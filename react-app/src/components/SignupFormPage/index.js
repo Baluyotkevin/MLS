@@ -10,6 +10,10 @@ function SignupFormPage() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [profile_img, setprofile_img] = useState("");
+	// const [imageLoading, setImageLoading] = useState(false);
+	const [first_name, setfirst_name] = useState("");
+	const [last_name, setlast_name] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
@@ -17,8 +21,17 @@ function SignupFormPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const formData = new FormData()
+			console.log(username)
+			formData.append("username", username)
+			formData.append("email", email)
+			formData.append("password", password)
+			formData.append("profile_img", profile_img)
+			formData.append("first_name", first_name)
+			formData.append("last_name", last_name)
+
     if (password === confirmPassword) {
-        const data = await dispatch(signUp(username, email, password));
+        const data = await dispatch(signUp(formData));
         if (data) {
           setErrors(data)
         }
@@ -30,7 +43,7 @@ function SignupFormPage() {
   return (
     <>
       <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} encType='multipart/form-data'>
         <ul>
           {errors.map((error, idx) => <li key={idx}>{error}</li>)}
         </ul>
@@ -52,6 +65,33 @@ function SignupFormPage() {
             required
           />
         </label>
+        <label>
+          First Name
+          <input
+            type="text"
+            value={first_name}
+            onChange={(e) => setfirst_name(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+          Last Name
+          <input
+            type="text"
+            value={last_name}
+            onChange={(e) => setlast_name(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+					Profile Picture
+					<input
+					id="image"
+					type="file"
+					accept="image/*"
+					onChange={(e) => setprofile_img(e.target.files[0])}
+					/>
+				</label>
         <label>
           Password
           <input

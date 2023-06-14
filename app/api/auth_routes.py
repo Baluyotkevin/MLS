@@ -3,6 +3,9 @@ from app.models import User, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
+from .AWS_helpers import upload_file_to_s3, remove_file_from_s3, get_unique_filename
+from datetime import date
+
 
 auth_routes = Blueprint('auth', __name__)
 
@@ -61,12 +64,31 @@ def sign_up():
     """
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    print(' THIS BE MEEEE =========================')
     if form.validate_on_submit():
+
+        profile_img=form.data['profile_img']
+        print("THSI SI MY PROFILE IMG =================>>", profile_img)
+        profile_img.filename = get_unique_filename(profile_img.filename)
+        print('TH IS IS MY PROFILE_IMG', profile_img.filename)
+        upload = upload_file_to_s3(profile_img)
+        print("this is my UPLOADDDDDD========", upload)
+        if "url" not in upload:
+            return upload['errors']
+        # if the dictionary doesn't have a url key
+        # it means that there was an error when we tried to upload
+        # so we send back that error message
+            # return 'hello'
+
         user = User(
             username=form.data['username'],
             email=form.data['email'],
-            password=form.data['password']
+            profile_img = upload['url'],
+            password=form.data['password'],
+            first_name=form.data['first_name'],
+            last_name=form.data['last_name']
         )
+        print('Do i get created ?? ========>', user)
         db.session.add(user)
         db.session.commit()
         login_user(user)
