@@ -19,6 +19,7 @@ class User(db.Model, UserMixin):
     last_name = db.Column(db.String(40), nullable=False)
     
     user_posts = db.relationship("Post", back_populates='user')
+    user_comments = db.relationship("Comment", back_populates='user')
 
     @property
     def password(self):

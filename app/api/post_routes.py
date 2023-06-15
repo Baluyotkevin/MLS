@@ -1,9 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import Post
-from ..forms.post_form import PostForm
-from ..forms.post_on_post_form import PostOnPostForm
-from ..models import db
+from ..forms import PostForm, PostOnPostForm, CommentForm
+from ..models import db, Comment, Post
 
 post_routes = Blueprint('posts', __name__, url_prefix='')
 
@@ -57,10 +55,9 @@ def create_post():
 @login_required
 def create_post_on_post(id):
     """
-    Post on the homepage
+    Posts on a post
     """
 
-    print("====================== do i get her OR EVasdasdasdasdasdasdasdasdasdEN NOW e")
     child_post = Post.query.filter(Post.parent_id == id).all()
     if len(child_post):
         return {"message": "Already created a post on this"}
@@ -71,11 +68,8 @@ def create_post_on_post(id):
     
     form = PostOnPostForm()
     form["csrf_token"].data=request.cookies["csrf_token"]
-    print(form)
     if form.validate_on_submit():
-        print("====================== DO I WOW do i get here")
         if post.root_post_id is None:
-            print("====================== do i get here NOW")
             new_post=Post(
                 title = form.data['title'],
                 body = form.data['body'],
@@ -103,9 +97,30 @@ def create_post_on_post(id):
             return new_post.to_dict()
     # return "hello"
 
+
+@post_routes.route('/<int:id>/comment', methods=['POST'])
+@login_required
+def create_comment(id):
+    """Creates a comment on a post"""
+    print("am i getting in here ========")
+    form = CommentForm()
+    form["csrf_token"].data=request.cookies["csrf_token"]
+
+    if form.validate_on_submit():
+        new_comment=Comment(
+            body = form.data['body'],
+            user_id = current_user.id,
+            post_id = id
+        )
+        db.session.add(new_comment)
+        db.session.commit()
+        return new_comment.to_dict()
+    
+
 @post_routes.route('/<int:id>/edit', methods=['PUT'])
 @login_required
 def edit_post(id):
+    """Edits a current users post"""
     postObj = Post.query.get(id)
     # post = postObj.to_dict()
     form = PostForm()
@@ -131,6 +146,7 @@ def edit_post(id):
 @post_routes.route('/<int:id>/delete', methods=['DELETE'])
 @login_required
 def delete_post(id):
+    """Deletes a current users post"""
     postObj = Post.query.get(id)
 
     if not postObj:
@@ -151,5 +167,3 @@ def delete_post(id):
         return {"message": "Post successfully deleted"}
     
     return {"message": "You cannot delete this post as it does not belong to you"}
-    
-
