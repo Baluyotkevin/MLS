@@ -55,10 +55,9 @@ def create_post():
 @login_required
 def create_post_on_post(id):
     """
-    Post on the homepage
+    Posts on a post
     """
 
-    print("====================== do i get her OR EVasdasdasdasdasdasdasdasdasdEN NOW e")
     child_post = Post.query.filter(Post.parent_id == id).all()
     if len(child_post):
         return {"message": "Already created a post on this"}
@@ -69,11 +68,8 @@ def create_post_on_post(id):
     
     form = PostOnPostForm()
     form["csrf_token"].data=request.cookies["csrf_token"]
-    print(form)
     if form.validate_on_submit():
-        print("====================== DO I WOW do i get here")
         if post.root_post_id is None:
-            print("====================== do i get here NOW")
             new_post=Post(
                 title = form.data['title'],
                 body = form.data['body'],
@@ -105,7 +101,8 @@ def create_post_on_post(id):
 @post_routes.route('/<int:id>/comment', methods=['POST'])
 @login_required
 def create_comment(id):
-
+    """Creates a comment on a post"""
+    print("am i getting in here ========")
     form = CommentForm()
     form["csrf_token"].data=request.cookies["csrf_token"]
 
@@ -123,6 +120,7 @@ def create_comment(id):
 @post_routes.route('/<int:id>/edit', methods=['PUT'])
 @login_required
 def edit_post(id):
+    """Edits a current users post"""
     postObj = Post.query.get(id)
     # post = postObj.to_dict()
     form = PostForm()
@@ -148,6 +146,7 @@ def edit_post(id):
 @post_routes.route('/<int:id>/delete', methods=['DELETE'])
 @login_required
 def delete_post(id):
+    """Deletes a current users post"""
     postObj = Post.query.get(id)
 
     if not postObj:
