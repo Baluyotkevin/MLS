@@ -1,9 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import Post
-from ..forms.post_form import PostForm
-from ..forms.post_on_post_form import PostOnPostForm
-from ..models import db
+from ..forms import PostForm, PostOnPostForm, CommentForm
+from ..models import db, Comment, Post
 
 post_routes = Blueprint('posts', __name__, url_prefix='')
 
@@ -102,6 +100,25 @@ def create_post_on_post(id):
             db.session.commit()
             return new_post.to_dict()
     # return "hello"
+
+
+@post_routes.route('/<int:id>/comment', methods=['POST'])
+@login_required
+def create_comment(id):
+
+    form = CommentForm()
+    form["csrf_token"].data=request.cookies["csrf_token"]
+
+    if form.validate_on_submit():
+        new_comment=Comment(
+            body = form.data['body'],
+            user_id = current_user.id,
+            post_id = id
+        )
+        db.session.add(new_comment)
+        db.session.commit()
+        return new_comment.to_dict()
+    
 
 @post_routes.route('/<int:id>/edit', methods=['PUT'])
 @login_required
