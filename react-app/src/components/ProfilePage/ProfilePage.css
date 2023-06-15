@@ -1,0 +1,8 @@
+.profileImg {
+    width: 450px;
+}
+
+.profileCont {
+    display: flex;
+    flex-direction: row;
+}

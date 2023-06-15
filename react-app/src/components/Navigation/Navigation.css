@@ -5,3 +5,17 @@
 .hidden {
   display: none;
 }
+
+.navContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid #800020;
+  margin: 10px;
+  padding: 20px 20px;
+}
+
+.navLiCont {
+  display: flex;
+  padding-right: 50px;
+}

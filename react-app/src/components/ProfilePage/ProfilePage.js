@@ -1,7 +1,8 @@
 import { thunkAllCurrPosts } from "../../store/post"
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from "react";
-
+import './ProfilePage.css'
+import { NavLink } from "react-router-dom";
 
 
 
@@ -18,28 +19,33 @@ const ProfilePage = () => {
     if (!allCurrPosts) return 'hi'
 
     return (
-        <div>
+        <div class='profileCont'>
             <div>
-                <img src={currUser.profile_img} />
+                <img class='profileImg' src={currUser.profile_img} />
+            <div>
+                <div>Followers</div>
+                <div>Favorites</div>
+                <NavLink to='/comments/current'>Your Comments</NavLink>
+            </div>
             </div>
             <ul>
-                {Object.values(allCurrPosts).map(post => {
+                {!allCurrPosts.length ? Object.values(allCurrPosts).map(post => {
                     return (
                         <li>
-                            <div>
+                            <div class='title'>
                                 {post.title}
                             </div>
 
-                            <div>
+                            <br />
+
+                            <div class='body'>
                                 {post.body}
                             </div>
-                        {/* <div> */}
-                            {/* {post.anonymous === true ? } */}
-                        {/* </div> */}
+                        
                             <br />
                         </li>
                     )
-                })}
+                }) : "You Haven't Posted Your Love Story Yet!" } 
             </ul>
         </div>
     )

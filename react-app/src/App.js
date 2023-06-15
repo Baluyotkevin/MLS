@@ -10,6 +10,7 @@ import PostForm from "./components/Posts/PostOneForm"
 import CreatePostOnPost from "./components/Posts/CreatePostOnPost";
 import DeletePost from "./components/Posts/DeletePost";
 import ProfilePage from "./components/ProfilePage/ProfilePage";
+import GetAllCurrComments from "./components/Comments/AllCurrComments";
 
 function App() {
   const dispatch = useDispatch();
@@ -29,11 +30,12 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route path='/post/:postId/delete' component={DeletePost} />
-          <Route path='/posts' component={GetAllPosts} />
+          {/* <Route path='/post/:postId/delete' component={DeletePost} /> */}
+          <Route path='/profilePage' component= {ProfilePage} />
+          <Route path='/comments/current' component={GetAllCurrComments} />
           <Route path='/:postId/new' component={CreatePostOnPost} />
-          <Route path='/post' component={PostForm} />
-          <Route path='/current' component={ProfilePage} />
+          {/* <Route path='/post' component={PostForm} /> */}
+          <Route path='/' component={GetAllPosts} />
         </Switch>
       )}
     </>

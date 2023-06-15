@@ -22,7 +22,6 @@ def user_all_posts():
     """
     all_posts = Post.query.filter(Post.user_id == current_user.id).all()
     new_all_posts = [post.to_dict() for post in all_posts]
-    print(new_all_posts)
     return new_all_posts
 
 @post_routes.route('/<int:id>')
@@ -57,46 +56,46 @@ def create_post_on_post(id):
     """
     Posts on a post
     """
-
-    child_post = Post.query.filter(Post.parent_id == id).all()
-    if len(child_post):
-        return {"message": "Already created a post on this"}
-
     post = Post.query.get(id)
-    if not post:
-        return {"message": "Post does not exist"}
-    
-    form = PostOnPostForm()
-    form["csrf_token"].data=request.cookies["csrf_token"]
-    if form.validate_on_submit():
-        if post.root_post_id is None:
-            new_post=Post(
-                title = form.data['title'],
-                body = form.data['body'],
-                user_id = current_user.id,
-                category = post.category,
-                root_post_id = id,
-                parent_id = id,
-                anonymous= post.anonymous
-            )
-            db.session.add(new_post)
-            db.session.commit()
-            return new_post.to_dict()
-        else:
-            new_post = Post (
-                title = form.data['title'],
-                body = form.data['body'],
-                user_id = current_user.id,
-                category = post.category,
-                root_post_id = post.root_post_id,
-                parent_id = id,
-                anonymous= post.anonymous
-            )
-            db.session.add(new_post)
-            db.session.commit()
-            return new_post.to_dict()
-    # return "hello"
 
+    if post.user_id == current_user.id:
+        child_post = Post.query.filter(Post.parent_id == id).all()
+        if len(child_post):
+            return {"message": "Already created a post on this"}
+
+        if not post:
+            return {"message": "Post does not exist"}
+        
+        form = PostOnPostForm()
+        form["csrf_token"].data=request.cookies["csrf_token"]
+        if form.validate_on_submit():
+            if post.root_post_id is None:
+                new_post=Post(
+                    title = form.data['title'],
+                    body = form.data['body'],
+                    user_id = current_user.id,
+                    category = post.category,
+                    root_post_id = id,
+                    parent_id = id,
+                    anonymous= post.anonymous
+                )
+                db.session.add(new_post)
+                db.session.commit()
+                return new_post.to_dict()
+            else:
+                new_post = Post (
+                    title = form.data['title'],
+                    body = form.data['body'],
+                    user_id = current_user.id,
+                    category = post.category,
+                    root_post_id = post.root_post_id,
+                    parent_id = id,
+                    anonymous= post.anonymous
+                )
+                db.session.add(new_post)
+                db.session.commit()
+                return new_post.to_dict()    
+    return {"message": "You cannot post on this post as it does not belong to you"}
 
 @post_routes.route('/<int:id>/comment', methods=['POST'])
 @login_required

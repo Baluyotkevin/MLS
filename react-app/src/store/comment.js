@@ -62,6 +62,71 @@ export const thunkAllCurrComments = () => async (dispatch) => {
     }
 }
 
-export const thunkCreateComment = (comment) => async (dispatch) => {
-    const res = await fetch(`/api/${comment.post_id}/comment`)
+export const thunkCreateComment = (comment, postId) => async (dispatch) => {
+    const res = await fetch(`/api/${postId}/comment`,{
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(comment)
+    })
+
+    if (res.ok) {
+        const data = await res.json()
+        dispatch(createComment(data))
+    }
 }
+
+export const thunkEditComment = (comment) => async (dispatch) => {
+    const res = await fetch(`api/comments/${comment.id}/edit`, {
+        method: "PUT",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(comment)
+    })
+
+    if (res.ok) {
+        const data = await res.json()
+        dispatch(editComment(data))
+    }
+}
+
+export const thunkDeleteComment = (comment) => async (dispatch) => {
+    const res = await fetch(`api/comments/${comment.id}/delete`, {
+        method: "DELETE"
+    })
+
+    if (res.ok) {
+        const data = await res.json()
+        dispatch(deleteComment(data))
+    }
+}
+
+const initialState = { currentComments: {}, singleComment: {}, allComments: {} }
+
+const commentReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case GET_ALL_COMMENTS: {
+            const newState = {}
+            const allComments = action.comments
+            allComments.forEach(comment => {
+                newState[comment.id] = comment
+            })
+            return {
+                ...state,
+                allComments: newState
+            }
+        }
+        case GET_ALL_CURR_COMMENTS: {
+            const newState = {}
+            const allCurrComments = action.comments
+            allCurrComments.forEach(comment => {
+                newState[comment.id] = comment
+            })
+            return {
+                ...state,
+                currentComments: newState
+            }
+        }
+        default: return state
+    }
+}
+
+export default commentReducer

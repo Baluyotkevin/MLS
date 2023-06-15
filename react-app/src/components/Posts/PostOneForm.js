@@ -1,7 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useHistory } from 'react-router-dom';
-import { thunkCreatePost } from "../../store/post";
+import { thunkCreatePost, thunkAllCurrPosts } from "../../store/post";
+import OpenModalButton from "../OpenModalButton";
+import { useModal } from "../../context/Modal";
 
 const PostForm = () => {
     const dispatch = useDispatch()
@@ -11,7 +13,7 @@ const PostForm = () => {
     const [category, setCategory] = useState("")
     const [anonymous, setAnonymous] = useState("")
     const [validationErrors, setValidationErrors] = useState("")
-
+    const { closeModal } = useModal()
     
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -28,6 +30,8 @@ const PostForm = () => {
         }
 
         await dispatch(thunkCreatePost(post))
+        .then(closeModal)
+        dispatch(thunkAllCurrPosts())
     }
 
     return (
@@ -63,7 +67,7 @@ const PostForm = () => {
 
             <div>
                 <select onChange={(e) => setAnonymous(e.target.value)}>
-                    <option value = "" >--Anonymous?--</option>
+                    <option value = "">--Anonymous?--</option>
                     <option value = {true}> Yes </option>
                     <option value = {false}> No </option>
                 </select>

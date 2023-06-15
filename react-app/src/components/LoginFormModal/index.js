@@ -21,6 +21,21 @@ function LoginFormModal() {
     }
   };
 
+  const autoLoginOne = e => {
+    setEmail('demo@aa.io')
+    setPassword('password')
+    dispatch(login(email, password))
+    .then(closeModal)
+  }
+
+  const autoLoginTwo = e => {
+    setEmail('marnie@aa.io')
+    setPassword('password')
+    dispatch(login(email, password))
+    .then(closeModal)
+  }
+
+
   return (
     <>
       <h1>Log In</h1>
@@ -49,6 +64,8 @@ function LoginFormModal() {
           />
         </label>
         <button type="submit">Log In</button>
+        <button type="submit" onClick={autoLoginOne}>Log In As Demo</button>
+        <button type="submit" onClick={autoLoginTwo}>Log In As Marnie</button>
       </form>
     </>
   );
