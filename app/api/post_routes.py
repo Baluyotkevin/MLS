@@ -28,8 +28,10 @@ def user_all_posts():
 @login_required
 def user_post(id):
     """Gets One post by its id"""
-    single_post = Post.query.get(id)
-    return single_post
+    root = Post.query.get(id)
+    childrenObj = Post.query.filter(Post.root_post_id == id).all()
+    children = [child.to_dict() for child in childrenObj]
+    return { "root": root.to_dict(), "children": children }
 
 @post_routes.route('/post', methods=['POST'])
 @login_required

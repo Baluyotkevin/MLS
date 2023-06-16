@@ -12,13 +12,12 @@ const ProfilePage = () => {
     const dispatch = useDispatch()
     const allCurrPosts = useSelector(state => state.post.currentUserPosts)
     const currUser = useSelector(state => state.session.user)
-    console.log('hello', currUser.profile_img)
 
     useEffect(() => {
         dispatch(thunkAllCurrPosts())
     }, [dispatch])
 
-    if (!allCurrPosts) return 'hi'
+    // if (!allCurrPosts) return 'hi'
 
     return (
         <div class='profileCont'>
@@ -27,7 +26,6 @@ const ProfilePage = () => {
             <div>
                 <div>Followers</div>
                 <div>Favorites</div>
-                <NavLink to='/comments/current'>Your Comments</NavLink>
             </div>
             </div>
             <ul>

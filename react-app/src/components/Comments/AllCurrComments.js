@@ -24,10 +24,10 @@ const GetAllCurrComments = () => {
         <div class='profileCont'>
             <div>
                 <img class='profileImg' src={currUser.profile_img} />
-            <div>
-            <div>Followers</div>
-                <div>Favorites</div>
-            </div>
+                <div>
+                    <div>Followers</div>
+                    <div>Favorites</div>
+                </div>
             </div>
             <ul>
                 <div>

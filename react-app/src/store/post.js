@@ -41,8 +41,8 @@ const deletePost = postId => ({
     postId
 })
 
-export const thunkOnePost = (post) => async (dispatch) => {
-    const res = await fetch(`/api/posts/${post.id}`)
+export const thunkOnePost = (postId) => async (dispatch) => {
+    const res = await fetch(`/api/posts/${postId}`)
 
     if (res.ok) {
         const data = await res.json()
@@ -150,9 +150,7 @@ const postReducer = (state = initialState, action) => {
             }
         }
         case GET_ONE_POST: {
-            const newState = {}
-            const onePost = action.post
-            newState[onePost.id] = onePost
+            const newState = { ...action.post }
             return {
                 ...state,
                 singlePost: newState

@@ -17,6 +17,12 @@ const CommentsForm = ({ postId, formType, comment }) => {
         e.preventDefault()
         let errors = {}
 
+        
+        if (body.length < 5) errors.body = "Please enter 5 characters or more"
+        if (body.length > 50) errors.body = "You cannot exceed 50 characters"
+        setValidationErrors(errors)
+        if(Object.keys(errors).length) return
+
         comment = {
             ...comment,
             body
@@ -39,6 +45,7 @@ const CommentsForm = ({ postId, formType, comment }) => {
     return (
         <div>
             <form onSubmit ={handleSubmit}>
+                {validationErrors.body}
                 <div>
                     <textarea
                     type='text'

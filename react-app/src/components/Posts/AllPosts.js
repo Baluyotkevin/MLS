@@ -59,7 +59,7 @@ const GetAllPosts = () => {
                             {/* <NavLink></NavLink> */}
                         </div>
                         <div>
-                            View More Posts
+                            <NavLink to={`/postPage/${post.id}`}>View more Post</NavLink>
                         </div>
                         <br />
                     </li>
