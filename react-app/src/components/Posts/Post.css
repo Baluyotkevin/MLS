@@ -31,7 +31,11 @@
 
 .singlePostCont {
     width: 500px;
+    padding: 20px;
+    height: auto;
     background-color: #800020;
     border-radius: 50px;
-    /* display: flex; */
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
 }
