@@ -1,17 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useHistory } from 'react-router-dom';
-import { thunkCreatePost, thunkAllCurrPosts } from "../../store/post";
+import { thunkCreatePost, thunkAllCurrPosts, thunkEditPost } from "../../store/post";
 import OpenModalButton from "../OpenModalButton";
 import { useModal } from "../../context/Modal";
 
-const PostForm = () => {
+const PostForm = ({post, formType}) => {
     const dispatch = useDispatch()
     const history = useHistory()
-    const [body, setBody] = useState("")
-    const [title, setTitle] = useState("")
-    const [category, setCategory] = useState("")
-    const [anonymous, setAnonymous] = useState("")
+    const [body, setBody] = useState(post?.body)
+    const [title, setTitle] = useState(post?.title)
+    const [category, setCategory] = useState(post?.category)
+    const [anonymous, setAnonymous] = useState(post?.anonymous)
     const [validationErrors, setValidationErrors] = useState("")
     const { closeModal } = useModal()
     
@@ -22,16 +22,27 @@ const PostForm = () => {
 
         // if (!category) return 'this is not a category'
 
-        const post = {
+        post = {
+            ...post,
             title,
             body,
             category,
             anonymous
         }
 
-        await dispatch(thunkCreatePost(post))
-        .then(closeModal)
-        dispatch(thunkAllCurrPosts())
+        if (formType === 'Create Post') {
+            await dispatch(thunkCreatePost(post))
+            .then(closeModal)
+            dispatch(thunkAllCurrPosts())
+            // history.push('/')
+        }
+
+        if (formType === 'Edit Post') {
+            await dispatch(thunkEditPost(post))
+            .then(closeModal)
+            dispatch(thunkAllCurrPosts())
+            // history.push('/')
+        }
     }
 
     return (
@@ -55,20 +66,21 @@ const PostForm = () => {
                 />
             </div>
 
-            <div class='selectPost'>
-                <select onChange={(e) => setCategory(e.target.value)}>
-                    <option value="">--Select Category--</option>
-                    <option value = "Beautiful" > Beautiful </option>
-                    <option value = "Horrible" > Horrible </option>
-                </select>
-            {/* </div>
-
-            <div> */}
-                <select onChange={(e) => setAnonymous(e.target.value)}>
+        <div class='selectPost'>
+            {formType === 'Edit Post' ? null : 
+            <>
+            <select onChange={(e) => setCategory(e.target.value)}>
+                <option value="">--Select Category--</option>
+                <option value = "Beautiful" > Beautiful </option>
+                <option value = "Horrible" > Horrible </option>
+            </select>
+            <select onChange={(e) => setAnonymous(e.target.value)}>
                     <option value = "">--Anonymous?--</option>
                     <option value = {true}> Yes </option>
                     <option value = {false}> No </option>
-                </select>
+            </select>
+            </>
+            }
             </div>
             <div className='submitButtCont'>
 

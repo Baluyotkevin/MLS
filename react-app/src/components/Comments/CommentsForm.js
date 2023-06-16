@@ -23,7 +23,7 @@ const CommentsForm = ({ postId, formType, comment }) => {
         }
 
         if (formType === 'Create Comment') {
-            await dispatch(thunkCreateComment(postId, comment))
+            await dispatch(thunkCreateComment(comment, postId))
             .then(closeModal)
         }
 

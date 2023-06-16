@@ -63,7 +63,8 @@ export const thunkAllCurrComments = () => async (dispatch) => {
 }
 
 export const thunkCreateComment = (comment, postId) => async (dispatch) => {
-    const res = await fetch(`/api/${postId}/comment`,{
+    console.log("do i get in here")
+    const res = await fetch(`/api/posts/${postId}/comment`,{
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(comment)
@@ -123,6 +124,15 @@ const commentReducer = (state = initialState, action) => {
             return {
                 ...state,
                 currentComments: newState
+            }
+        }
+        case CREATE_COMMENT: {
+            const newState = {}
+            const oneComment = action.comment
+            newState[oneComment] = oneComment
+            return {
+                ...state,
+                allComments: {...state.allComments, ...newState}
             }
         }
         default: return state

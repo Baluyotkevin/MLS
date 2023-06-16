@@ -28,6 +28,10 @@ const GetAllPosts = () => {
                         <div>
                             {post.title}
                         </div>
+
+                        <div>
+                            {post.category}
+                        </div>
                         <br />
                         <div>
                             {post.body}

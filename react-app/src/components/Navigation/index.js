@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
-import PostForm from '../Posts/PostOneForm';
+import CreatePost from '../Posts/CreatePost';
 import OpenModalButton from '../OpenModalButton';
 
 function Navigation({ isLoaded }){
@@ -19,7 +19,7 @@ function Navigation({ isLoaded }){
 				<li>
 					{sessionUser ? <OpenModalButton
 					buttonText="Post Your Love Story!"
-					 modalComponent={<PostForm />}
+					 modalComponent={<CreatePost />}
 					 /> 
 					 : null}
 				</li>

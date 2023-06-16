@@ -58,13 +58,13 @@ const PostOnPostForm = ({ postId, post, formType }) => {
                 </label>
             </div>
 
-            {/* <div>
+            <div>
                 <select onChange={(e) => setAnonymous(e.target.value)}>
                     <option value = "" >--Anonymous?--</option>
                     <option value = {true}> Yes </option>
                     <option value = {false}> No </option>
                 </select>
-            </div> */}
+            </div>
             <button type='submit'> Submit </button>
         </form>
         </div>

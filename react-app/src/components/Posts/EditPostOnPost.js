@@ -1,4 +1,4 @@
-import PostForm from "./PostOneForm";
+import PostOnPostForm from "./PostOneForm"
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -11,19 +11,18 @@ const EditPost = ({ post }) => {
     // const post = useSelector(state => state.post.singlePost[postEdit.id])
     // console.log(post)
     // useEffect(() => {
-        // dispatch(thunkOnePost(post))
-        // dispatch(thunkAllCurrPosts())
+    //     dispatch(thunkOnePost(post))
+    //     dispatch(thunkAllCurrPosts())
     // }, [dispatch])
 
     return (
         <>
 
-        <PostForm 
+        <PostOnPostForm 
         post = {post}
-        // postId = {postEdit.id}
+        // postId = {postEdit}
         formType = 'Edit Post'
         />
-
         </>
     )
 }

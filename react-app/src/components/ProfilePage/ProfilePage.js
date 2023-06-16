@@ -3,7 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from "react";
 import './ProfilePage.css'
 import { NavLink } from "react-router-dom";
-
+import OpenModalButton from "../OpenModalButton";
+import EditPost from '../Posts/EditPost';
+import EditPostOnPost from '../Posts/EditPostOnPost';
 
 
 const ProfilePage = () => {
@@ -30,19 +32,32 @@ const ProfilePage = () => {
             </div>
             <ul>
                 {!allCurrPosts.length ? Object.values(allCurrPosts).map(post => {
+                    console.log(post.root_user_id)
+                    console.log(post.parent_id)
                     return (
                         <li>
+                            {post.parent_id == undefined ? 
+                            <>
+                            <OpenModalButton
+                            buttonText='Edit'
+                            modalComponent={<EditPost post={post} />}
+                            />
                             <div class='title'>
                                 {post.title}
                             </div>
 
+                            <div>
+                                {post.category}
+                            </div>
                             <br />
 
                             <div class='body'>
                                 {post.body}
                             </div>
-                        
+
                             <br />
+                            </>
+                            : null}
                         </li>
                     )
                 }) : "You Haven't Posted Your Love Story Yet!" } 

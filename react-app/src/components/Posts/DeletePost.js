@@ -9,17 +9,17 @@ const DeletePost = () => {
     const dispatch = useDispatch()
     const { postId } = useParams()
     const history = useHistory()
+    const { closeModal } = useModal()
 
     const handleDelete = e => {
         e.preventDefault()
         console.log('do i get in it postId', postId)
         dispatch(thunkDeletePost(postId))
-        history.push('/')
     }
 
     return (
         <>
-            <button onClick={handleDelete}>delete</button>
+            <button onClick={handleDelete}>Delete</button>
         </>
     )
 

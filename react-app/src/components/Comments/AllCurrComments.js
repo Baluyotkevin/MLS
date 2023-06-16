@@ -5,7 +5,7 @@ import { thunkAllCurrComments } from "../../store/comment";
 const GetAllCurrComments = () => {
     const dispatch = useDispatch()
     const allComments = useSelector(state => state.comment.currentComments)
-    
+    console.log(allComments)
     // if (!allComments) return 'No Comments found'
 
     useEffect(() => {
@@ -15,7 +15,7 @@ const GetAllCurrComments = () => {
     return (
         <div>
             <ul>
-                {!allComments ? Object.values(allComments.map(comment => {
+                {allComments.length ? Object.values(allComments.map(comment => {
                     return (
                         <li>
                             <div>{comment.body}</div>
