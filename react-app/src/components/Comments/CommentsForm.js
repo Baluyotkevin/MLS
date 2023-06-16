@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useHistory } from 'react-router-dom';
 import { thunkCreatePostonPost, thunkEditPost } from "../../store/post";
 import { useParams } from "react-router-dom";
-import { thunkCreateComment, thunkEditComment } from "../../store/comment";
+import { thunkAllCurrComments, thunkCreateComment, thunkEditComment } from "../../store/comment";
 import { useModal } from "../../context/Modal";
 
 const CommentsForm = ({ postId, formType, comment }) => {
@@ -25,11 +25,13 @@ const CommentsForm = ({ postId, formType, comment }) => {
         if (formType === 'Create Comment') {
             await dispatch(thunkCreateComment(comment, postId))
             .then(closeModal)
+            await dispatch(thunkAllCurrComments())
         }
 
-        if (formType === 'Update Comment') {
+        if (formType === 'Edit Comment') {
             await dispatch(thunkEditComment(comment))
             .then(closeModal)
+            await dispatch(thunkAllCurrComments())
         }
 
     }

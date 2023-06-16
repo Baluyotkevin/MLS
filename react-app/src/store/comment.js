@@ -30,9 +30,9 @@ const editComment = comment => ({
     comment
 })
 
-const deleteComment = comment => ({
+const deleteComment = commentId => ({
     type: DELETE_COMMENT,
-    comment
+    commentId
 })
 
 export const thunkOneComment = (comment) => async (dispatch) => {
@@ -77,7 +77,7 @@ export const thunkCreateComment = (comment, postId) => async (dispatch) => {
 }
 
 export const thunkEditComment = (comment) => async (dispatch) => {
-    const res = await fetch(`api/comments/${comment.id}/edit`, {
+    const res = await fetch(`/api/comments/${comment.id}/edit`, {
         method: "PUT",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(comment)
@@ -89,8 +89,8 @@ export const thunkEditComment = (comment) => async (dispatch) => {
     }
 }
 
-export const thunkDeleteComment = (comment) => async (dispatch) => {
-    const res = await fetch(`api/comments/${comment.id}/delete`, {
+export const thunkDeleteComment = (commentId) => async (dispatch) => {
+    const res = await fetch(`/api/comments/${commentId}/delete`, {
         method: "DELETE"
     })
 
@@ -133,6 +133,23 @@ const commentReducer = (state = initialState, action) => {
             return {
                 ...state,
                 allComments: {...state.allComments, ...newState}
+            }
+        }
+        case EDIT_COMMENT: {
+            const newState = {}
+            const oneComment = action.comment
+            newState[oneComment] = oneComment
+            return {
+                ...state,
+                allComments: {...state.allComments, ...newState}
+            }
+        }
+        case DELETE_COMMENT: {
+            const newState = { ...state, ...state.currentComments }
+            delete newState.currentComments[action.commentId.id]
+            return {
+                ...newState,
+                currentComments: { ...newState.currentComments }
             }
         }
         default: return state

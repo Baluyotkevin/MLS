@@ -52,9 +52,9 @@ function ProfileButton({ user }) {
           <NavLink to='/comments/current'>
             <li>My Comments</li>
           </NavLink>
-            <li>
+            <NavLink to='/'>
               <button onClick={handleLogout}>Log Out</button>
-            </li>
+            </NavLink>
           </>
         ) : (
           <>

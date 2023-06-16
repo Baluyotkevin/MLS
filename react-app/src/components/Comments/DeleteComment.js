@@ -2,28 +2,27 @@ import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useModal } from "../../context/Modal";
-import { thunkAllCurrPosts, thunkDeletePost } from '../../store/post';
+import { thunkAllCurrComments, thunkDeleteComment } from '../../store/comment';
 
-
-const DeletePost = ({post}) => {
+const DeleteComment = ({comment}) => {
     const dispatch = useDispatch()
     const { closeModal } = useModal()
 
     const handleDelete = e => {
         e.preventDefault()
-        
-        dispatch(thunkDeletePost(post.id))
+
+        dispatch(thunkDeleteComment(comment.id))
         .then(closeModal)
-        dispatch(thunkAllCurrPosts())
+        dispatch(thunkAllCurrComments)
     }
 
     return (
-        <div>
-        <h2>Confirm Delete</h2>
+        <>
+            <h2>Confirm Delete</h2>
             <button onClick={handleDelete}>Delete</button>
-        </div>
+        </>
     )
 
 }
 
-export default DeletePost
+export default DeleteComment

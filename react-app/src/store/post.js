@@ -61,7 +61,7 @@ export const thunkAllPosts = () => async (dispatch) => {
 
 export const thunkAllCurrPosts = () => async (dispatch) => {
     const res = await fetch(`/api/posts/current`)
-    console.log("THIS IS MY REEEES", res)
+    // console.log("THIS IS MY REEEES", res)
     if (res.ok) {
         const data = await res.json()
         dispatch(loadAllCurrPosts(data))
@@ -112,7 +112,7 @@ export const thunkEditPost = (post) => async (dispatch) => {
 }
 
 export const thunkDeletePost = (postId) => async (dispatch) => {
-    console.log("THIS IS MY POSTID YOOOOO", postId)
+    // console.log("THIS IS MY POSTID YOOOOO", postId)
     const res = await fetch(`/api/posts/${postId}/delete`, {
         method: "DELETE"
     })
@@ -146,7 +146,7 @@ const postReducer = (state = initialState, action) => {
             })
             return {
                 ...state,
-                currUserPosts: newState
+                currentUserPosts: newState
             }
         }
         case GET_ONE_POST: {
@@ -186,11 +186,11 @@ const postReducer = (state = initialState, action) => {
             }
         }
         case DELETE_POST: {
-            const newState = { ...state }
-            delete newState.currentUserPosts[action.postId]
+            const newState = { ...state, ...state.currentUserPosts }
+            delete newState.currentUserPosts[action.postId.id]
             return {
-                ...state,
-                currentUserPosts: newState
+                ...newState,
+                currentUserPosts: { ...newState.currentUserPosts }
             }
 
         }

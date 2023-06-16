@@ -58,5 +58,5 @@ def user_comment_delete(id):
     if comment.user_id == current_user.id:
         db.session.delete(comment)
         db.session.commit()
-        return {"message": "Comment was successfully deleted"}
+        return {"message": "Comment was successfully deleted", "id": id}
     return {"message": "You cannot delete this comment as it does not belong to you"}
