@@ -38,41 +38,42 @@ const PostForm = () => {
         <div>
         <form onSubmit={handleSubmit}>
             <div>
-                <label>Title
+                <div>Title</div>
                 <input
                 type='text'
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 />
-                </label>
             </div>
 
             <div>
-                <label>Body
+                <div>Body</div>
                 <textarea
                 type='text'
                 value={body}
                 onChange={(e) => setBody(e.target.value)}
                 />
-                </label>
             </div>
 
-            <div>
+            <div class='selectPost'>
                 <select onChange={(e) => setCategory(e.target.value)}>
                     <option value="">--Select Category--</option>
                     <option value = "Beautiful" > Beautiful </option>
                     <option value = "Horrible" > Horrible </option>
                 </select>
-            </div>
+            {/* </div>
 
-            <div>
+            <div> */}
                 <select onChange={(e) => setAnonymous(e.target.value)}>
                     <option value = "">--Anonymous?--</option>
                     <option value = {true}> Yes </option>
                     <option value = {false}> No </option>
                 </select>
             </div>
+            <div className='submitButtCont'>
+
             <button type='submit'> Submit </button>
+            </div>
         </form>
         </div>
     )

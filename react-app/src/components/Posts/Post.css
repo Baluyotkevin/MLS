@@ -1,0 +1,37 @@
+.postCont > li {
+    padding: 50px 70px;
+}
+
+.postCont {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.selectPost {
+    display: flex;
+    flex-direction: column;
+}
+
+.submitButt {
+    display: flex;
+    justify-content: center;
+}
+
+.submitButtCont {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.submitButtCont > button {
+    padding: 5px;
+    border-radius: 50px;
+}
+
+.singlePostCont {
+    width: 500px;
+    background-color: #800020;
+    border-radius: 50px;
+    /* display: flex; */
+}

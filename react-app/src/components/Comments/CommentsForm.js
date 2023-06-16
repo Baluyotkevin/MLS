@@ -44,7 +44,9 @@ const CommentsForm = ({ postId, formType, comment }) => {
                     onChange={(e) => setBody(e.target.value)}
                     />
                 </div>
+                <div> 
                     <button type='submit'> Submit </button>
+                </div>
             </form>
         </div>
     )
