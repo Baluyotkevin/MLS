@@ -25,9 +25,9 @@ def current_user_comments():
     return new_all_comments
 
 @comment_routes.route('/<int:id>')
-@login_required
+# @login_required
 def user_comment(id):
-    """Gets One post by its id"""
+    """Gets One Comment by its id"""
     single_comment = Comment.query.get(id)
     return single_comment
 

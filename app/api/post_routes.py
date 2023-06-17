@@ -25,7 +25,7 @@ def user_all_posts():
     return new_all_posts
 
 @post_routes.route('/<int:id>')
-@login_required
+# @login_required
 def user_post(id):
     """Gets One post by its id"""
     root = Post.query.get(id)

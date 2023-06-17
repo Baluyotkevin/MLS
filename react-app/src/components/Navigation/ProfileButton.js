@@ -5,11 +5,15 @@ import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import { NavLink } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
+  const history = useHistory()
+  const currUser = useSelector(state => state.session.user)
 
   const openMenu = () => {
     if (showMenu) return;
@@ -33,6 +37,7 @@ function ProfileButton({ user }) {
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(logout());
+    history.push('/')
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
@@ -41,7 +46,11 @@ function ProfileButton({ user }) {
   return (
     <>
       <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
+        {/* <i className="fas fa-user-circle" /> */}
+        {currUser ? <>
+        <i className="fas fa-user-circle" /> Welcome, {currUser.first_name}!
+         </>
+          : <i className="fas fa-user-circle" /> }
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
@@ -52,9 +61,7 @@ function ProfileButton({ user }) {
           <NavLink to='/comments/current'>
             <li>My Comments</li>
           </NavLink>
-            <NavLink to='/'>
-              <button onClick={handleLogout}>Log Out</button>
-            </NavLink>
+              <button className='logOut' onClick={handleLogout}>Log Out</button>
           </>
         ) : (
           <>

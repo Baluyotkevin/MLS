@@ -1,26 +1,31 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { thunkAllPosts, thunkOnePost } from "../../store/post";
+import { thunkOnePost } from "../../store/post";
 import { useParams } from "react-router-dom";
+import { thunkAllComments } from "../../store/comment";
 import { thunkAllUsers } from "../../store/user";
+import './PostPage.css'
+import CreateComment from "../Comments/CreateComment";
 
-const PostPage = () => {
+const PostsCommentsPage = () => {
     const dispatch = useDispatch()
+    const allComments = useSelector(state => state.comment.allComments)
     const onePost = useSelector(state => state.post.singlePost)
     const allUsers = useSelector(state => state.users.allUsers)
     const root = onePost.root
-    const children = onePost.children
+    const postComments = Object.values(allComments).filter(comment =>  comment.post_id === onePost.root?.id)
     const { postId } = useParams()
+
     useEffect(() => {
-        dispatch(thunkAllPosts())
+        dispatch(thunkAllComments())
         dispatch(thunkOnePost(postId))
         dispatch(thunkAllUsers())
     }, [dispatch])
 
     return (
         <div className='postBody'>
-            <ul class='postCont'>
-                <li className='singlePostCont'> 
+            <ul className='postCont'>
+                <li className='singlePostCont'>
                     <div>
                         {root?.title}
                     </div>
@@ -31,7 +36,7 @@ const PostPage = () => {
                         {root?.body}
                     </div>
                     <div>
-                    {root?.anonymous ? Object.values(allUsers).map(user => {
+                        {root?.anonymous ? Object.values(allUsers).map(user => {
                                     return (
                                         <>
                                         <div>
@@ -42,30 +47,29 @@ const PostPage = () => {
                                 }) : 'Anonymous'}
                     </div>
                 </li>
-                {children?.length ? Object.values(children).map(post => {
+                {/* <br /> */}
+                {postComments.length ? Object.values(postComments).map(comment => {
                     return (
-                        <li className='singlePostCont'>
-                        <div className='title'>
-                                {post.title}
-                            </div>
-
+                        <div class='commentCont'>
+                            <div className='singleCommCont'>
                             <div>
-                                {post.category}
+                                {comment.user.first_name}
                             </div>
-                            <br />
-
-                            <div className='body'>
-                                {post.body}
+                            <div>
+                                {comment.body}
                             </div>
-                        <br />
-                        </li>
-                        
+                            </div>
+                        </div>
                     )
                 }) : null}
             </ul>
+            
+            <div className='createCommCont'>
+                <CreateComment post={root}/>
+            </div>
         </div>
     )
 
 }
 
-export default PostPage
+export default PostsCommentsPage

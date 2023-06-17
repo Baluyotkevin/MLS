@@ -30,5 +30,6 @@ class Post(db.Model):
             "root_post_id": self.root_post_id,
             "parent_id": self.parent_id,
             "anonymous": self.anonymous,
-            "created_at": self.created_at
+            "created_at": self.created_at,
+            "user": self.user.to_dict()
         }

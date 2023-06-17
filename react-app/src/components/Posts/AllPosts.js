@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { thunkAllPosts } from "../../store/post";
 import OpenModalButton from "../OpenModalButton";
@@ -20,11 +20,12 @@ const GetAllPosts = () => {
     }, [dispatch])
 
     return (
-        <div>
+        <div className='postBody'>
+            <div className='storyHead'>All Love Stories</div>
             <ul class='postCont'>
             {Object.values(allPosts).map(post => {
                 return (
-                    <li className='singlePostCont'>
+                    <li className='singlePostCont' key={post.id}>
                         <div>
                             {post.title}
                         </div>
@@ -32,35 +33,25 @@ const GetAllPosts = () => {
                         <div>
                             {post.category}
                         </div>
+
                         <br />
                         <div>
                             {post.body}
                         </div>
-                        <div>
-                            {currUser ? currUser.id !== post.user_id ?
-                            <OpenModalButton 
-                            buttonText='Comment'
-                            modalComponent={<CreateComment post={post} />}/>
-                            : null : null}
-                        </div>
                             <div>
-                                {post.anonymous ? Object.values(allUsers).map(user => {
-                                    return (
-                                        <>
-                                        <div>
-                                            {post.user_id === user.id ? user.first_name : null} 
-                                        </div>
-                                        </>
-                                    )
-                                }) : 'Anonymous'}
+                                {post.anonymous ? 'Anonymous' : post.user.first_name}
                             </div>
-                        <div>
-                            View Comments
-                            {/* <NavLink></NavLink> */}
+                            
+                            <div className='viewCont'>
+                        <div className='viewComm'>
+                        
+                            <NavLink to={`/post/${post.id}/comments`}><i class="fa-regular fa-comment"></i> View Comments</NavLink>
                         </div>
-                        <div>
+                        
+                        <div className='viewPost'>
                             <NavLink to={`/postPage/${post.id}`}>View more Post</NavLink>
                         </div>
+                            </div>
                         <br />
                     </li>
                 )

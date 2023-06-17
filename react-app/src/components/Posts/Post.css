@@ -1,5 +1,10 @@
 .postCont > li {
     padding: 50px 70px;
+    margin-top: 20px;
+    margin-left: 20px;
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* align-content: center; */
 }
 
 .postCont {
@@ -31,11 +36,26 @@
 
 .singlePostCont {
     width: 500px;
-    padding: 20px;
+    padding: 10px;
     height: auto;
-    background-color: #800020;
-    border-radius: 50px;
+    background-color: #cd9898;
+    border-radius: 30px;
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 10px;
+}
+
+.viewCont {
+    display: flex;
+    justify-content: space-between;
+}
+
+.viewComm {
+    display: flex;
+    /* gap: 5px; */
+}
+
+.storyHead {
+    margin: 15px 20px;
+    border-bottom: 3px solid white;
 }

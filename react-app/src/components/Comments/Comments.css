@@ -1,5 +1,9 @@
-.h2Comment {
+/* .h2Comment {
     display: flex;
     justify-content: center;
 }
+ */
 
+ .createCommCont {
+    margin-left: 20px;
+ }

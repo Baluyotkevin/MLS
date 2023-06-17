@@ -2,7 +2,6 @@ import { thunkAllCurrPosts } from "../../store/post"
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from "react";
 import './ProfilePage.css'
-import { NavLink } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton";
 import EditPost from '../Posts/EditPost';
 import DeletePost from "../Posts/DeletePost";
@@ -22,6 +21,7 @@ const ProfilePage = () => {
     return (
         <div class='profileCont'>
             <div>
+                
                 <img class='profileImg' src={currUser.profile_img} />
             <div>
                 <div>Followers</div>
@@ -29,6 +29,9 @@ const ProfilePage = () => {
             </div>
             </div>
             <ul>
+                <div>
+                    {currUser.first_name} - Posts
+                </div>
                 {!allCurrPosts.length ? Object.values(allCurrPosts).map(post => {
                     // console.log(post.root_user_id)
                     // console.log(post.parent_id)

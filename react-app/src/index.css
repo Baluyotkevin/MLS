@@ -4,6 +4,12 @@
     padding: 0px;
     list-style: none;
     font-family: American Typewriter, serif;
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+body { 
+    background-color: #70012b;
 }
 
 #modal-content { 
@@ -25,6 +31,20 @@ form {
 }
 
 textarea {
-    width: 400px;
-    height: 200px;
+    min-width: 400px;
+    min-height: 200px;
+    max-width: 400px;
+    max-height: 200px;
+    border-radius: 20px;
+}
+
+button {
+    color: #70012b;
+    background-color: #cd9898;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+textarea {
+    outline: #cd9898;
 }

@@ -29,7 +29,8 @@ const PostForm = ({post, formType}) => {
         setValidationErrors(errors)
         if(Object.keys(errors).length) return
 
-
+        console.log(post)
+        
         post = {
             ...post,
             title,
@@ -83,14 +84,14 @@ const PostForm = ({post, formType}) => {
                 <option value = "Beautiful" > Beautiful </option>
                 <option value = "Horrible" > Horrible </option>
             </select>
+            </>
+            }
             {validationErrors.anonymous}
             <select onChange={(e) => setAnonymous(e.target.value)}>
                     <option value = "">--Anonymous?--</option>
                     <option value = {true}> Yes </option>
                     <option value = {false}> No </option>
             </select>
-            </>
-            }
             </div>
             <div className='submitButtCont'>
 

@@ -12,18 +12,18 @@ function Navigation({ isLoaded }){
 	return (
 		<ul class='navContainer'>
 			<li>
-				<NavLink exact to="/">Home</NavLink>
+				<NavLink exact to="/"><img className='Logo' src='https://kevinbawsbucket.s3.us-west-1.amazonaws.com/Screenshot+2023-06-16+at+6.29.38+PM.png' /></NavLink>
 			</li>
 			{isLoaded && (
 				<div class='navLiCont'>
-				<li>
+				<li className='navPost'>
 					{sessionUser ? <OpenModalButton
 					buttonText="Post Your Love Story!"
 					 modalComponent={<CreatePost />}
 					 /> 
 					 : null}
 				</li>
-				<li>
+				<li className='navProfButt'>
 					<ProfileButton user={sessionUser} />
 				</li>
 				</div>

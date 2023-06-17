@@ -1,0 +1,25 @@
+.commentCont {
+    margin-left: 20px;
+}
+
+.createComm {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+.h2Comment {
+    margin-left: 20px;
+}
+
+.singleCommCont {
+    width: 300px;
+    padding: 10px;
+    height: auto;
+    background-color: #cd9898;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
