@@ -44,9 +44,15 @@ const GetAllCurrComments = () => {
                         buttonText='Delete'
                         modalComponent={<DeleteComment comment={comment} />}
                         />
-                        <li>
-                            <div>{comment.body}</div>
-                        </li>
+
+                            <div>
+                                {comment.post.title} - {comment.post.user.first_name}
+                            </div>
+
+                            <div>
+                                {comment.body}
+                            </div>
+                        
                         <br />
                         </>
                     )

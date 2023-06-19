@@ -45,7 +45,7 @@ function LoginFormModal() {
             <li key={idx}>{error}</li>
           ))}
         </ul>
-        <label>
+        <label className='loginEmail'>
           Email
           <input
             type="text"
@@ -54,7 +54,7 @@ function LoginFormModal() {
             required
           />
         </label>
-        <label>
+        <label className='loginPass'>
           Password
           <input
             type="password"

@@ -23,5 +23,6 @@ class Comment(db.Model):
             "user_id": self.user_id,
             "post_id": self.post_id,
             "created_at": self.created_at,
-            "user": self.user.to_dict()
+            "user": self.user.to_dict(),
+            "post": self.post.to_dict()
         }

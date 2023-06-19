@@ -26,7 +26,7 @@ const GetAllPosts = () => {
             {Object.values(allPosts).map(post => {
                 return (
                     <li className='singlePostCont' key={post.id}>
-                        <div>
+                        <div className='homePostTitle'>
                             {post.title}
                         </div>
 
@@ -39,7 +39,7 @@ const GetAllPosts = () => {
                             {post.body}
                         </div>
                             <div>
-                                {post.anonymous ? 'Anonymous' : post.user.first_name}
+                                {post.anonymous ? 'Anonymous' : post.user.first_name} - {post?.created_at.slice(0, 16)}
                             </div>
                             
                             <div className='viewCont'>
@@ -49,7 +49,7 @@ const GetAllPosts = () => {
                         </div>
                         
                         <div className='viewPost'>
-                            <NavLink to={`/postPage/${post.id}`}>View more Post</NavLink>
+                            <NavLink to={`/postPage/${post.id}`}>View more Posts</NavLink>
                         </div>
                             </div>
                         <br />

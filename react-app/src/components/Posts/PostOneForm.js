@@ -21,8 +21,8 @@ const PostForm = ({post, formType}) => {
         let errors = {}
 
         if(title.length < 5) errors.title = "Please enter 5 characters or more"
-        if(title.length > 10) errors.title = "You cannot exceed 10 characters"
-        if(body.length < 10) errors.body = "PLease enter 10 characters or more"
+        if(title.length > 20) errors.title = "You cannot exceed 20 characters"
+        if(body.length < 10) errors.body = "Please enter 10 characters or more"
         if(body.length > 355) errors.body = "You cannot exceed 355 characters"
         if(!category.length) errors.category = "Please select Beautiful or Horrible"
         if(!anonymous.length) errors.anonymous = "Please select yes or no."
@@ -57,18 +57,24 @@ const PostForm = ({post, formType}) => {
     return (
         <div>
         <form onSubmit={handleSubmit}>
+            <div className='errors' >
+
             {validationErrors.title}
+            </div>
             <div>
-                <div>Title</div>
+                <div className='createPostTitle'>Title</div>
                 <input
                 type='text'
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 />
             </div>
+            <div className='errors' >
+
             {validationErrors.body}
+            </div>
             <div>
-                <div>Body</div>
+                <div className='createPostBody'>Body</div>
                 <textarea
                 type='text'
                 value={body}
@@ -78,7 +84,10 @@ const PostForm = ({post, formType}) => {
         <div class='selectPost'>
             {formType === 'Edit Post' ? null : 
             <>
+            <div className='errors' >
+
             {validationErrors.category}
+            </div>
             <select onChange={(e) => setCategory(e.target.value)}>
                 <option value="">--Select Category--</option>
                 <option value = "Beautiful" > Beautiful </option>
@@ -86,7 +95,10 @@ const PostForm = ({post, formType}) => {
             </select>
             </>
             }
+            <div className='errors' >
+
             {validationErrors.anonymous}
+            </div>
             <select onChange={(e) => setAnonymous(e.target.value)}>
                     <option value = "">--Anonymous?--</option>
                     <option value = {true}> Yes </option>

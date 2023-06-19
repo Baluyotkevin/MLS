@@ -14,15 +14,10 @@ function SignupFormModal() {
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [profile_img, setprofile_img] = useState("");
-	// const [imageLoading, setImageLoading] = useState(false);
 	const [first_name, setfirst_name] = useState("");
 	const [last_name, setlast_name] = useState("");
 	const [errors, setErrors] = useState([]);
 	const { closeModal } = useModal();
-
-	// const handlePicSubmit = async (e) => {
-
-	// }
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -35,7 +30,7 @@ function SignupFormModal() {
 			formData.append("profile_img", profile_img)
 			formData.append("first_name", first_name)
 			formData.append("last_name", last_name)
-			// console.log("THI SI S MY FORM DATA", formData.values())
+
 			const data = await dispatch(signUp(formData));
 			if (data) {
 				setErrors(data);
@@ -58,19 +53,20 @@ function SignupFormModal() {
 			>
 				<ul>
 					{errors.map((error, idx) => (
-						<li key={idx}>{error}</li>
+						<li className='errors' key={idx}>{error}</li>
 					))}
 				</ul>
-				<label>
+				<div className='signUp'>
 					Profile Picture
 					<input
+					className='signProf'
 					id="image"
 					type="file"
 					accept="image/*"
 					onChange={(e) => setprofile_img(e.target.files[0])}
 					/>
-				</label>
-				<label>
+				</div>
+				<div className='signUp'>
 					Email
 					<input
 						type="text"
@@ -78,8 +74,8 @@ function SignupFormModal() {
 						onChange={(e) => setEmail(e.target.value)}
 						required
 					/>
-				</label>
-				<label>
+				</div>
+				<div className='signUp'>
 					Username
 					<input
 						type="text"
@@ -87,8 +83,8 @@ function SignupFormModal() {
 						onChange={(e) => setUsername(e.target.value)}
 						required
 					/>
-				</label>
-				<label>
+				</div >
+				<div className='signUp'>
 					First Name 
 					<input
 					type="text"
@@ -96,8 +92,8 @@ function SignupFormModal() {
 					onChange={(e) => setfirst_name(e.target.value)}
 					required
 					/>
-				</label>
-				<label>
+				</div >
+				<div className='signUp'>
 					Last Name 
 					<input
 					type="text"
@@ -105,8 +101,8 @@ function SignupFormModal() {
 					onChange={(e) => setlast_name(e.target.value)}
 					required
 					/>
-				</label>
-				<label>
+				</div >
+				<div className='signUp'>
 					Password
 					<input
 						type="password"
@@ -114,8 +110,8 @@ function SignupFormModal() {
 						onChange={(e) => setPassword(e.target.value)}
 						required
 					/>
-				</label>
-				<label>
+				</div >
+				<div className='signUp'>
 					Confirm Password
 					<input
 						type="password"
@@ -123,7 +119,7 @@ function SignupFormModal() {
 						onChange={(e) => setConfirmPassword(e.target.value)}
 						required
 					/>
-				</label>
+				</div >
 				<button type="submit">Sign Up</button>
 			</form>
 		</>

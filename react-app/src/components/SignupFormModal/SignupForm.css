@@ -1,0 +1,9 @@
+.signUp {
+    color: #cd9898;
+    display: flex;
+    gap: 5px;
+}
+
+input.signProf {
+    background-color: none;
+}
