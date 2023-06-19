@@ -6,6 +6,8 @@ import OpenModalButton from "../OpenModalButton";
 import EditPost from '../Posts/EditPost';
 import DeletePost from "../Posts/DeletePost";
 import { NavLink } from "react-router-dom";
+import ProfileForm from "./EditProfilePage";
+
 
 
 const ProfilePage = () => {
@@ -25,6 +27,10 @@ const ProfilePage = () => {
                 
                 <img class='profileImg' src={currUser.profile_img} />
             <div>
+                <OpenModalButton
+                buttonText='Edit Profile'
+                modalComponent={<ProfileForm user={currUser} />}
+                />
                 <div>Followers</div>
                 <div>Favorites</div>
             </div>
