@@ -67,14 +67,11 @@ def sign_up():
     print(' THIS BE MEEEE =========================')
     if form.validate_on_submit():
 
-        profile_img=form.data['profile_img']
-        print("THSI SI MY PROFILE IMG =================>>", profile_img)
-        profile_img.filename = get_unique_filename(profile_img.filename)
-        print('TH IS IS MY PROFILE_IMG', profile_img.filename)
-        upload = upload_file_to_s3(profile_img)
-        print("this is my UPLOADDDDDD========", upload)
-        if "url" not in upload:
-            return upload['errors']
+        # profile_img=form.data['profile_img']
+        # profile_img.filename = get_unique_filename(profile_img.filename)
+        # upload = upload_file_to_s3(profile_img)
+        # if "url" not in upload:
+        #     return upload['errors']
         # if the dictionary doesn't have a url key
         # it means that there was an error when we tried to upload
         # so we send back that error message
@@ -83,7 +80,7 @@ def sign_up():
         user = User(
             username=form.data['username'],
             email=form.data['email'],
-            profile_img = upload['url'],
+            profile_img = form.data['profile_img'],
             password=form.data['password'],
             first_name=form.data['first_name'],
             last_name=form.data['last_name']
@@ -94,6 +91,34 @@ def sign_up():
         login_user(user)
         return user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+@auth_routes.route('/current', methods=['PUT'])
+@login_required
+def edit_user():
+
+    form = SignUpForm()
+    form["csrf_token"].data=request.cookies["csrf_token"]
+    profile_img=form.data['profile_img']
+    profile_img.filename = get_unique_filename(profile_img.filename)
+    print("WHAT IS THIS ?? ===========", profile_img.filename)
+    upload = upload_file_to_s3(profile_img)
+    print("THIS IS MY UPLOOAD ============",upload)
+    if "url" not in upload:
+            return upload['errors']
+
+    if form.validate_on_submit():
+
+        edit_user = User(
+            username = current_user.username,
+            email = current_user.email,
+            password = current_user.password,
+            profile_img = upload['url'],
+            first_name=form.data['first_name'],
+            last_name=form.data['last_name']
+        )
+        db.session.add(edit_user)
+        db.session.commit()
+        return edit_user.to_dict()
 
 
 @auth_routes.route('/unauthorized')

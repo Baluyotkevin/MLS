@@ -63,7 +63,7 @@ function SignupFormModal() {
 					id="image"
 					type="file"
 					accept="image/*"
-					onChange={(e) => setprofile_img(e.target.files[0])}
+					onChange={(e) => setprofile_img(e.target?.files[0])}
 					/>
 				</div>
 				<div className='signUp'>

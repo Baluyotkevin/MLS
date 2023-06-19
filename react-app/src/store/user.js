@@ -1,9 +1,15 @@
 const GET_ALL_USERS = 'user/getAllUsers'
+// const EDIT_USER = 'user/editUser'
 
 const allUsers = users => ({
     type: GET_ALL_USERS,
     users
 })
+
+// const editUser = user => ({
+//     type: EDIT_USER,
+//     user
+// })
 
 export const thunkAllUsers = () => async (dispatch) => {
     const res = await fetch('/api/users/')
@@ -14,8 +20,17 @@ export const thunkAllUsers = () => async (dispatch) => {
     }
 }
 
+// export const thunkEditUser = () => async (dispatch) => {
+//     const res = await fetch('/api/users/current')
+//     if (res.ok) {
+//         const data = await res.json(
+//             dispatch(editUser(data))
+//         )
+//     }
+// }
 
-const initialState = { allUsers: {} }
+
+const initialState = { allUsers: {}, singleUser: {} }
 
 const userReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -30,6 +45,15 @@ const userReducer = (state = initialState, action) => {
                 allUsers: newState
             }
         }
+        // case EDIT_USER: {
+        //     const newState = {}
+        //     const user = action.user
+        //     newState[user.id] = user
+        //     return {
+        //         ...state,
+        //         singleUser: newState
+        //     }
+        // }
         default: return state
     }
 }

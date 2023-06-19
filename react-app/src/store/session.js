@@ -1,11 +1,17 @@
 // constants
 const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
+const EDIT_USER = 'user/editUser'
 
 const setUser = (user) => ({
 	type: SET_USER,
 	payload: user,
 });
+
+const editUser = user => ({
+    type: EDIT_USER,
+    user
+})
 
 const removeUser = () => ({
 	type: REMOVE_USER,
@@ -28,6 +34,17 @@ export const authenticate = () => async (dispatch) => {
 		dispatch(setUser(data));
 	}
 };
+
+export const thunkEditUser = (user) => async (dispatch) => {
+    const res = await fetch('/api/auth/current', {
+		method: "PUT",
+		body: user
+	})
+    if (res.ok) {
+        const data = await res.json();
+		dispatch(editUser(data));
+    }
+}
 
 export const login = (email, password) => async (dispatch) => {
 	const response = await fetch("/api/auth/login", {
@@ -68,20 +85,12 @@ export const logout = () => async (dispatch) => {
 };
 
 export const signUp = (user) => async (dispatch) => {
-	console.log("DO I EGET IN HERE????=====")
 	const response = await fetch("/api/auth/signup", {
 		method: "POST",
-		// headers: {
-		// 	"Content-Type": "application/json",
-		// },
 		body: user
-		// JSON.stringify(),
 	});
-	console.log("THIS IS MY USER IN MY STORE ====>", user)
-	console.log("THIS IS MY RESPONSE ========", response)
 	if (response.ok) {
 		const data = await response.json();
-		console.log("THIS IS MY DATA =======>", data)
 		dispatch(setUser(data));
 		return null;
 	} else if (response.status < 500) {
@@ -100,6 +109,8 @@ export default function reducer(state = initialState, action) {
 			return { user: action.payload };
 		case REMOVE_USER:
 			return { user: null };
+		case EDIT_USER:
+			return { user: action.user }
 		default:
 			return state;
 	}
