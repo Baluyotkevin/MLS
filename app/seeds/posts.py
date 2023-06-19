@@ -20,31 +20,11 @@ def seed_posts():
     )
     post5 = Post (
         title='I Miss You',
-        body="""I always missed you when you weren't by my side. 
-        I thought I'd act strong and pretend I didn't, but I lied. 
-        I always missed you when you were gone and then I cried. 
-        I never got to tell you because of my pride. 
-        I always missed you when you were away so I'd hide. 
-        And now I can't even tell you anymore because your love for me,  had died.
-        I still see you with eyes wide. 
-        It hurts. 
-        I miss you.
-        I miss you so much.
-        Still I'll always remember your touch…""", user_id = 4, category = 'Beautiful'
+        body="I always missed you when you weren't by my side. I thought I'd act strong and pretend I didn't, but I lied. I always missed you when you were gone and then I cried. I never got to tell you because of my pride. I always missed you when you were away so I'd hide. And now I can't even tell you anymore because your love for me, had died.I still see you with eyes wide. It hurts. I miss you.I miss you so much. Still I'll always remember your touch…", user_id = 4, category = 'Beautiful'
     )
     post6 = Post(
         title="I'm Always Here For You",
-        body="""It felt forever being sad and upset. 
-        What I didn't notice that the love I believed in, did exist.
-        I was a fool for thinking it didn't, like how did I miss?
-        It felt forever being mad and angry. 
-        What I had forgotten you've done for me because I was selfish and blinded. 
-        How could I not see, of all of the things you did for me and be so close minded.
-        It felt forever since I was happy and joyful. 
-        Now I realize you did make my world and still do.
-        I promise it's not out of the blue. 
-        I'm serious. My love for you only grew. 
-        No matter what I'm always here for you.""", user_id = 4, category = 'Beautiful'
+        body="It felt forever being sad and upset. What I didn't notice that the love I believed in, did exist. I was a fool for thinking it didn't, like how did I miss? It felt forever being mad and angry. What I had forgotten you've done for me because I was selfish and blinded. How could I not see, of all of the things you did for me and be so close minded.It felt forever since I was happy and joyful. Now I realize you did make my world and still do. I promise it's not out of the blue. I'm serious. My love for you only grew. No matter what I'm always here for you.", user_id = 4, category = 'Beautiful'
     )
 
     db.session.add(post1)
