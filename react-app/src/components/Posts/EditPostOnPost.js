@@ -1,10 +1,10 @@
-import PostOnPostForm from "./PostOneForm"
+import PostOnPostForm from "./PostOnPostForm"
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { thunkAllCurrPosts, thunkAllPosts, thunkOnePost } from "../../store/post";
 
-const EditPost = ({ post }) => {
+const EditPostOnPost = ({ post }) => {
     
     const dispatch = useDispatch()
     // const { postId } = useParams()
@@ -18,7 +18,7 @@ const EditPost = ({ post }) => {
     return (
         <>
 
-        <PostOnPostForm 
+        <PostOnPostForm
         post = {post}
         // postId = {postEdit}
         formType = 'Edit Post'
@@ -27,4 +27,4 @@ const EditPost = ({ post }) => {
     )
 }
 
-export default EditPost
+export default EditPostOnPost

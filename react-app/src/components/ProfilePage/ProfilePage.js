@@ -42,44 +42,48 @@ const ProfilePage = () => {
                 {!allCurrPosts.length ? Object.values(allCurrPosts).map(post => {
                     // console.log(post.root_user_id)
                     // console.log(post.parent_id)
-                    return (
-                        <li className='singlePostCont'>
-                            {post.parent_id == undefined ? 
-                            <>
-                            <div className='modalCont'>
-                            <OpenModalButton
-                            buttonText='Edit'
-                            modalComponent={<EditPost post={post} />}
-                            />
-                            <OpenModalButton
-                            buttonText='Delete'
-                            modalComponent={<DeletePost post={post} />}
-                            />
+                    if (post.root_post_id === null) {
+                        return (
+                            <li className='singlePostCont'>
+                                {/* hello */}
+                                <>
+                                <div className='modalCont'>
+                                <OpenModalButton
+                                buttonText='Edit'
+                                modalComponent={<EditPost post={post} />}
+                                />
+                                <OpenModalButton
+                                buttonText='Delete'
+                                modalComponent={<DeletePost post={post} />}
+                                />
+                                </div>
+                                <div className='homePostTitle'>
+                                    {post.title}
+                                </div>
+    
+                                <div>
+                                    {post.category}
+                                </div>
+                                <br />
+    
+                                <div class='body'>
+                                    {post.body}
+                                </div>
+                                <div>
+                                    {post.anonymous ? 'Anonymous' : post.user.first_name} - {post?.created_at.slice(0, 16)}
+                                </div>
+                                <div className='viewPost'>
+                                <NavLink to={`/postPage/${post.id}`}>View more Posts</NavLink>
                             </div>
-                            <div className='homePostTitle'>
-                                {post.title}
-                            </div>
+                                <br />
+                                </>
+                            </li>
+                        )
 
-                            <div>
-                                {post.category}
-                            </div>
-                            <br />
-
-                            <div class='body'>
-                                {post.body}
-                            </div>
-                            <div>
-                                {post.anonymous ? 'Anonymous' : post.user.first_name} - {post?.created_at.slice(0, 16)}
-                            </div>
-                            <div className='viewPost'>
-                            <NavLink to={`/postPage/${post.id}`}>View more Posts</NavLink>
-                        </div>
-                            <br />
-                            </>
-                            : null}
-                        </li>
-                    )
-                }) : "You Haven't Posted Your Love Story Yet!" } 
+                    } else {
+                        return null
+                    }
+                }) : <div className='none'>You Haven't Posted Your Love Story Yet!</div> } 
             </ul>
         </div>
     )

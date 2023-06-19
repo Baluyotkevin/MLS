@@ -1,9 +1,5 @@
 import PostForm from "./PostOneForm";
-import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { thunkAllCurrPosts, thunkAllPosts, thunkOnePost } from "../../store/post";
-
+import { useDispatch } from "react-redux";
 const EditPost = ({ post }) => {
     
     const dispatch = useDispatch()

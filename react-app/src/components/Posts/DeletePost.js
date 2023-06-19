@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useModal } from "../../context/Modal";
-import { thunkAllCurrPosts, thunkDeletePost } from '../../store/post';
+import { thunkAllCurrPosts, thunkDeletePost, thunkOnePost } from '../../store/post';
 
 
 const DeletePost = ({post}) => {
@@ -15,6 +15,7 @@ const DeletePost = ({post}) => {
         dispatch(thunkDeletePost(post.id))
         .then(closeModal)
         dispatch(thunkAllCurrPosts())
+        dispatch(thunkOnePost(post.id))
     }
 
     return (

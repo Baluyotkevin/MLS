@@ -35,6 +35,12 @@ function LoginFormModal() {
     .then(closeModal)
   }
 
+  const autoLoginThree = e => {
+    setEmail('kevin@aa.io')
+    setPassword('password')
+    dispatch(login(email, password))
+    .then(closeModal)
+  }
 
   return (
     <>
@@ -66,6 +72,7 @@ function LoginFormModal() {
         <button type="submit">Log In</button>
         <button type="submit" onClick={autoLoginOne}>Log In As Demo</button>
         <button type="submit" onClick={autoLoginTwo}>Log In As Marnie</button>
+        <button type="submit" onClick={autoLoginThree}>Log In As Kevin</button>
       </form>
     </>
   );

@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { thunkOnePost } from "../../store/post";
 import { useParams } from "react-router-dom";
 import { thunkAllComments } from "../../store/comment";
-import { thunkAllUsers } from "../../store/user";
+// import { thunkAllUsers } from "../../store/user";
 import './PostPage.css'
 import CreateComment from "../Comments/CreateComment";
 
@@ -11,7 +11,7 @@ const PostsCommentsPage = () => {
     const dispatch = useDispatch()
     const allComments = useSelector(state => state.comment.allComments)
     const onePost = useSelector(state => state.post.singlePost)
-    const allUsers = useSelector(state => state.users.allUsers)
+    // const allUsers = useSelector(state => state.users.allUsers)
     const currUser = useSelector(state => state.session.user)
     const root = onePost.root
     const postComments = Object.values(allComments).filter(comment =>  comment.post_id === onePost.root?.id)
@@ -20,7 +20,7 @@ const PostsCommentsPage = () => {
     useEffect(() => {
         dispatch(thunkAllComments())
         dispatch(thunkOnePost(postId))
-        dispatch(thunkAllUsers())
+        // dispatch(thunkAllUsers())
     }, [dispatch])
 
     return (

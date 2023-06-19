@@ -10,10 +10,12 @@ def seed_users():
         username='marnie', email='marnie@aa.io', password='password', first_name='marine', last_name='marnie', profile_img='https://kevinbawsbucket.s3.us-west-1.amazonaws.com/9395c115a982448b855ea7ad430eb58b.png')
     bobbie = User(
         username='bobbie', email='bobbie@aa.io', password='password', first_name='hello', last_name='bobbie', profile_img='https://kevinbawsbucket.s3.us-west-1.amazonaws.com/9395c115a982448b855ea7ad430eb58b.png')
-
+    kevin = User(
+        username='kevinb', email='kevin@aa.io', password='password', first_name='Kevin', last_name='B', profile_img='https://kevinbawsbucket.s3.us-west-1.amazonaws.com/kevinmiddle.jpeg')
     db.session.add(demo)
     db.session.add(marnie)
     db.session.add(bobbie)
+    db.session.add(kevin)
     db.session.commit()
 
 

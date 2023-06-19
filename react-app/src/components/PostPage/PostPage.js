@@ -5,6 +5,9 @@ import { useParams } from "react-router-dom";
 import { thunkAllUsers } from "../../store/user";
 import OpenModalButton from "../OpenModalButton";
 import CreatePostOnPost from "../Posts/CreatePostOnPost";
+import EditPostOnPost from "../Posts/EditPostOnPost";
+import DeletePost from "../Posts/DeletePost";
+import EditPost from "../Posts/EditPost";
 
 const PostPage = () => {
     const dispatch = useDispatch()
@@ -14,19 +17,21 @@ const PostPage = () => {
     const children = onePost.children
     const { postId } = useParams()
     useEffect(() => {
-        dispatch(thunkAllPosts())
         dispatch(thunkOnePost(postId))
+        dispatch(thunkAllPosts())
+        // dispatch(t)
     }, [dispatch])
 
     return (
         <div className='postBody'>
-            {/* {currUser.id === root?.user_id ? <OpenModalButton
+            {currUser?.id === root?.user_id && !children.length ? <OpenModalButton
             buttonText='Continue your love story!'
             modalComponent={<CreatePostOnPost postId={postId}/>}
-            /> : null} */}
+            /> : null}
             <ul class='postCont'>
                 <li className='singlePostCont'> 
                     <div>
+                        {/* hello */}
                         {root?.title}
                     </div>
                     <div>
@@ -42,6 +47,16 @@ const PostPage = () => {
                 {children?.length ? Object.values(children).map(post => {
                     return (
                         <li className='singlePostCont'>
+                            <div className='modalCont'>
+                               <OpenModalButton 
+                               buttonText='Edit'
+                               modalComponent={<EditPostOnPost post={post}/>}
+                               />
+                                <OpenModalButton
+                                buttonText='Delete'
+                                modalComponent={<DeletePost post={post} />}
+                                />
+                            </div>
                         <div className='title'>
                                 {post.title}
                             </div>
@@ -53,6 +68,9 @@ const PostPage = () => {
 
                             <div className='body'>
                                 {post.body}
+                            </div>
+                            <div>
+                                {post.created_at?.slice(0, 16)}
                             </div>
                         <br />
                         </li>

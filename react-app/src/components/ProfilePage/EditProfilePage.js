@@ -10,6 +10,7 @@ const ProfileForm = ({user}) => {
     const [profile_img, setprofile_img] = useState("");
 	const [first_name, setfirst_name] = useState("");
 	const [last_name, setlast_name] = useState("");
+    const { closeModal } = useModal()
     console.log("this is my user", user)
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -19,7 +20,7 @@ const ProfileForm = ({user}) => {
 		formData.append("last_name", last_name)
 
         await dispatch(thunkEditUser(formData, user))
-        // dispatch(login())
+        .then(closeModal)
     }
 
     return (

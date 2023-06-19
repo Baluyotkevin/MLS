@@ -29,9 +29,9 @@ const GetAllCurrComments = () => {
                 </div>
             </div>
             <ul class='postCont'>
-                <div className='profileHeader'>
+                <h3 className='profileHeader'>
                 {currUser.first_name} - Comments
-                </div>
+                </h3>
                 <br />
                 {check.length ? Object.values(allComments).map(comment => {
                     return (
@@ -61,7 +61,7 @@ const GetAllCurrComments = () => {
                         <br />
                         </li>
                     )
-                }) : "No comments yet"}
+                }) : <div className='none'>No comments yet!</div>}
             </ul>
         </div>
     )

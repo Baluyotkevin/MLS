@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { useHistory } from 'react-router-dom';
-import { thunkCreatePostonPost, thunkEditPost, thunkAllCurrPosts } from "../../store/post";
+import { thunkCreatePostonPost, thunkOnePost, thunkEditPostOnPost } from "../../store/post";
 import { useModal } from "../../context/Modal";
 
 const PostOnPostForm = ({ postId, post, formType }) => {
@@ -19,9 +19,13 @@ const PostOnPostForm = ({ postId, post, formType }) => {
         let errors = {}
 
         if(title.length < 5) errors.title = "Please enter 5 characters or more"
-        if(title.length > 20) errors.title = "You cannot exceed 20 characters"
+        if(title.length > 30) errors.title = "You cannot exceed 30 characters"
         if(body.length < 10) errors.body = "Please enter 10 characters or more"
         if(body.length > 355) errors.body = "You cannot exceed 355 characters"
+        // const check = dispatch(thunkOnePost(postId + 1))
+        // if(check.children) errors.check = "You've already created a post"
+        setValidationErrors(errors)
+        if(Object.keys(errors).length) return
 
         post = {
             ...post,
@@ -33,45 +37,43 @@ const PostOnPostForm = ({ postId, post, formType }) => {
         if (formType === 'Create Post') {
             await dispatch(thunkCreatePostonPost(post, postId))
             .then(closeModal)
-            dispatch(thunkAllCurrPosts())
+            // history.push(`/postPage/${postId}`)
+            dispatch(thunkOnePost(postId))
         }
 
         if (formType === 'Edit Post') {
-            await dispatch(thunkEditPost(post))
-            history.push('/')
+            await dispatch(thunkEditPostOnPost(post))
+            .then(closeModal)
+            // dispatch(thunkOnePost(postId))
+            // dispatch(thunkAllPosts())
         }
     }
 
     return (
         <div>
         <form onSubmit={handleSubmit}>
+            <div className='errors'>
+            {validationErrors.title}
+            </div>
             <div>
-                <label>Title
+            <div className='createPostTitle'>Title</div>
                 <input
                 type='text'
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 />
-                </label>
             </div>
-
+            <div className='errors'>
+            {validationErrors.body}
+            </div>
             <div>
-                <label>Body
+            <div className='createPostBody'>Body</div>
                 <textarea
                 type='text'
                 value={body}
                 onChange={(e) => setBody(e.target.value)}
                 />
-                </label>
             </div>
-
-            {/* <div>
-                <select onChange={(e) => setAnonymous(e.target.value)}>
-                    <option value = "" >--Anonymous?--</option>
-                    <option value = {true}> Yes </option>
-                    <option value = {false}> No </option>
-                </select>
-            </div> */}
             <button type='submit'> Submit </button>
         </form>
         </div>

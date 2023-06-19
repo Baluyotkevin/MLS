@@ -21,7 +21,7 @@ const PostForm = ({post, formType}) => {
         let errors = {}
 
         if(title.length < 5) errors.title = "Please enter 5 characters or more"
-        if(title.length > 20) errors.title = "You cannot exceed 20 characters"
+        if(title.length > 30) errors.title = "You cannot exceed 30 characters"
         if(body.length < 10) errors.body = "Please enter 10 characters or more"
         if(body.length > 355) errors.body = "You cannot exceed 355 characters"
         if(!category.length) errors.category = "Please select Beautiful or Horrible"
@@ -42,8 +42,8 @@ const PostForm = ({post, formType}) => {
         if (formType === 'Create Post') {
             await dispatch(thunkCreatePost(post))
             .then(closeModal)
+            history.push('/')
             dispatch(thunkAllCurrPosts())
-            // history.push('/')
         }
 
         if (formType === 'Edit Post') {
@@ -85,7 +85,7 @@ const PostForm = ({post, formType}) => {
             {formType === 'Edit Post' ? null : 
             <>
             <div className='errors' >
-
+        {/* hello */}
             {validationErrors.category}
             </div>
             <select onChange={(e) => setCategory(e.target.value)}>

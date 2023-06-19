@@ -4,6 +4,7 @@ const GET_ALL_CURR_POSTS = "post/loadAllCurrPosts"
 const CREATE_POST_POST = "post/createPostOnPost"
 const CREATE_POST = "post/createPost"
 const EDIT_POST = "post/editPost"
+const EDIT_POST_POST = 'post/editPostOnPost'
 const DELETE_POST = "delete/deletePost"
 
 const loadOnePost = post => ({
@@ -33,6 +34,11 @@ const createPostOnPost = post => ({
 
 const editPost = post => ({
     type: EDIT_POST,
+    post
+})
+
+const editPostOnPost = post => ({
+    type: EDIT_POST_POST,
     post
 })
 
@@ -82,17 +88,14 @@ export const thunkCreatePost = (post) => async (dispatch) => {
 }
 
 export const thunkCreatePostonPost = (post, postId) => async (dispatch) => {
-    console.log("WHAT IS THIS????? ", post, postId)
     const res = await fetch(`/api/posts/${postId}/post`, {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(post)
     })
-    console.log("WHAT IS MY REEEEES", res)
 
     if (res.ok) {
         const data = await res.json()
-        console.log("THIS IS MY DAATAAAAA", data)
         dispatch(createPostOnPost(data))
     }
 }
@@ -108,6 +111,20 @@ export const thunkEditPost = (post) => async (dispatch) => {
     if (res.ok) {
         const data = await res.json()
         dispatch(editPost(data))
+    }
+}
+
+export const thunkEditPostOnPost = (post) => async (dispatch) => {
+    console.log(post)
+    const res = await fetch(`/api/posts/${post.id}/edit`, {
+        method: "PUT",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(post)
+    })
+    
+    if (res.ok) {
+        const data = await res.json()
+        dispatch(editPostOnPost(data))
     }
 }
 
@@ -165,6 +182,15 @@ const postReducer = (state = initialState, action) => {
                 singlePost: newState
             }
         }
+        case EDIT_POST_POST: {
+            const newState = { ...action.post }
+            // const onePost = action.post
+            // newState[onePost.id] = onePost
+            return {
+                ...state,
+                singlePost: { root: {...state.singlePost.root}, children: [newState]}
+            }
+        }
         case CREATE_POST: {
             const newState = {}
             const onePost = action.post
@@ -180,7 +206,7 @@ const postReducer = (state = initialState, action) => {
             newState[onePost.id] = onePost
             return {
                 ...state,
-                allPosts: { ...state.allPosts, ...newState}
+                singlePost: { root: {...state.singlePost.root}, children: [newState]}
             }
         }
         case DELETE_POST: {
