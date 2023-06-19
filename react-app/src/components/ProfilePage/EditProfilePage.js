@@ -10,7 +10,7 @@ const ProfileForm = ({user}) => {
     const [profile_img, setprofile_img] = useState("");
 	const [first_name, setfirst_name] = useState("");
 	const [last_name, setlast_name] = useState("");
-
+    console.log("this is my user", user)
     const handleSubmit = async (e) => {
         e.preventDefault()
         const formData = new FormData()
@@ -18,7 +18,7 @@ const ProfileForm = ({user}) => {
 		formData.append("first_name", first_name)
 		formData.append("last_name", last_name)
 
-        await dispatch(thunkEditUser(formData))
+        await dispatch(thunkEditUser(formData, user))
         // dispatch(login())
     }
 

@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, session, request
 from app.models import User, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
+from app.forms.edit_user_form import EditForm
 from flask_login import current_user, login_user, logout_user, login_required
 from .AWS_helpers import upload_file_to_s3, remove_file_from_s3, get_unique_filename
 from datetime import date
@@ -92,33 +93,25 @@ def sign_up():
         return user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
-@auth_routes.route('/current', methods=['PUT'])
+@auth_routes.route('/<int:id>/current', methods=['PUT'])
 @login_required
-def edit_user():
-
+def edit_user(id):
+    user = User.query.get(id)
     form = SignUpForm()
     form["csrf_token"].data=request.cookies["csrf_token"]
     profile_img=form.data['profile_img']
     profile_img.filename = get_unique_filename(profile_img.filename)
-    print("WHAT IS THIS ?? ===========", profile_img.filename)
     upload = upload_file_to_s3(profile_img)
-    print("THIS IS MY UPLOOAD ============",upload)
+
     if "url" not in upload:
             return upload['errors']
 
-    if form.validate_on_submit():
+    user.profile_img = upload['url']
+    user.first_name=form.data['first_name']
+    user.last_name=form.data['last_name']
 
-        edit_user = User(
-            username = current_user.username,
-            email = current_user.email,
-            password = current_user.password,
-            profile_img = upload['url'],
-            first_name=form.data['first_name'],
-            last_name=form.data['last_name']
-        )
-        db.session.add(edit_user)
-        db.session.commit()
-        return edit_user.to_dict()
+    db.session.commit()
+    return user.to_dict()
 
 
 @auth_routes.route('/unauthorized')

@@ -35,10 +35,11 @@ export const authenticate = () => async (dispatch) => {
 	}
 };
 
-export const thunkEditUser = (user) => async (dispatch) => {
-    const res = await fetch('/api/auth/current', {
+export const thunkEditUser = (data, user) => async (dispatch) => {
+	console.log("this is my thunkedit user", data, user)
+    const res = await fetch(`/api/auth/${user.id}/current`, {
 		method: "PUT",
-		body: user
+		body: data
 	})
     if (res.ok) {
         const data = await res.json();
