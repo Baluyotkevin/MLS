@@ -21,7 +21,7 @@ const PostOnPostForm = ({ postId, post, formType }) => {
         if(title.length < 5) errors.title = "Please enter 5 characters or more"
         if(title.length > 30) errors.title = "You cannot exceed 30 characters"
         if(body.length < 10) errors.body = "Please enter 10 characters or more"
-        if(body.length > 355) errors.body = "You cannot exceed 355 characters"
+        if(body.length > 455) errors.body = "You cannot exceed 455 characters"
         // const check = dispatch(thunkOnePost(postId + 1))
         // if(check.children) errors.check = "You've already created a post"
         setValidationErrors(errors)

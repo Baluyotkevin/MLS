@@ -23,7 +23,7 @@ const PostForm = ({post, formType}) => {
         if(title.length < 5) errors.title = "Please enter 5 characters or more"
         if(title.length > 30) errors.title = "You cannot exceed 30 characters"
         if(body.length < 10) errors.body = "Please enter 10 characters or more"
-        if(body.length > 355) errors.body = "You cannot exceed 355 characters"
+        if(body.length > 455) errors.body = "You cannot exceed 455 characters"
         if(!category.length) errors.category = "Please select Beautiful or Horrible"
         if(!anonymous.length) errors.anonymous = "Please select yes or no."
         setValidationErrors(errors)
