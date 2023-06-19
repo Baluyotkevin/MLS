@@ -21,6 +21,14 @@ function SignupFormPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const err = {}
+		if(!first_name.length) err.first = "Please enter a first name"
+		if(!last_name.length) err.last = "Please enter a last name"
+		if(!email.length || !email.includes('@')) err.email = "Please enter an email with @"
+		if(username.length < 5) err.username = "Please enter a 5 character username"
+		setErrors(err)
+		if(Object.keys(err.length)) return
+
     const formData = new FormData()
 			console.log(username)
 			formData.append("username", username)

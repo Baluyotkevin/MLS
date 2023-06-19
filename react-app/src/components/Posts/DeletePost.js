@@ -19,7 +19,7 @@ const DeletePost = ({post}) => {
 
     return (
         <div>
-        <h2>Confirm Delete</h2>
+        <h2 className='createPostTitle'>Confirm Delete</h2>
             <button onClick={handleDelete}>Delete</button>
         </div>
     )

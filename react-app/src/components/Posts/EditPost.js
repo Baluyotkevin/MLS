@@ -17,7 +17,6 @@ const EditPost = ({ post }) => {
 
     return (
         <>
-        {/* hi */}
         <PostForm 
         post = {post}
         // postId = {postEdit.id}

@@ -17,10 +17,20 @@ function SignupFormModal() {
 	const [first_name, setfirst_name] = useState("");
 	const [last_name, setlast_name] = useState("");
 	const [errors, setErrors] = useState([]);
+	const [validationErrors, setValidationErrors] = useState("")
 	const { closeModal } = useModal();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+
+		const err = {}
+		if(!email.includes('@')) err.email = "Please enter an email with @"
+		if (!first_name) errors.first_name = 'First name is required'
+		if (!last_name) errors.last_name = 'Last name is required'
+		console.log(validationErrors)
+		setValidationErrors(err)
+		if(Object.keys(err).length) return
+
 		if (password === confirmPassword) {
 			const formData = new FormData()
 			console.log(username)
@@ -51,6 +61,7 @@ function SignupFormModal() {
 			onSubmit={handleSubmit}
 			encType='multipart/form-data'
 			>
+				{/* hello */}
 				<ul>
 					{errors.map((error, idx) => (
 						<li className='errors' key={idx}>{error}</li>
@@ -66,6 +77,9 @@ function SignupFormModal() {
 					onChange={(e) => setprofile_img(e.target.files[0])}
 					/>
 				</div>
+				<div className='errors'>
+					{validationErrors.email}
+				</div>
 				<div className='signUp'>
 					Email
 					<input
@@ -75,6 +89,7 @@ function SignupFormModal() {
 						required
 					/>
 				</div>
+				{validationErrors.user}
 				<div className='signUp'>
 					Username
 					<input
@@ -84,6 +99,7 @@ function SignupFormModal() {
 						required
 					/>
 				</div >
+				{validationErrors.first}
 				<div className='signUp'>
 					First Name 
 					<input
@@ -93,6 +109,7 @@ function SignupFormModal() {
 					required
 					/>
 				</div >
+				{validationErrors.last}
 				<div className='signUp'>
 					Last Name 
 					<input
@@ -102,6 +119,7 @@ function SignupFormModal() {
 					required
 					/>
 				</div >
+				{validationErrors.password}
 				<div className='signUp'>
 					Password
 					<input

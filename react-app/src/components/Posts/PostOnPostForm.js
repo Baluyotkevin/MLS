@@ -1,8 +1,8 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
 import { useHistory } from 'react-router-dom';
-import { thunkCreatePostonPost, thunkEditPost } from "../../store/post";
-import { useParams } from "react-router-dom";
+import { thunkCreatePostonPost, thunkEditPost, thunkAllCurrPosts } from "../../store/post";
+import { useModal } from "../../context/Modal";
 
 const PostOnPostForm = ({ postId, post, formType }) => {
     const dispatch = useDispatch()
@@ -11,11 +11,17 @@ const PostOnPostForm = ({ postId, post, formType }) => {
     const [title, setTitle] = useState(post?.title)
     const [anonymous, setAnonymous] = useState(post?.anonymous)
     const [validationErrors, setValidationErrors] = useState({})
+    const { closeModal } = useModal()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         
         let errors = {}
+
+        if(title.length < 5) errors.title = "Please enter 5 characters or more"
+        if(title.length > 20) errors.title = "You cannot exceed 20 characters"
+        if(body.length < 10) errors.body = "Please enter 10 characters or more"
+        if(body.length > 355) errors.body = "You cannot exceed 355 characters"
 
         post = {
             ...post,
@@ -26,7 +32,8 @@ const PostOnPostForm = ({ postId, post, formType }) => {
 
         if (formType === 'Create Post') {
             await dispatch(thunkCreatePostonPost(post, postId))
-            // history.push('/')
+            .then(closeModal)
+            dispatch(thunkAllCurrPosts())
         }
 
         if (formType === 'Edit Post') {
@@ -58,13 +65,13 @@ const PostOnPostForm = ({ postId, post, formType }) => {
                 </label>
             </div>
 
-            <div>
+            {/* <div>
                 <select onChange={(e) => setAnonymous(e.target.value)}>
                     <option value = "" >--Anonymous?--</option>
                     <option value = {true}> Yes </option>
                     <option value = {false}> No </option>
                 </select>
-            </div>
+            </div> */}
             <button type='submit'> Submit </button>
         </form>
         </div>

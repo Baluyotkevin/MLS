@@ -10,7 +10,6 @@ import './Post.css'
 const GetAllPosts = () => {
     const dispatch = useDispatch()
     const allPosts = useSelector(state => state.post.allPosts)
-    const currUser = useSelector(state => state.session.user)
     const allUsers = useSelector(state => state.users.allUsers)
     // console.log(allUsers)
 
@@ -24,7 +23,9 @@ const GetAllPosts = () => {
             <div className='storyHead'>All Love Stories</div>
             <ul class='postCont'>
             {Object.values(allPosts).map(post => {
-                return (
+                console.log(post.root_post_id)
+                return post.root_post_id === null ? 
+                <>
                     <li className='singlePostCont' key={post.id}>
                         <div className='homePostTitle'>
                             {post.title}
@@ -39,7 +40,7 @@ const GetAllPosts = () => {
                             {post.body}
                         </div>
                             <div>
-                                {post.anonymous ? 'Anonymous' : post.user.first_name} - {post?.created_at.slice(0, 16)}
+                                {post?.anonymous ? 'Anonymous' : post.user?.first_name} - {post?.created_at.slice(0, 16)}
                             </div>
                             
                             <div className='viewCont'>
@@ -54,7 +55,7 @@ const GetAllPosts = () => {
                             </div>
                         <br />
                     </li>
-                )
+                </> : null
             })}
             </ul>
         </div>

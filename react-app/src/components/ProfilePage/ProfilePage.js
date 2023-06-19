@@ -5,6 +5,7 @@ import './ProfilePage.css'
 import OpenModalButton from "../OpenModalButton";
 import EditPost from '../Posts/EditPost';
 import DeletePost from "../Posts/DeletePost";
+import { NavLink } from "react-router-dom";
 
 
 const ProfilePage = () => {
@@ -28,17 +29,18 @@ const ProfilePage = () => {
                 <div>Favorites</div>
             </div>
             </div>
-            <ul>
-                <div>
+            <ul class='postCont'>
+                <h3 className='profileHeader'>
                     {currUser.first_name} - Posts
-                </div>
+                </h3>
                 {!allCurrPosts.length ? Object.values(allCurrPosts).map(post => {
                     // console.log(post.root_user_id)
                     // console.log(post.parent_id)
                     return (
-                        <li>
+                        <li className='singlePostCont'>
                             {post.parent_id == undefined ? 
                             <>
+                            <div className='modalCont'>
                             <OpenModalButton
                             buttonText='Edit'
                             modalComponent={<EditPost post={post} />}
@@ -47,7 +49,8 @@ const ProfilePage = () => {
                             buttonText='Delete'
                             modalComponent={<DeletePost post={post} />}
                             />
-                            <div class='title'>
+                            </div>
+                            <div className='homePostTitle'>
                                 {post.title}
                             </div>
 
@@ -59,7 +62,12 @@ const ProfilePage = () => {
                             <div class='body'>
                                 {post.body}
                             </div>
-
+                            <div>
+                                {post.anonymous ? 'Anonymous' : post.user.first_name} - {post?.created_at.slice(0, 16)}
+                            </div>
+                            <div className='viewPost'>
+                            <NavLink to={`/postPage/${post.id}`}>View more Posts</NavLink>
+                        </div>
                             <br />
                             </>
                             : null}

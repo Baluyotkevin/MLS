@@ -12,6 +12,7 @@ const PostsCommentsPage = () => {
     const allComments = useSelector(state => state.comment.allComments)
     const onePost = useSelector(state => state.post.singlePost)
     const allUsers = useSelector(state => state.users.allUsers)
+    const currUser = useSelector(state => state.session.user)
     const root = onePost.root
     const postComments = Object.values(allComments).filter(comment =>  comment.post_id === onePost.root?.id)
     const { postId } = useParams()
@@ -36,15 +37,7 @@ const PostsCommentsPage = () => {
                         {root?.body}
                     </div>
                     <div>
-                        {root?.anonymous ? Object.values(allUsers).map(user => {
-                                    return (
-                                        <>
-                                        <div>
-                                            {root?.user_id === user.id ? user.first_name : null} 
-                                        </div>
-                                        </>
-                                    )
-                                }) : 'Anonymous'}
+                    {root?.anonymous ? 'Anonymous' : root?.user.first_name} - {root?.created_at.slice(0, 16)}
                     </div>
                 </li>
                 {/* <br /> */}
@@ -58,6 +51,9 @@ const PostsCommentsPage = () => {
                             <div>
                                 {comment.body}
                             </div>
+                            <div>
+                                {comment.created_at.slice(0, 16)}
+                            </div>
                             </div>
                         </div>
                     )
@@ -65,7 +61,8 @@ const PostsCommentsPage = () => {
             </ul>
             
             <div className='createCommCont'>
-                <CreateComment post={root}/>
+                {currUser?.id !== root?.user_id && currUser ? <CreateComment post={root}/> : null}
+                
             </div>
         </div>
     )

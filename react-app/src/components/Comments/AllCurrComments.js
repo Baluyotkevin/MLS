@@ -28,14 +28,15 @@ const GetAllCurrComments = () => {
                     <div>Favorites</div>
                 </div>
             </div>
-            <ul>
-                <div>
+            <ul class='postCont'>
+                <div className='profileHeader'>
                 {currUser.first_name} - Comments
                 </div>
                 <br />
                 {check.length ? Object.values(allComments).map(comment => {
                     return (
-                        <>
+                        <li className='singlePostCont'>
+                        <div className='modalCont'>
                         <OpenModalButton
                         buttonText='Edit'
                         modalComponent={<EditComment comment={comment} />}
@@ -45,6 +46,8 @@ const GetAllCurrComments = () => {
                         modalComponent={<DeleteComment comment={comment} />}
                         />
 
+                        </div>
+
                             <div>
                                 {comment.post.title} - {comment.post.user.first_name}
                             </div>
@@ -52,9 +55,11 @@ const GetAllCurrComments = () => {
                             <div>
                                 {comment.body}
                             </div>
-                        
+                            <div>
+                                {comment.created_at.slice(0, 16)}
+                            </div>
                         <br />
-                        </>
+                        </li>
                     )
                 }) : "No comments yet"}
             </ul>

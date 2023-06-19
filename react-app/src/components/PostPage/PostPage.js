@@ -3,22 +3,27 @@ import { useEffect } from "react";
 import { thunkAllPosts, thunkOnePost } from "../../store/post";
 import { useParams } from "react-router-dom";
 import { thunkAllUsers } from "../../store/user";
+import OpenModalButton from "../OpenModalButton";
+import CreatePostOnPost from "../Posts/CreatePostOnPost";
 
 const PostPage = () => {
     const dispatch = useDispatch()
     const onePost = useSelector(state => state.post.singlePost)
-    const allUsers = useSelector(state => state.users.allUsers)
+    const currUser = useSelector(state => state.session.user)
     const root = onePost.root
     const children = onePost.children
     const { postId } = useParams()
     useEffect(() => {
         dispatch(thunkAllPosts())
         dispatch(thunkOnePost(postId))
-        dispatch(thunkAllUsers())
     }, [dispatch])
 
     return (
         <div className='postBody'>
+            {/* {currUser.id === root?.user_id ? <OpenModalButton
+            buttonText='Continue your love story!'
+            modalComponent={<CreatePostOnPost postId={postId}/>}
+            /> : null} */}
             <ul class='postCont'>
                 <li className='singlePostCont'> 
                     <div>
@@ -31,15 +36,7 @@ const PostPage = () => {
                         {root?.body}
                     </div>
                     <div>
-                    {root?.anonymous ? Object.values(allUsers).map(user => {
-                                    return (
-                                        <>
-                                        <div>
-                                            {root?.user_id === user.id ? user.first_name : null} 
-                                        </div>
-                                        </>
-                                    )
-                                }) : 'Anonymous'}
+                    {root?.anonymous ? 'Anonymous' : root?.user.first_name} - {root?.created_at.slice(0, 16)}
                     </div>
                 </li>
                 {children?.length ? Object.values(children).map(post => {

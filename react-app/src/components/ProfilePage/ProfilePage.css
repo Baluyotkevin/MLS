@@ -7,3 +7,12 @@
     flex-direction: row;
 }
 
+.modalCont {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.profileHeader {
+    margin: 15px 20px;
+}
