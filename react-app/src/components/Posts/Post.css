@@ -59,6 +59,10 @@
     /* gap: 5px; */
 }
 
+.viewComm > a:hover {
+    color:#70012b;
+}
+
 .storyHead {
     margin: 15px 20px;
     border-bottom: 3px solid white;
@@ -81,3 +85,4 @@ select {
 .homePostTitle {
     border-bottom: 3px solid white;
 }
+

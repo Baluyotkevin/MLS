@@ -42,7 +42,7 @@ const PostForm = ({post, formType}) => {
         if (formType === 'Create Post') {
             await dispatch(thunkCreatePost(post))
             .then(closeModal)
-            history.push('/')
+            // history.push('/')
             dispatch(thunkAllCurrPosts())
         }
 

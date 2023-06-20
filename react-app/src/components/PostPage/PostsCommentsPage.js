@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { thunkOnePost } from "../../store/post";
 import { useParams } from "react-router-dom";
 import { thunkAllComments } from "../../store/comment";
-// import { thunkAllUsers } from "../../store/user";
+import Loading from "../Loading/loading";
 import './PostPage.css'
 import CreateComment from "../Comments/CreateComment";
 
@@ -11,7 +11,7 @@ const PostsCommentsPage = () => {
     const dispatch = useDispatch()
     const allComments = useSelector(state => state.comment.allComments)
     const onePost = useSelector(state => state.post.singlePost)
-    // const allUsers = useSelector(state => state.users.allUsers)
+    const [isLoading, setIsLoading] = useState(true)
     const currUser = useSelector(state => state.session.user)
     const root = onePost.root
     const postComments = Object.values(allComments).filter(comment =>  comment.post_id === onePost.root?.id)
@@ -23,8 +23,12 @@ const PostsCommentsPage = () => {
     useEffect(() => {
         dispatch(thunkAllComments())
         dispatch(thunkOnePost(postId))
-        // dispatch(thunkAllUsers())
+        setTimeout(() => {
+            setIsLoading(false)
+        }, 100);
     }, [dispatch])
+
+    if (isLoading === true) return <Loading />
 
     return (
         <div className='postBody'>

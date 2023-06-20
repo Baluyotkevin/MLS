@@ -1,13 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { thunkAllPosts, thunkOnePost } from "../../store/post";
 import { useParams } from "react-router-dom";
-import { thunkAllUsers } from "../../store/user";
 import OpenModalButton from "../OpenModalButton";
 import CreatePostOnPost from "../Posts/CreatePostOnPost";
 import EditPostOnPost from "../Posts/EditPostOnPost";
 import DeletePost from "../Posts/DeletePost";
-import EditPost from "../Posts/EditPost";
+import Loading from "../Loading/loading";
 
 const PostPage = () => {
     const dispatch = useDispatch()
@@ -16,11 +15,17 @@ const PostPage = () => {
     const root = onePost.root
     const children = onePost.children
     const { postId } = useParams()
+    const [isLoading, setIsLoading] = useState(true)
+
     useEffect(() => {
         dispatch(thunkOnePost(postId))
         dispatch(thunkAllPosts())
-        // dispatch(t)
+        setTimeout(() => {
+            setIsLoading(false)
+        }, 100);
     }, [dispatch])
+
+    if (isLoading === true) return <Loading />
 
     return (
         <div className='postBody'>

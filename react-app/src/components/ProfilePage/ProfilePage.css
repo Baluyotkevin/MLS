@@ -20,3 +20,8 @@
 .none {
     margin-left: 25px;
 }
+
+.viewPost > a:hover {
+    color:#70012b;
+}
+

@@ -56,12 +56,12 @@ function ProfileButton({ user }) {
         {user ? (
           <>
           <NavLink to='/profilePage'>
-            <li>My Profile</li>
+            <li className='profileDrop'>My Profile</li>
           </NavLink>
           <NavLink to='/comments/current'>
-            <li>My Comments</li>
+            <li className='profileDrop'>My Comments</li>
           </NavLink>
-              <button className='logOut' onClick={handleLogout}>Log Out</button>
+              <button className='logOut profileDrop' onClick={handleLogout}>Log Out</button>
           </>
         ) : (
           <>

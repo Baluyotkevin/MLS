@@ -5,19 +5,24 @@ import { thunkAllPosts } from "../../store/post";
 import OpenModalButton from "../OpenModalButton";
 import EditComment from "./EditComment";
 import DeleteComment from "./DeleteComment";
+import Loading from "../Loading/loading";
 
 const GetAllCurrComments = () => {
     const dispatch = useDispatch()
     const allComments = useSelector(state => state.comment.currentComments)
     const currUser = useSelector(state => state.session.user)
     const check = Object.values(allComments)
-    // console.log(check)
-    // if (!allComments) return 'No Comments found'
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         dispatch(thunkAllCurrComments())
         dispatch(thunkAllPosts())
+        setTimeout(() => {
+            setIsLoading(false)
+        }, 100);
     }, [dispatch])
+
+    if (isLoading === true) return <Loading />
 
     return (
         <div class='profileCont'>

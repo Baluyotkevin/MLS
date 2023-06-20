@@ -23,14 +23,14 @@ function SignupFormModal() {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		const err = {}
-		if(!email.includes('@')) err.email = "Please enter an email with @"
-		if (!first_name.length) errors.first_name = 'First name is required'
-		if (!last_name.length) errors.last_name = 'Last name is required'
-		if (!profile_img.length) errors.img = "Please upload an image"
-		console.log(validationErrors)
-		setValidationErrors(err)
-		if(Object.keys(err).length) return
+		// const err = {}
+		// if(!email.includes('@')) err.email = "Please enter an email with @"
+		// if (!first_name.length) errors.first_name = 'First name is required'
+		// if (!last_name.length) errors.last_name = 'Last name is required'
+		// if (!profile_img.length) errors.img = "Please upload an image"
+		// console.log(validationErrors)
+		// setValidationErrors(err)
+		// if(Object.keys(err).length) return
 
 		if (password === confirmPassword) {
 			const formData = new FormData()
@@ -43,6 +43,7 @@ function SignupFormModal() {
 			formData.append("last_name", last_name)
 
 			const data = await dispatch(signUp(formData));
+			if (!data) history.push('/profilePage')
 			if (data) {
 				setErrors(data);
 			} else {

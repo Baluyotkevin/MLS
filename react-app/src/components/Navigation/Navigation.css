@@ -37,6 +37,10 @@
   font-size: 20px;
   padding: 5px;
 }
+/* 
+.navPost > button:hover {
+  color: #70012b;
+} */
 
 .fa-user-circle {
   color: #cd9898;
@@ -77,3 +81,18 @@ button:hover {
   font-size: 17px;
   padding: 0px;
 }
+
+.profileDrop:hover {
+    color:#70012b;
+}
+
+/* .greetingCont {
+  display: flex;
+  gap: 10px;
+  color: #cd9898;
+}
+
+.greetingItems:hover {
+  color:#70012b;
+} */
+

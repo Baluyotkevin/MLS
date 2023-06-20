@@ -7,6 +7,7 @@ import EditPost from '../Posts/EditPost';
 import DeletePost from "../Posts/DeletePost";
 import { NavLink } from "react-router-dom";
 import ProfileForm from "./EditProfilePage";
+import Loading from "../Loading/loading";
 
 
 
@@ -14,12 +15,16 @@ const ProfilePage = () => {
     const dispatch = useDispatch()
     const allCurrPosts = useSelector(state => state.post.currentUserPosts)
     const currUser = useSelector(state => state.session.user)
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         dispatch(thunkAllCurrPosts())
+        setTimeout(() => {
+            setIsLoading(false)
+        }, 100);
     }, [dispatch])
 
-    // if (!allCurrPosts) return 'hi'
+    if (isLoading === true) return <Loading />
 
     return (
         <div class='profileCont'>
@@ -73,7 +78,7 @@ const ProfilePage = () => {
                                     {post.anonymous ? 'Anonymous' : post.user.first_name} - {post?.created_at.slice(0, 16)}
                                 </div>
                                 <div className='viewPost'>
-                                <NavLink to={`/postPage/${post.id}`}>View more Posts</NavLink>
+                                <NavLink to={`/postPage/${post.id}`}>View Your Post</NavLink>
                             </div>
                                 <br />
                                 </>

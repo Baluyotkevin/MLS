@@ -9,9 +9,12 @@ function Footer({ isLoaded }){
 	return (
 		<ul class='footerContainer'>
 			{isLoaded && (
-                <a href='https://www.linkedin.com/in/kevin-baluyot-2102b5bb/'>
-                    LinkedIn
-                </a>
+				<div className='footBody'>
+                	<a className='footItems' href='https://www.linkedin.com/in/kevin-baluyot-2102b5bb/'>
+                    	LinkedIn
+                	</a>
+					<a className='footItems' href='https://github.com/Baluyotkevin'>GitHub</a>
+				</div>
 			)}
 		</ul>
 	);

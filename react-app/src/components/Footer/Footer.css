@@ -9,3 +9,13 @@
     bottom:0;
     right:0;
 }
+
+.footBody {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.footItems {
+    color: #70012b;
+}

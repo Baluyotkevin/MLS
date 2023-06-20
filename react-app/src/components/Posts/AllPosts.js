@@ -1,23 +1,25 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { thunkAllPosts } from "../../store/post";
-import OpenModalButton from "../OpenModalButton";
-import CreateComment from "../Comments/CreateComment";
 import { thunkAllUsers } from "../../store/user";
+import Loading from "../Loading/loading";
 import './Post.css'
 
 const GetAllPosts = () => {
     const dispatch = useDispatch()
     const allPosts = useSelector(state => state.post.allPosts)
-    const currUser = useSelector(state => state.session.user)
-    const allUsers = useSelector(state => state.users.allUsers)
-    // console.log(allUsers)
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         dispatch(thunkAllPosts())
         dispatch(thunkAllUsers())
+        setTimeout(() => {
+            setIsLoading(false)
+        }, 100);
     }, [dispatch])
+
+    if (isLoading === true) return <Loading />
 
     return (
         <div className='postBody'>
@@ -45,7 +47,6 @@ const GetAllPosts = () => {
                                 
                                 <div className='viewCont'>
                             <div className='viewComm'>
-                            
                                 <NavLink to={`/post/${post.id}/comments`}><i class="fa-regular fa-comment"></i> View Comments</NavLink>
                             </div>
                             
