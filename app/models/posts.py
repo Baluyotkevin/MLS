@@ -31,5 +31,6 @@ class Post(db.Model):
             "parent_id": self.parent_id,
             "anonymous": self.anonymous,
             "created_at": self.created_at,
-            "user": self.user.to_dict()
+            "user": self.user.to_dict(),
+            # "comments": [self.user.to_dict() for self.user in self.post_comments]
         }

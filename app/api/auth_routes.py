@@ -66,21 +66,25 @@ def sign_up():
     form['csrf_token'].data = request.cookies['csrf_token']
     print(' THIS BE MEEEE =========================')
     if form.validate_on_submit():
+        
+        profile_img=form.data['profile_img']
+        print("THIS IS MY PROFILE_IMG=========", profile_img)
+        profile_img.filename = get_unique_filename(profile_img.filename)
+        
+        upload = upload_file_to_s3(profile_img)
+        print(" THIS IS MY UPLOAD ===========", upload)
 
-        # profile_img=form.data['profile_img']
-        # profile_img.filename = get_unique_filename(profile_img.filename)
-        # upload = upload_file_to_s3(profile_img)
-        # if "url" not in upload:
-        #     return upload['errors']
+        if "url" not in upload:
+            return upload['errors']
+            # return 'hello'
         # if the dictionary doesn't have a url key
         # it means that there was an error when we tried to upload
         # so we send back that error message
             # return 'hello'
-
         user = User(
             username=form.data['username'],
             email=form.data['email'],
-            profile_img = form.data['profile_img'],
+            profile_img = upload['url'],
             password=form.data['password'],
             first_name=form.data['first_name'],
             last_name=form.data['last_name']
@@ -99,19 +103,21 @@ def edit_user(id):
     form = SignUpForm()
     form["csrf_token"].data=request.cookies["csrf_token"]
     profile_img=form.data['profile_img']
-    profile_img.filename = get_unique_filename(profile_img.filename)
-    upload = upload_file_to_s3(profile_img)
+    if profile_img:
+        profile_img.filename = get_unique_filename(profile_img.filename)
+        upload = upload_file_to_s3(profile_img)
 
-    if "url" not in upload:
-            return upload['errors']
+        if "url" not in upload:
+                return upload['errors']
 
-    user.profile_img = upload['url']
+        user.profile_img = upload['url']
+        db.session.commit()
+        return user.to_dict()
+
     user.first_name=form.data['first_name']
     user.last_name=form.data['last_name']
-
     db.session.commit()
     return user.to_dict()
-
 
 @auth_routes.route('/unauthorized')
 def unauthorized():

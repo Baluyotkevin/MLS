@@ -16,6 +16,9 @@ const PostsCommentsPage = () => {
     const root = onePost.root
     const postComments = Object.values(allComments).filter(comment =>  comment.post_id === onePost.root?.id)
     const { postId } = useParams()
+    const check = [];
+    Object.values(postComments).forEach(comment => check.push(comment.user_id))
+    console.log(check)
 
     useEffect(() => {
         dispatch(thunkAllComments())
@@ -61,7 +64,7 @@ const PostsCommentsPage = () => {
             </ul>
             
             <div className='createCommCont'>
-                {currUser?.id !== root?.user_id && currUser ? <CreateComment post={root}/> : null}
+                {currUser?.id !== root?.user_id && currUser && !check.includes(currUser.id)  ? <CreateComment post={root}/> : null}
                 
             </div>
         </div>
