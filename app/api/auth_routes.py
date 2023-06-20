@@ -111,6 +111,8 @@ def edit_user(id):
                 return upload['errors']
 
         user.profile_img = upload['url']
+        user.first_name=form.data['first_name']
+        user.last_name=form.data['last_name']
         db.session.commit()
         return user.to_dict()
 

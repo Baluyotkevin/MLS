@@ -13,6 +13,7 @@ import ProfilePage from "./components/ProfilePage/ProfilePage";
 import GetAllCurrComments from "./components/Comments/AllCurrComments";
 import PostPage from "./components/PostPage/PostPage";
 import PostsCommentsPage from "./components/PostPage/PostsCommentsPage";
+import Footer from "./components/Footer";
 
 function App() {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
+      <div className='bodyCont'>
       {isLoaded && (
         <Switch>
           <Route path="/login" >
@@ -42,6 +44,8 @@ function App() {
           {/* <Route path='/post' component={PostForm} /> */}
         </Switch>
       )}
+      </div>
+      <Footer isLoaded={isLoaded} />
     </>
   );
 }

@@ -24,14 +24,13 @@ const PostPage = () => {
 
     return (
         <div className='postBody'>
-            {currUser?.id === root?.user_id && !children.length ? <OpenModalButton
+            {currUser?.id === root?.user_id && !children?.length ? <OpenModalButton
             buttonText='Continue your love story!'
             modalComponent={<CreatePostOnPost postId={postId}/>}
             /> : null}
             <ul class='postCont'>
                 <li className='singlePostCont'> 
                     <div>
-                        {/* hello */}
                         {root?.title}
                     </div>
                     <div>
