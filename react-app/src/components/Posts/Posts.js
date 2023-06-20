@@ -1,26 +1,29 @@
 import { useState } from 'react';
 import { NavLink } from "react-router-dom";
+import { thunkAllPosts } from '../../store/post';
+import { useDispatch } from 'react-redux';
 import './Post.css'
 
 const Post = ({ postData }) => {
-
+    const dispatch = useDispatch()
     const [numLoves, setNumLoves] = useState(postData?.loves.length)
+    // const check = useState(postData.)
     const [loved, setLoved] = useState(false)
             const addLove = () => {
                 setLoved(!loved);
                 setNumLoves(numLoves + 1);
+                dispatch(thunkAllPosts())
             }
         
             const removeLove = () => {
                 setLoved(!loved)
                 setNumLoves(numLoves- 1);
-            }            
+            }
                        
     return (
         <>
+        
         {postData.root_post_id === null ?
-        <div className='postBody'>
-        <div className='storyHead'>All Love Stories</div>
         <ul class='postCont'>
                     <li className='singlePostCont' key={postData.id}>
                         <div className='homePostTitle'>
@@ -40,10 +43,11 @@ const Post = ({ postData }) => {
                             </div>
                             
                             <div className='viewCont'>
+                                {postData.loves.length}
                             { loved ?
-                            <i class="fa-regular fa-heart" onClick={ removeLove }></i>
+                            <i class="fa-regular fa-heart" style={{ color: 'red' }} onClick={ removeLove }></i>
                                      :
-                            <i class="fa-regular fa-heart" style={{ color: 'red' }} onClick={ addLove }></i>
+                            <i class="fa-regular fa-heart"  onClick={ addLove }></i>
                                 }
                         <div className='viewComm'>
                         
@@ -56,8 +60,7 @@ const Post = ({ postData }) => {
                             </div>
                         <br />
                     </li>
-        </ul>
-        </div> : null }
+        </ul> : null }
         </>
     )
 }

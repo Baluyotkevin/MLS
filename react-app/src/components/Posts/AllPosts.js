@@ -17,7 +17,8 @@ const GetAllPosts = () => {
     }, [dispatch])
 
     return (
-        <div>
+        <div className='postBody'>
+        <div className='storyHead'>All Love Stories</div>
             { allPosts && Object.values(allPosts).map(post => (
                 <Post key={ post.id } postData={post} />
             ))
