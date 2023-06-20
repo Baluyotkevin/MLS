@@ -11,9 +11,17 @@ const ProfileForm = ({user}) => {
 	const [first_name, setfirst_name] = useState("");
 	const [last_name, setlast_name] = useState("");
     const { closeModal } = useModal()
+	const [errors, setErrors] = ({})
     console.log("this is my user", user)
     const handleSubmit = async (e) => {
         e.preventDefault()
+		const err = {}
+
+		if(!first_name.length) err.first = "Please enter a first name"
+		if(!last_name.length) err.last = "Please enter a last name"
+		setErrors(err)
+        if(Object.keys(err).length) return
+
         const formData = new FormData()
         formData.append("profile_img", profile_img)
 		formData.append("first_name", first_name)
@@ -39,6 +47,9 @@ const ProfileForm = ({user}) => {
 					onChange={(e) => setprofile_img(e.target?.files[0])}
 					/>
 				</div>
+				<div className='errors'>
+					{errors.first}
+				</div>
             <div className='signUp'>
 					First Name 
 					<input
@@ -48,6 +59,9 @@ const ProfileForm = ({user}) => {
 					required
 					/>
 				</div >
+				<div className='errors'>
+					{errors.last}
+				</div>
 				<div className='signUp'>
 					Last Name 
 					<input
