@@ -105,6 +105,7 @@ def edit_user(id):
     if "url" not in upload:
             return upload['errors']
 
+    user.username=form.data['username']
     user.profile_img = upload['url']
     user.first_name=form.data['first_name']
     user.last_name=form.data['last_name']

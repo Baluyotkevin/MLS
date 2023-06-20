@@ -1,6 +1,6 @@
 import { thunkAllCurrPosts } from "../../store/post"
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import './ProfilePage.css'
 import OpenModalButton from "../OpenModalButton";
 import EditPost from '../Posts/EditPost';

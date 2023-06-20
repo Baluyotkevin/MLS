@@ -25,8 +25,8 @@ function SignupFormModal() {
 
 		const err = {}
 		if(!email.includes('@')) err.email = "Please enter an email with @"
-		if (!first_name) errors.first_name = 'First name is required'
-		if (!last_name) errors.last_name = 'Last name is required'
+		if (!first_name.length) errors.first_name = 'First name is required'
+		if (!last_name.length) errors.last_name = 'Last name is required'
 		console.log(validationErrors)
 		setValidationErrors(err)
 		if(Object.keys(err).length) return

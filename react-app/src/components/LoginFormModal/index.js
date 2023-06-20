@@ -36,7 +36,7 @@ function LoginFormModal() {
   }
 
   const autoLoginThree = e => {
-    setEmail('kevin@aa.io')
+    setEmail('kevinb@aa.io')
     setPassword('password')
     dispatch(login(email, password))
     .then(closeModal)
