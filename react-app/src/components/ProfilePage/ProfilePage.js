@@ -21,7 +21,7 @@ const ProfilePage = () => {
         dispatch(thunkAllCurrPosts())
         setTimeout(() => {
             setIsLoading(false)
-        }, 100);
+        }, 500);
     }, [dispatch])
 
     if (isLoading === true) return <Loading />

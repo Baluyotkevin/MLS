@@ -20,7 +20,7 @@ const GetAllCurrComments = () => {
         dispatch(thunkAllPosts())
         setTimeout(() => {
             setIsLoading(false)
-        }, 100);
+        }, 500);
     }, [dispatch])
 
     if (isLoading === true) return <Loading />

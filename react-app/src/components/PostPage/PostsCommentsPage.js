@@ -25,7 +25,7 @@ const PostsCommentsPage = () => {
         dispatch(thunkOnePost(postId))
         setTimeout(() => {
             setIsLoading(false)
-        }, 100);
+        }, 500);
     }, [dispatch])
 
     if (isLoading === true) return <Loading />
