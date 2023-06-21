@@ -144,6 +144,31 @@ def edit_post(id):
         return postObj.to_dict()
     return {"message": "You cannot edit this post as it does not belong to you"}
 
+@post_routes.route('/<int:id>/add', methods=['POST'])
+@login_required
+def add_post_loves(id):
+    postObj = Post.query.get(id)
+    post = postObj.to_dict()
+    check = []
+    for user in post['loves']:
+        check.append(user['id'])
+
+    if current_user.id not in check:
+        post['loves'].append(current_user.to_dict())
+        return post
+    return {"message": "You already loved this post"}
+
+@post_routes.route('/<int:id>/delete', methods=['DELETE'])
+@login_required
+def remove_post_loves(id):
+    postObj = Post.query.get(id)
+    post = postObj.to_dict()
+    if current_user.id in post['loves']:
+        for user in post['loves']:
+            if current_user.id == user.id:
+                db.session.delete
+                db.session.commit()
+
 @post_routes.route('/<int:id>/delete', methods=['DELETE'])
 @login_required
 def delete_post(id):
