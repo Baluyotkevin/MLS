@@ -10,6 +10,7 @@ const ProfileForm = ({user}) => {
     const [profile_img, setprofile_img] = useState("");
 	const [first_name, setfirst_name] = useState("");
 	const [last_name, setlast_name] = useState("");
+	const [errors, setErrors] = useState("")
     const { closeModal } = useModal()
 	// const [errors, setErrors] = ({})
     console.log("this is my user", user)
@@ -17,10 +18,11 @@ const ProfileForm = ({user}) => {
         e.preventDefault()
 		const err = {}
 
-		// if(!first_name.length) err.first = "Please enter a first name"
-		// if(!last_name.length) err.last = "Please enter a last name"
-		// setErrors(err)
-        // if(Object.keys(err)?.length) return
+		if(first_name.length > 15 || first_name.length < 2) err.first = "Please enter characters between 2 and 15"
+		if(last_name.length > 15) err.last = "Please enter less than 15 characters"
+		
+		setErrors(err)
+        if(Object.keys(err)?.length) return
 
         const formData = new FormData()
         formData.append("profile_img", profile_img)
@@ -48,7 +50,7 @@ const ProfileForm = ({user}) => {
 					/>
 				</div>
 				<div className='errors'>
-					{/* {errors.first} */}
+					{errors.first}
 				</div>
             <div className='signUp'>
 					First Name 
@@ -60,7 +62,7 @@ const ProfileForm = ({user}) => {
 					/>
 				</div >
 				<div className='errors'>
-					{/* {errors.last} */}
+					{errors.last}
 				</div>
 				<div className='signUp'>
 					Last Name 

@@ -45,7 +45,9 @@ const CommentsForm = ({ postId, formType, comment }) => {
     return (
         <div>
             <form onSubmit ={handleSubmit}>
-                {validationErrors.body}
+                <div className='errors'>
+                    {validationErrors.body}
+                </div>
                 <div>
                     <textarea
                     type='text'

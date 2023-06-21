@@ -23,7 +23,7 @@ def username_exists(form, field):
 
 class SignUpForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired(), username_exists])
-    email = StringField('Email', validators=[DataRequired(), user_exists])
+    email = StringField('Email', validators=[DataRequired(), user_exists, Email()])
     password = StringField('Password', validators=[DataRequired()])
     profile_img = FileField("Image File", validators=[DataRequired(), FileAllowed(list(ALLOWED_EXTENSIONS))]) 
 # default='https://kevinbawsbucket.s3.us-west-1.amazonaws.com/heart+model.png')
