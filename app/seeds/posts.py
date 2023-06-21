@@ -23,6 +23,9 @@ def seed_posts():
     post6 = Post(
         title="I'm Always Here For You", body="It felt forever being sad and upset. What I didn't notice that the love I believed in, did exist. I was a fool for thinking it didn't, like how did I miss? It felt forever being mad and angry. What I had forgotten you've done for me because I was selfish and blinded. How could I not see, of all of the things you did for me and be so close minded.It felt forever since I was happy and joyful. Now I realize you did make my world and still do. I promise it's not out of the blue. I'm serious. My love for you only grew. No matter what I'm always here for you.", user_id = 4, category = 'Beautiful'
     )
+    post7 = Post(
+        title='First Meet', body="I first laid eyes on her in theater class and thought, 'Wow she's Gorgeous.' Later we were practicing we our partners and the first thing she said after was, 'Do you like have a number or anything?' I just chuckled and thought it was cute and said, '(Laughter), yeah of course I do.' We started getting to know one another and the next thing you know I fell in love with her. Not because of the times we spent together, but because she made me feel like I was the most important person in the world. Always being so sweet to me with her words coming out of her beautiful soft lips. I just couldn't help but fall in love with each of her features from top to bottom. The way she stared at me with those eyes had me mesmerized and enchanted. The way she spoke to me had me in trance until she stopped speaking. Her smile so beautifully breathtakingly had me forget how to breathe. The way she moved had me captivated until I had to look away. Her compassionate, kind, and tender heart. I just fell more in love each time I learned something new about her.", user_id = 4, category='Beautiful', 
+    )
 
     db.session.add(post1)
     db.session.add(post2)
@@ -30,6 +33,7 @@ def seed_posts():
     db.session.add(post4)
     db.session.add(post5)
     db.session.add(post6)
+    db.session.add(post7)
     db.session.commit()
 
 def undo_posts():

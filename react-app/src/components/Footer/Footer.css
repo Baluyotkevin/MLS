@@ -13,9 +13,18 @@
 .footBody {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .footItems {
+    color: #70012b;
+}
+
+.footItems:hover {
+    color: white;
+    cursor: pointer;
+}
+
+.author {
     color: #70012b;
 }

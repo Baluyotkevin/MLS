@@ -83,3 +83,7 @@ input {
 h1 {
     color: #cd9898;
 }
+
+a:hover {
+    cursor: pointer;
+}

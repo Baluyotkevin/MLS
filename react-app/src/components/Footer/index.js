@@ -14,6 +14,7 @@ function Footer({ isLoaded }){
                     	LinkedIn
                 	</a>
 					<a className='footItems' href='https://github.com/Baluyotkevin'>GitHub</a>
+					<p className='author'>Developed By: Kevin Baluyot</p>
 				</div>
 			)}
 		</ul>

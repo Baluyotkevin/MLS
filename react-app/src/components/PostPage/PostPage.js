@@ -19,7 +19,7 @@ const PostPage = () => {
 
     useEffect(() => {
         dispatch(thunkOnePost(postId))
-        dispatch(thunkAllPosts())
+        // dispatch(thunkAllPosts())
         setTimeout(() => {
             setIsLoading(false)
         }, 100);

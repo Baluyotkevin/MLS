@@ -6,6 +6,7 @@ import OpenModalButton from "../OpenModalButton";
 import EditComment from "./EditComment";
 import DeleteComment from "./DeleteComment";
 import Loading from "../Loading/loading";
+import ProfileForm from '../ProfilePage/EditProfilePage'
 
 const GetAllCurrComments = () => {
     const dispatch = useDispatch()
@@ -29,6 +30,10 @@ const GetAllCurrComments = () => {
             <div>
                 <img class='profileImg' src={currUser.profile_img} />
                 <div>
+                    <OpenModalButton
+                    buttonText='Edit Profile'
+                    modalComponent={<ProfileForm user={currUser} />}
+                    />
                     <div>Followers</div>
                     <div>Favorites</div>
                 </div>
