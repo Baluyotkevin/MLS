@@ -26,6 +26,13 @@ def seed_posts():
     post7 = Post(
         title='First Meet', body="I first laid eyes on her in theater class and thought, 'Wow she's Gorgeous.' Later we were practicing we our partners and the first thing she said after was, 'Do you like have a number or anything?' I just chuckled and thought it was cute and said, '(Laughter), yeah of course I do.' We started getting to know one another and the next thing you know I fell in love with her. Not because of the times we spent together, but because she made me feel like I was the most important person in the world. Always being so sweet to me with her words coming out of her beautiful soft lips. I just couldn't help but fall in love with each of her features from top to bottom. The way she stared at me with those eyes had me mesmerized and enchanted. The way she spoke to me had me in trance until she stopped speaking. Her smile so beautifully breathtakingly had me forget how to breathe. The way she moved had me captivated until I had to look away. Her compassionate, kind, and tender heart. I just fell more in love each time I learned something new about her.", user_id = 4, category='Beautiful', 
     )
+    post8 = Post(
+        title="I Love You", body="Words cannot express how much I love you. Not even the actions I do can follow through. The way you stare at me with those beautiful eyes. I can't help but be completely mesmerized. The sound of your voice that sounds so divine. How wonderful it would be, to call you mine. That captivating smile that takes my breathe away. Would make me speechless and not know what to say. My body and soul are yours to share. Your voice when you say my name brings me up from despair. The different kinds of laughter I hear when I'm being me. Makes me want to hurry and get down on one knee. Always missing you when you're not by my side. I get impatient to not make you my bride. Your kindness, your compassion, and your empathetic heart. Now thats what made me fall in love from the start. I love you with all my heart", user_id = 4, category='Beautiful'
+    )
+    post9 = Post(
+        title="Close To Heaven", body="You know your the only one for me, The thought of you, picks me up when I am lonely. I get all crazy when you call out my name, I'm close to heaven when your touching me. You say that you love me, Girl, I know it, I feel the same but still so afraid to show it, I get all crazy when you call out my name I'm close to heaven when your touching me It's gotta be love, sweet love (love sweet love) Whenever your near me Ooh you make me happy, baby Love, sweet love (love... sweet love) Whenever your near me Ooh you make me happy, baby, Me vuelvo loco pensando en Tu amor Cuandote veo, temblo por Tu calor Cerca del cielco, alma de Mi corazon, mis ladios Brillan llenos de emocion", user_id = 4, category='Beautiful'
+    )
+
 
     db.session.add(post1)
     db.session.add(post2)
@@ -34,6 +41,8 @@ def seed_posts():
     db.session.add(post5)
     db.session.add(post6)
     db.session.add(post7)
+    db.session.add(post8)
+    db.session.add(post9)
     db.session.commit()
 
 def undo_posts():
