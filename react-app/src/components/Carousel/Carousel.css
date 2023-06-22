@@ -16,3 +16,7 @@
     height: 500px;
     border-radius: 30px;
 }
+
+.react-multiple-carousel__arrow {
+    z-index: 0;
+}
