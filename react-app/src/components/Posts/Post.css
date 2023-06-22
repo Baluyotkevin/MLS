@@ -18,17 +18,25 @@
 }
 
 .carousel {
-    width: 700px;
+    width: 500px;
     height: 500px;
     /* grid-area: b; */
-    /* border-radius: 50px; */
+    border-radius: 30px;
     /* margin-top: 50px; */
+    /* z-index: -1; */
+}
+
+.react-multi-carousel-track {
+    z-index: -1
 }
 
 .carouselImgCont {
     margin-top: 100px;
     grid-area: b;
+    margin-left: 200px;
+    border-radius: 30px;
     /* margin-left: 50px; */
+    /* z-index: -1; */
 
 }
 
