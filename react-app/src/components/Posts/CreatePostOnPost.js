@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, Fragment } from "react";
 import { useHistory } from "react-router-dom";
 
-const CreatePostOnPost = () => {
-    const { postId } = useParams()
+const CreatePostOnPost = ({postId}) => {
+    // const { postId } = useParams()
 
     const post = {
         title: "",
