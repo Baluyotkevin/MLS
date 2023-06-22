@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 import './Carousel.css'
 
 
-const CarouselImages = ({beauty, horrible}) => {
+const CarouselImages = () => {
 
 
     const responsive = {
@@ -15,13 +15,19 @@ const CarouselImages = ({beauty, horrible}) => {
           // the naming can be any, depends on you.
           breakpoint: { max: 3000, min: 1500 },
           items: 1,
-          slidesToSlide: 1
+          slidesToSlide: 1,
+
         }
     }
     return (
             <Carousel
             responsive={responsive}
             className='carousel'
+            infinite={true}
+            autoPlay={true}
+            transitionDuration={500}
+            ssr={true}
+            autoPlaySpeed={5000}
             >
                 <div>
                 <img className='carouselImg' src='https://kevinbawsbucket.s3.us-west-1.amazonaws.com/Screenshot+2023-06-22+at+8.03.38+AM.png'></img>
@@ -33,7 +39,7 @@ const CarouselImages = ({beauty, horrible}) => {
                 <img className='carouselImg' src='https://kevinbawsbucket.s3.us-west-1.amazonaws.com/Screenshot+2023-06-22+at+8.05.15+AM.png'></img>
                 </div>
                 <div>
-                    <img className='carouselImg' src='https://kevinbawsbucket.s3.us-west-1.amazonaws.com/Screenshot+2023-06-22+at+8.13.53+AM.png'></img>
+                <img className='carouselImg' src='https://kevinbawsbucket.s3.us-west-1.amazonaws.com/Screenshot+2023-06-22+at+8.13.53+AM.png'></img>
                 </div>
             </Carousel>
         )

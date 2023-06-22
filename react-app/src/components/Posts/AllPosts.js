@@ -11,20 +11,6 @@ const GetAllPosts = () => {
     const dispatch = useDispatch()
     const allPosts = useSelector(state => state.post.allPosts)
     const [isLoading, setIsLoading] = useState(true)
-    const beauty = []
-    const horrible = []
-    if (allPosts) {
-        Object.values(allPosts).filter(post => {
-            if (post.category === 'Beautiful' && post.root_post_id === null) {
-                beauty.push(post)
-            } 
-            if (post.category === 'Horrible' && post.root_post_id === null) {
-                horrible.push(post)
-            }
-            
-        })
-    }
-
 
 
     useEffect(() => {
@@ -45,7 +31,7 @@ const GetAllPosts = () => {
         </div>
         <div className='postBody'>
             <div className='carouselImgCont'>
-                <CarouselImages beauty={beauty} horrible={horrible}/>
+                <CarouselImages />
             </div>
             <ul className='postCont'>
             {Object.values(allPosts).map(post => {
