@@ -156,7 +156,7 @@ def delete_post(id):
     if postObj.user_id == current_user.id:
         if postObj.root_post_id is None:
             allPost = Post.query.filter(Post.root_post_id == postObj.id).all()
-            # print('this is all of my post post', allPost)
+            print('this is all of my post post', allPost)
             for post in allPost:
                 db.session.delete(post)
             db.session.delete(postObj)

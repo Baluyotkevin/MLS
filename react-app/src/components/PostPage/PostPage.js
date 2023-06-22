@@ -29,7 +29,7 @@ const PostPage = () => {
 
     return (
         <div className='postPageBody'>
-            {currUser?.id === root?.user_id && !children?.length ? <OpenModalButton
+            {currUser?.id === root?.user_id && !children.length ? <OpenModalButton
             buttonText='Continue your love story!'
             modalComponent={<CreatePostOnPost postId={postId}/>}
             /> : null}
@@ -58,7 +58,7 @@ const PostPage = () => {
                                />
                                 <OpenModalButton
                                 buttonText='Delete'
-                                modalComponent={<DeletePost post={post} />}
+                                modalComponent={<DeletePost post={post} root={root} />}
                                 />
                             </div>
                         <div className='title'>

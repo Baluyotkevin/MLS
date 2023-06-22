@@ -5,7 +5,7 @@ import { useModal } from "../../context/Modal";
 import { thunkAllCurrPosts, thunkDeletePost, thunkOnePost } from '../../store/post';
 
 
-const DeletePost = ({post}) => {
+const DeletePost = ({post, root}) => {
     const dispatch = useDispatch()
     const { closeModal } = useModal()
 
@@ -14,8 +14,13 @@ const DeletePost = ({post}) => {
         
         dispatch(thunkDeletePost(post.id))
         .then(closeModal)
-        dispatch(thunkAllCurrPosts())
-        dispatch(thunkOnePost(post.id))
+        if (root) {
+            setTimeout(() => {
+                dispatch(thunkOnePost(root.id))
+            }, 100)
+        } else {
+            dispatch(thunkOnePost(post.id))
+        }
     }
 
     return (
