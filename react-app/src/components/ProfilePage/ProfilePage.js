@@ -30,14 +30,14 @@ const ProfilePage = () => {
         <div class='profileCont'>
             <div>
                 
-                <img class='profileImg' src={currUser.profile_img} />
-            <div>
+                <img className='profileImg' src={currUser.profile_img} />
+            <div className='editCont'>
                 <OpenModalButton
                 buttonText='Edit Profile'
                 modalComponent={<ProfileForm user={currUser} />}
                 />
-                <div>Followers</div>
-                <div>Favorites</div>
+                <div>5 Followers</div>
+                <div>5 Favorites</div>
             </div>
             </div>
             <ul class='postCont'>

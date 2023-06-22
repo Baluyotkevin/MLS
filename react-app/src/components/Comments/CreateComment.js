@@ -8,7 +8,7 @@ const CreateComment = ({post}) => {
     }
     return (
         <div className='createComm'>
-            <h2 className='h2Comment'>Comment</h2>
+            <h2 className='h2Comment'>Post Your Comment!</h2>
             <CommentsForm
                 comment={comment}
                 postId={post?.id}

@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { thunkAllCurrComments } from "../../store/comment";
 import { thunkAllPosts } from "../../store/post";
+import { NavLink } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton";
 import EditComment from "./EditComment";
 import DeleteComment from "./DeleteComment";
@@ -28,14 +29,14 @@ const GetAllCurrComments = () => {
     return (
         <div class='profileCont'>
             <div>
-                <img class='profileImg' src={currUser.profile_img} />
-                <div>
+                <img className='profileImg' src={currUser.profile_img} />
+                <div className='editCont'>
                     <OpenModalButton
                     buttonText='Edit Profile'
                     modalComponent={<ProfileForm user={currUser} />}
                     />
-                    <div>Followers</div>
-                    <div>Favorites</div>
+                    <div>5 Followers</div>
+                    <div>5 Favorites</div>
                 </div>
             </div>
             <ul class='postCont'>
@@ -67,6 +68,9 @@ const GetAllCurrComments = () => {
                             </div>
                             <div>
                                 {comment.created_at.slice(0, 16)}
+                            </div>
+                            <div className='viewPost'>
+                                <NavLink to={`/postPage/${comment.post.id}`}>View Post</NavLink>
                             </div>
                         <br />
                         </li>

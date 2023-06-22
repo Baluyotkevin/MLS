@@ -28,7 +28,7 @@ const PostPage = () => {
     if (isLoading === true) return <Loading />
 
     return (
-        <div className='postBody'>
+        <div className='postPageBody'>
             {currUser?.id === root?.user_id && !children?.length ? <OpenModalButton
             buttonText='Continue your love story!'
             modalComponent={<CreatePostOnPost postId={postId}/>}
@@ -41,7 +41,7 @@ const PostPage = () => {
                     <div>
                         {root?.category}
                     </div>
-                    <div>
+                    <div className='body'>
                         {root?.body}
                     </div>
                     <div>

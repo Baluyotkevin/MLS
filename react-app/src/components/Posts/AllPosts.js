@@ -5,26 +5,49 @@ import { thunkAllPosts } from "../../store/post";
 import { thunkAllUsers } from "../../store/user";
 import Loading from "../Loading/loading";
 import './Post.css'
+import CarouselImages from "../Carousel/Carousel";
 
 const GetAllPosts = () => {
     const dispatch = useDispatch()
     const allPosts = useSelector(state => state.post.allPosts)
     const [isLoading, setIsLoading] = useState(true)
+    const beauty = []
+    const horrible = []
+    if (allPosts) {
+        Object.values(allPosts).filter(post => {
+            if (post.category === 'Beautiful' && post.root_post_id === null) {
+                beauty.push(post)
+            } 
+            if (post.category === 'Horrible' && post.root_post_id === null) {
+                horrible.push(post)
+            }
+            
+        })
+    }
+
+
 
     useEffect(() => {
         dispatch(thunkAllPosts())
         dispatch(thunkAllUsers())
         setTimeout(() => {
             setIsLoading(false)
-        }, 100);
+        }, 500);
     }, [dispatch])
 
     if (isLoading === true) return <Loading />
 
     return (
+        <>
+        <div className='storyHead'>
+            <h1>All Love Stories</h1>
+            <h1>Let These Stories Inspire Your Love Story!</h1>
+        </div>
         <div className='postBody'>
-            <div className='storyHead'>All Love Stories</div>
-            <ul class='postCont'>
+            <div className='carouselImgCont'>
+                <CarouselImages beauty={beauty} horrible={horrible}/>
+            </div>
+            <ul className='postCont'>
             {Object.values(allPosts).map(post => {
                 if (post.root_post_id === null) {
                     return (
@@ -38,8 +61,8 @@ const GetAllPosts = () => {
                             </div>
     
                             <br />
-                            <div>
-                                {post.body}
+                            <div className='postBodyCont'>
+                                {post.body.slice(0, 100) + "..."}
                             </div>
                                 <div>
                                     {post.anonymous ? 'Anonymous' : post.user.first_name} - {post?.created_at.slice(0, 16)}
@@ -63,6 +86,7 @@ const GetAllPosts = () => {
             })}
             </ul>
         </div>
+        </>
     )
 }
 

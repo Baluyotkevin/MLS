@@ -5,18 +5,20 @@ from sqlalchemy.sql import text
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
-        username='Demo', email='demo@aa.io', password='password', first_name='demo', last_name='demo', profile_img='https://kevinbawsbucket.s3.us-west-1.amazonaws.com/9395c115a982448b855ea7ad430eb58b.png')
+        username='Demo', email='demo@aa.io', password='password', first_name='Demo', last_name='demo', profile_img='https://kevinbawsbucket.s3.us-west-1.amazonaws.com/9395c115a982448b855ea7ad430eb58b.png')
     marnie = User(
-        username='marnie', email='marnie@aa.io', password='password', first_name='marine', last_name='marnie', profile_img='https://kevinbawsbucket.s3.us-west-1.amazonaws.com/9395c115a982448b855ea7ad430eb58b.png')
+        username='marnie', email='marnie@aa.io', password='password', first_name='Marnie', last_name='marnie', profile_img='https://kevinbawsbucket.s3.us-west-1.amazonaws.com/9395c115a982448b855ea7ad430eb58b.png')
     bobbie = User(
-        username='bobbie', email='bobbie@aa.io', password='password', first_name='hello', last_name='bobbie', profile_img='https://kevinbawsbucket.s3.us-west-1.amazonaws.com/9395c115a982448b855ea7ad430eb58b.png')
+        username='bobbie', email='bobbie@aa.io', password='password', first_name='Bobbie', last_name='bobbie', profile_img='https://kevinbawsbucket.s3.us-west-1.amazonaws.com/9395c115a982448b855ea7ad430eb58b.png')
     kevin = User(
         username='kevinb', email='kevinb@aa.io', password='password', first_name='Kevin', last_name='B', profile_img='https://kevinbawsbucket.s3.us-west-1.amazonaws.com/kevinmiddle.jpeg')
-    
+    kevinL = User(
+        username='kevinL', email='kevinl@aa.io', password='password', first_name='Kevin', last_name='L', profile_img='https://kevinbawsbucket.s3.us-west-1.amazonaws.com/9395c115a982448b855ea7ad430eb58b.png')
     db.session.add(demo)
     db.session.add(marnie)
     db.session.add(bobbie)
     db.session.add(kevin)
+    db.session.add(kevinL)
     db.session.commit()
 
 

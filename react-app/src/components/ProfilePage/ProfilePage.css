@@ -1,10 +1,13 @@
 .profileImg {
     width: 450px;
+    margin-left: 10px;
+    margin-top: 15px;
 }
 
 .profileCont {
     display: flex;
     flex-direction: row;
+    gap: 300px;
 }
 
 .modalCont {
@@ -25,3 +28,13 @@
     color:#70012b;
 }
 
+.editCont {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-left: 10px;
+}
+
+.postBodyCont {
+    word-break: break-word;
+}

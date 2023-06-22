@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useState } from 'react';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
 import CreatePost from '../Posts/CreatePost';
@@ -8,7 +9,8 @@ import OpenModalButton from '../OpenModalButton';
 
 function Navigation({ isLoaded }){
 	const sessionUser = useSelector(state => state.session.user);
-
+	const [isBlur, setIsBlur] = useState(false)
+	console.log(isBlur)
 	return (
 		<ul class='navContainer'>
 			<li>
@@ -17,7 +19,8 @@ function Navigation({ isLoaded }){
 			{isLoaded && (
 				<div class='navLiCont'>
 				<li className='navPost'>
-					{sessionUser ? <OpenModalButton
+					{sessionUser ? 
+					<OpenModalButton
 					buttonText="Post Your Love Story!"
 					 modalComponent={<CreatePost />}
 					 /> 

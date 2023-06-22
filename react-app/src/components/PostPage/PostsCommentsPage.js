@@ -40,7 +40,7 @@ const PostsCommentsPage = () => {
                     <div>
                         {root?.category}
                     </div>
-                    <div>
+                    <div className='body'>
                         {root?.body}
                     </div>
                     <div>

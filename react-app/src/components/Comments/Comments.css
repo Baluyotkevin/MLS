@@ -7,3 +7,7 @@
  .createCommCont {
     margin-left: 20px;
  }
+
+ .singleCommCont {
+    box-shadow: 3px 3px 3px white;
+ }

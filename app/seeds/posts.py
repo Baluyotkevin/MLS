@@ -12,7 +12,6 @@ def seed_posts():
         title='CornyLove', body = "It is hard not to have faith in this from the blue-brown clay of nigh these two potters crushed and smoothed you into being—grind, then curve—built your form up—atlas of bone, fields of muscle, one breast a fig tree, the other a nightingale, both Morning and Evening.",
         user_id = 2, category = 'Beautiful'
     )
-
     post4 = Post (
         title='Ehh', body="And wasn't that good? Them at your hips— isn't this what God felt when he pressed together the first Beloved: Everything. Fever. Vapor. Atman. Pulsus. Finally, a sin worth hurting for. Finally, a sweet, a You are mine.",
         user_id = 3, category = 'Horrible'
@@ -35,6 +34,30 @@ def seed_posts():
     post10 = Post(
         title='It hurts', body="It hurts not being able to see you anymore. It hurts not being able to feel your warmth. I never considered my love to be a chore. I looked at you and if anything you made me want to love you even more. It hurts not being able to touch you anymore. It hurts not being able to look into your beautiful eyes. So that I can tell you how beautiful as a person you are. But now all I can do now is appreciate and look at you from afar. It hurts because I loved seeing you look into my eyes and smile. It hurts because you were the light to my world. I would have done anything to keep you by my side. But I know people change and not everyone can stay in the tide. It hurts because I still smell your scent. It hurts because I loved you so much. I guess this is part of the healing process. To feel everything and moving forward while being in a mess.", user_id = 4, category='Horrible'
     )
+    post11 = Post(
+        title='A Dance Of Souls', body="Two souls entwined in a dance so sweet, Moving in rhythm, their hearts complete. With every step, love's melody plays, Guiding their dance through life's myriad ways. Hand in hand, they twirl through life's maze, Love's choreography, a divine ballet. In this dance, their spirits intertwine, Forever partners, their love's design.", user_id = 3, category = 'Beautiful'
+    )
+    post12 = Post(
+        title='Serenade Of Devotion', body="In the stillness of night, a serenade, Love's devotion, a symphony displayed. With every note, my heart sings for you, A melody of love, pure and true. The moonlit stage, our love's sanctuary, A serenade of souls, harmoniously. In this symphony, our hearts unite, Love's eternal song, a beacon of light.", user_id = 2, category = 'Beautiful'
+    )
+    post13 = Post(
+        title='Whispers In The Wind', body="Whispers in the wind, secrets untold, Love's language, a story to unfold. Carried by breezes, caressing our skin, Love's gentle touch, a journey begins. In the rustling leaves, a love's embrace, Words unspoken, yet we both embrace. Whispers in the wind, love's sweet refrain, A symphony of hearts, forever sustained.", user_id = 1, category='Beautiful'
+    )
+    post14 = Post(
+        title="Eternity's Embrace", body="In this timeless space, our love resides, A flame that burns, with infinite tides. Embraced by eternity's gentle hold, A love that's ageless, a tale untold. Through the eons, our souls entwine, Love's essence, immortal and divine. In this embrace, forever we'll be, Two souls, bound for all", user_id = 3, category = 'Beautiful'
+    )
+    post15 = Post(
+        title="Love's Lament", body="Oh, love, you cruel and heartless beast, You turned my life into a dreadful feast. Like a vampire, you sucked me dry,Leaving me empty, asking why, oh why? Your words were like daggers, cutting deep, A love so toxic, it made me weep. Our relationship, a nightmare unending, A horror story, with no sign of mending.", user_id = 3, category='Horrible'
+    )
+    post16 = Post(
+        title='A Diaster Of Love', body="Roses are red, violets are blue, But our love story is a catastrophe, it's true. Like a tornado, it tore us apart, Leaving a wreckage of a broken heart. Your kisses were like poison, oh so vile, And your touch sent shivers, but not with a smile. Our love was a trainwreck, doomed from the start, A perfect example of a shattered heart.", user_id = 2, category='Horrible'
+    )
+    post17 = Post(
+        title="Love's Betrayal", body="In your arms, I thought I found solace, But it was an illusion, a love so callous. Your kisses were tainted, filled with deceit, A betrayal so deep, it left me incomplete. Our love was a sham, a charade of lies, A twisted game, with no compromise. I gave you my heart, but you played me fool, Love's treachery, the ultimate cruel.", user_id = 1, category='Horrible'
+    )
+    post18 = Post (
+        title="Love's Nightmare", body="Roses are wilted, violets are dead, Our love story filled with constant dread. Your touch is icy, like a winter's gale, Our relationship, a ship destined to fail. Your laughter grates, like nails on a chalkboard, Our love's demise, inevitable and untoward. In your eyes, a void devoid of affection, Our love, a dark and twisted reflection.", user_id = 2, category='Horrible'
+    )
 
     db.session.add(post1)
     db.session.add(post2)
@@ -46,6 +69,14 @@ def seed_posts():
     db.session.add(post8)
     db.session.add(post9)
     db.session.add(post10)
+    db.session.add(post11)
+    db.session.add(post12)
+    db.session.add(post13)
+    db.session.add(post14)
+    db.session.add(post15)
+    db.session.add(post16)
+    db.session.add(post17)
+    db.session.add(post18)
     db.session.commit()
 
 def undo_posts():

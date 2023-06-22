@@ -19,7 +19,7 @@ const CommentsForm = ({ postId, formType, comment }) => {
 
         
         if (body.length < 5) errors.body = "Please enter 5 characters or more"
-        if (body.length > 50) errors.body = "You cannot exceed 50 characters"
+        if (body.length > 80) errors.body = "You cannot exceed 80 characters"
         setValidationErrors(errors)
         if(Object.keys(errors).length) return
 

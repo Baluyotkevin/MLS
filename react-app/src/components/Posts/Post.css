@@ -9,11 +9,36 @@
 }
 
 
+.postBody {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "a b";
+    justify-items: center;
+    gap: 20px;
+}
+
+.carousel {
+    width: 700px;
+    height: 500px;
+    /* grid-area: b; */
+    /* border-radius: 50px; */
+    /* margin-top: 50px; */
+}
+
+.carouselImgCont {
+    margin-top: 100px;
+    grid-area: b;
+    /* margin-left: 50px; */
+
+}
+
+
 .postCont {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
     margin-bottom: 30px;
+    grid-area: a;
 }
 
 .selectPost {
@@ -64,8 +89,14 @@
 }
 
 .storyHead {
-    margin: 15px 20px;
+    margin: 15px 25px;
     border-bottom: 3px solid white;
+    display: flex;
+    justify-content: space-around;
+}
+
+.storyHead > h1 {
+    color: white;
 }
 
 .createPostTitle {

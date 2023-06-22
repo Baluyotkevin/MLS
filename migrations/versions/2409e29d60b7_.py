@@ -1,16 +1,19 @@
 """empty message
 
-Revision ID: c34927095513
+Revision ID: 2409e29d60b7
 Revises: 
-Create Date: 2023-06-21 10:27:48.707933
+Create Date: 2023-06-22 08:30:19.683483
 
 """
 from alembic import op
 import sqlalchemy as sa
+import os
+environment = os.getenv("FLASK_ENV")
+SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
-revision = 'c34927095513'
+revision = '2409e29d60b7'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -51,7 +54,7 @@ def upgrade():
     )
     op.create_table('comments',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('body', sa.String(length=50), nullable=False),
+    sa.Column('body', sa.String(length=80), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('post_id', sa.Integer(), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
@@ -60,6 +63,11 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###
+    if environment == "production":
+        op.execute(f"ALTER TABLE comments SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE posts SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE categories SET SCHEMA {SCHEMA};")
 
 
 def downgrade():
