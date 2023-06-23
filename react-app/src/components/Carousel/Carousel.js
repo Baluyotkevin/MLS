@@ -13,7 +13,7 @@ const CarouselImages = () => {
     const responsive = {
         desktop: {
           // the naming can be any, depends on you.
-          breakpoint: { max: 3000, min: 1500 },
+          breakpoint: { max: 3000, min: 1000 },
           items: 1,
           slidesToSlide: 1,
 
