@@ -9,7 +9,7 @@ class Post(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(50), nullable=False)
-    body = db.Column(db.String(1200), nullable=False)
+    body = db.Column(db.String(1300), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")))
     category = db.Column(db.String(50), nullable=False)
     root_post_id = db.Column(db.Integer)

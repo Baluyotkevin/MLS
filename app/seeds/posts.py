@@ -58,6 +58,9 @@ def seed_posts():
     post18 = Post (
         title="Love's Nightmare", body="Roses are wilted, violets are dead, Our love story filled with constant dread. Your touch is icy, like a winter's gale, Our relationship, a ship destined to fail. Your laughter grates, like nails on a chalkboard, Our love's demise, inevitable and untoward. In your eyes, a void devoid of affection, Our love, a dark and twisted reflection.", user_id = 2, category='Horrible'
     )
+    post19 = Post (
+        title='Second Chance', body="I'm sorry for the all mistakes I've made to make you feel alone I realized I didn't have what it takes aid To muster up the courage to be completely vulnerable to you but I was afraid  I thought my feelings were silly so I lied As a result I gave you suffering and you probably felt betrayed. I know I've caused hurt and damage to your feelings. How could I not see that you were alone with all your dealings. You felt like you were by yourself and I didn't realize. You just wanted someone to listen, to understand and to be sympathized, with. To be that equal partner that you deserved. Speaking your love language consistently, I should have preserved Especially with my actions and filling up your love tank. What a fool I was, to take you for granted, let's be frank. Entirely depending on you to make me feel better even though I should've done that myself while fulfilling your love. I had forgotten how to love myself, so how could I even fill up your cup from above. I'm sorry that I was too blinded to see, That a relationship is between we. That how you felt was the most important to me. I know I can't change the past, I know it'd be too fast, I know I shouldn't ask But I know I'd make it last. What can I do to advance To prove to you that I would love a second chance.", user_id = 4, category='Horrible'
+    )
 
     db.session.add(post1)
     db.session.add(post2)
@@ -77,6 +80,7 @@ def seed_posts():
     db.session.add(post16)
     db.session.add(post17)
     db.session.add(post18)
+    db.session.add(post19)
     db.session.commit()
 
 def undo_posts():

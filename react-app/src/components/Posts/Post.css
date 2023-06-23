@@ -118,7 +118,7 @@
 
 select {
     color: #cd9898;
-    background-color: white;
+    /* background-color: white; */
 }
 
 .homePostTitle {
