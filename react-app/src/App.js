@@ -14,6 +14,7 @@ import GetAllCurrComments from "./components/Comments/AllCurrComments";
 import PostPage from "./components/PostPage/PostPage";
 import PostsCommentsPage from "./components/PostPage/PostsCommentsPage";
 import Footer from "./components/Footer";
+import Chat from "./components/Chat/Chat";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +36,7 @@ function App() {
             <SignupFormPage />
           </Route>
           {/* <Route path='/post/:postId/delete' component={DeletePost} /> */}
+          <Route path='/current/chat' component = {Chat} />
           <Route path='/profilePage' component= {ProfilePage} />
           <Route path='/postPage/:postId' component={PostPage} />
           <Route path='/post/:postId/comments' component={PostsCommentsPage} />
