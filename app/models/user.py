@@ -40,5 +40,6 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'profile_img': self.profile_img,
             'first_name': self.first_name,
-            'last_name': self.last_name
+            'last_name': self.last_name,
+            "post_loves": [post.id for post in self.user_loves]
         }

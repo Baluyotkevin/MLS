@@ -6,6 +6,8 @@ const CREATE_POST = "post/createPost"
 const EDIT_POST = "post/editPost"
 const EDIT_POST_POST = 'post/editPostOnPost'
 const DELETE_POST = "delete/deletePost"
+const CREATE_LOVE = 'love/createLove'
+const DELETE_LOVE = 'love/deleteLove'
 
 const loadOnePost = post => ({
     type: GET_ONE_POST,
@@ -46,6 +48,17 @@ const deletePost = postId => ({
     type: DELETE_POST,
     postId
 })
+
+const createLove = post => ({
+    type: CREATE_LOVE,
+    post
+})
+
+const deleteLove = post => ({
+    type: DELETE_LOVE,
+    post
+})
+
 
 export const thunkOnePost = (postId) => async (dispatch) => {
     const res = await fetch(`/api/posts/${postId}`)
@@ -140,6 +153,31 @@ export const thunkDeletePost = (postId) => async (dispatch) => {
     }
 }
 
+export const thunkCreateLove = (post) => async (dispatch) => {
+    // console.log(post.id)
+        const res = await fetch(`/api/posts/${post.id}/add`, {
+            method: "POST"
+        })
+            console.log('hello error in thunk create love')
+            console.log(res)
+        if (res.ok) {
+            const data = await res.json()
+            console.log(data)
+            dispatch(createLove(data))
+    }
+}
+
+export const thunkDeleteLove = (post) => async (dispatch) => {
+    const res = await fetch(`/api/posts/${post.id}/remove`, {
+        method: "DELETE"
+    })
+
+    // if (res.ok) {
+    //     const data = await res.json()
+    //     // dispatch(deleteLove(data))
+    // }
+}
+
 const initialState = { currentUserPosts: {}, singlePost: {}, allPosts: {} }
 
 const postReducer = (state = initialState, action) => {
@@ -184,8 +222,6 @@ const postReducer = (state = initialState, action) => {
         }
         case EDIT_POST_POST: {
             const newState = { ...action.post }
-            // const onePost = action.post
-            // newState[onePost.id] = onePost
             return {
                 ...state,
                 singlePost: { root: {...state.singlePost.root}, children: [newState]}
@@ -207,6 +243,16 @@ const postReducer = (state = initialState, action) => {
             return {
                 ...state,
                 singlePost: { root: {...state.singlePost.root}, children: [newState]}
+            }
+        }
+        case CREATE_LOVE: {
+            console.log('hello from reducer')
+            const newState = {}
+            const onePost = action.post
+            newState[onePost.id] = onePost
+            return {
+                ...state,
+                singlePost: { ...state.singlePost.children, root: { ...onePost }}
             }
         }
         case DELETE_POST: {

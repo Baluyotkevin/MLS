@@ -35,5 +35,5 @@ class Post(db.Model):
             "created_at": self.created_at,
             "user": self.user.to_dict(),
             # "loves": []
-            "loves": [self.user.to_dict() for self.user in self.post_loves]
+            "loves": [user.id for user in self.post_loves]
         }
