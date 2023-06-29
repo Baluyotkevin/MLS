@@ -80,7 +80,6 @@ export const thunkAllPosts = () => async (dispatch) => {
 
 export const thunkAllCurrPosts = () => async (dispatch) => {
     const res = await fetch(`/api/posts/current`)
-    // console.log("THIS IS MY REEEES", res)
     if (res.ok) {
         const data = await res.json()
         dispatch(loadAllCurrPosts(data))
@@ -146,7 +145,6 @@ export const thunkDeletePost = (postId) => async (dispatch) => {
     const res = await fetch(`/api/posts/${postId}/delete`, {
         method: "DELETE"
     })
-    console.log("THIS IS MY REEEES")
     if (res.ok) {
         const data = await res.json()
         dispatch(deletePost(data))
@@ -154,16 +152,12 @@ export const thunkDeletePost = (postId) => async (dispatch) => {
 }
 
 export const thunkCreateLove = (post) => async (dispatch) => {
-    // console.log(post.id)
         const res = await fetch(`/api/posts/${post.id}/add`, {
             method: "POST"
         })
-            console.log('hello error in thunk create love')
-            console.log(res)
         if (res.ok) {
             const data = await res.json()
-            console.log(data)
-            dispatch(createLove(data))
+            await dispatch(createLove(data))
     }
 }
 
@@ -172,10 +166,10 @@ export const thunkDeleteLove = (post) => async (dispatch) => {
         method: "DELETE"
     })
 
-    // if (res.ok) {
-    //     const data = await res.json()
-    //     // dispatch(deleteLove(data))
-    // }
+    if (res.ok) {
+        const data = await res.json()
+        await dispatch(deleteLove(data))
+    }
 }
 
 const initialState = { currentUserPosts: {}, singlePost: {}, allPosts: {} }
@@ -246,14 +240,16 @@ const postReducer = (state = initialState, action) => {
             }
         }
         case CREATE_LOVE: {
-            console.log('hello from reducer')
-            const newState = {}
-            const onePost = action.post
-            newState[onePost.id] = onePost
-            return {
-                ...state,
-                singlePost: { ...state.singlePost.children, root: { ...onePost }}
-            }
+            const newState = { ...state }
+            const onePost = action.post.root
+            newState.allPosts[onePost.id] = onePost
+            return newState
+        }
+        case DELETE_LOVE: {
+            const newState = { ...state }
+            const onePost = action.post.root
+            delete newState.allPosts[onePost.id]
+            return newState
         }
         case DELETE_POST: {
             const newState = { ...state, ...state.currentUserPosts }

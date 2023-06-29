@@ -162,6 +162,7 @@ def add_post_loves(id):
             return { "root": post.to_dict(), "children": children }
     return {"message": "You already loved this post"}
 
+
 @post_routes.route('/<int:id>/remove', methods=['DELETE'])
 @login_required
 def remove_post_loves(id):
@@ -176,6 +177,7 @@ def remove_post_loves(id):
         db.session.commit()
         return { "root": post.to_dict(), "children": children }
     return {"message": "You already unloved this post"}
+
 
 @post_routes.route('/<int:id>/delete', methods=['DELETE'])
 @login_required
