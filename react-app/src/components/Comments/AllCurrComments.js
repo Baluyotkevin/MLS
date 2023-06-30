@@ -37,6 +37,7 @@ const GetAllCurrComments = () => {
                     />
                     <div>5 Followers</div>
                     <div>5 Favorites</div>
+
                 </div>
             </div>
             <ul class='postCont'>

@@ -77,9 +77,11 @@ const ProfilePage = () => {
                                 <div>
                                     {post.anonymous ? 'Anonymous' : post.user.first_name} - {post?.created_at.slice(0, 16)}
                                 </div>
+
+
                                 <div className='viewPost'>
-                                <NavLink to={`/postPage/${post.id}`}>View Your Post</NavLink>
-                            </div>
+                                    <NavLink to={`/postPage/${post.id}`}>View Your Post</NavLink>
+                                </div>
                                 <br />
                                 </>
                             </li>

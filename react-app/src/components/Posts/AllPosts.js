@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { thunkAllPosts } from "../../store/post";
 import { thunkAllUsers } from "../../store/user";
+import Post from "./Posts"
 import Loading from "../Loading/loading";
 import './Post.css'
 import CarouselImages from "../Carousel/Carousel";
@@ -25,6 +26,7 @@ const GetAllPosts = () => {
 
     return (
         <>
+{/*
         <div className='storyHead'>
             <h1>All Love Stories</h1>
             <h1>Let These Stories Inspire Your Love Story!</h1>
@@ -72,7 +74,24 @@ const GetAllPosts = () => {
             })}
             </ul>
         </div>
-        </>
+        </> */}
+
+        <div className='storyHead'>
+            <h1>All Love Stories</h1>
+            <h1>Let These Stories Inspire Your Love Story!</h1>
+        </div>
+        <div className='postBody'>
+            <div className='carouselImgCont'>
+                <CarouselImages />
+            </div>
+            <ul className='postCont'>
+                { allPosts && Object.values(allPosts).map(post => (
+                    <Post key={ post.id } postData={post} />
+                ))
+                }
+            </ul>
+        </div>
+    </>
     )
 }
 

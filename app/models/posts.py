@@ -1,5 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
+from .loves import loves
+from .comments import Comment
 
 class Post(db.Model):
     __tablename__ = 'posts'
@@ -19,6 +21,7 @@ class Post(db.Model):
 
     user = db.relationship('User', back_populates='user_posts')
     post_comments = db.relationship('Comment', back_populates='post', cascade="all, delete")
+    post_loves = db.relationship("User", secondary=loves, back_populates='user_loves', cascade="all, delete" )
 
     def to_dict(self):
         return {
@@ -32,5 +35,7 @@ class Post(db.Model):
             "anonymous": self.anonymous,
             "created_at": self.created_at,
             "user": self.user.to_dict(),
-            # "comments": [self.user.to_dict() for self.user in self.post_comments]
+            # "comments": [post_comments],
+            "loves": [user.id for user in self.post_loves]
+            # "loves": []
         }

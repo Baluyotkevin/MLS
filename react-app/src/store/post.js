@@ -6,6 +6,8 @@ const CREATE_POST = "post/createPost"
 const EDIT_POST = "post/editPost"
 const EDIT_POST_POST = 'post/editPostOnPost'
 const DELETE_POST = "delete/deletePost"
+const CREATE_LOVE = 'love/createLove'
+const DELETE_LOVE = 'love/deleteLove'
 
 const loadOnePost = post => ({
     type: GET_ONE_POST,
@@ -47,6 +49,17 @@ const deletePost = postId => ({
     postId
 })
 
+const createLove = post => ({
+    type: CREATE_LOVE,
+    post
+})
+
+const deleteLove = post => ({
+    type: DELETE_LOVE,
+    post
+})
+
+
 export const thunkOnePost = (postId) => async (dispatch) => {
     const res = await fetch(`/api/posts/${postId}`)
 
@@ -67,7 +80,6 @@ export const thunkAllPosts = () => async (dispatch) => {
 
 export const thunkAllCurrPosts = () => async (dispatch) => {
     const res = await fetch(`/api/posts/current`)
-    // console.log("THIS IS MY REEEES", res)
     if (res.ok) {
         const data = await res.json()
         dispatch(loadAllCurrPosts(data))
@@ -133,10 +145,30 @@ export const thunkDeletePost = (postId) => async (dispatch) => {
     const res = await fetch(`/api/posts/${postId}/delete`, {
         method: "DELETE"
     })
-    console.log("THIS IS MY REEEES")
     if (res.ok) {
         const data = await res.json()
         dispatch(deletePost(data))
+    }
+}
+
+export const thunkCreateLove = (post) => async (dispatch) => {
+        const res = await fetch(`/api/posts/${post.id}/add`, {
+            method: "POST"
+        })
+        if (res.ok) {
+            const data = await res.json()
+            await dispatch(createLove(data))
+    }
+}
+
+export const thunkDeleteLove = (post) => async (dispatch) => {
+    const res = await fetch(`/api/posts/${post.id}/remove`, {
+        method: "DELETE"
+    })
+
+    if (res.ok) {
+        const data = await res.json()
+        await dispatch(deleteLove(data))
     }
 }
 
@@ -184,8 +216,6 @@ const postReducer = (state = initialState, action) => {
         }
         case EDIT_POST_POST: {
             const newState = { ...action.post }
-            // const onePost = action.post
-            // newState[onePost.id] = onePost
             return {
                 ...state,
                 singlePost: { root: {...state.singlePost.root}, children: [newState]}
@@ -208,6 +238,18 @@ const postReducer = (state = initialState, action) => {
                 ...state,
                 singlePost: { root: {...state.singlePost.root}, children: [newState]}
             }
+        }
+        case CREATE_LOVE: {
+            const newState = { ...state }
+            const onePost = action.post.root
+            newState.allPosts[onePost.id] = onePost
+            return newState
+        }
+        case DELETE_LOVE: {
+            const newState = { ...state }
+            const onePost = action.post.root
+            delete newState.allPosts[onePost.id]
+            return newState
         }
         case DELETE_POST: {
             const newState = { ...state, ...state.currentUserPosts }

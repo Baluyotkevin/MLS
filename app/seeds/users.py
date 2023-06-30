@@ -14,6 +14,7 @@ def seed_users():
         username='kevinb', email='kevinb@aa.io', password='password', first_name='Kevin', last_name='B', profile_img='https://kevinbawsbucket.s3.us-west-1.amazonaws.com/kevinmiddle.jpeg')
     kevinL = User(
         username='kevinL', email='kevinl@aa.io', password='password', first_name='Kevin', last_name='L', profile_img='https://kevinbawsbucket.s3.us-west-1.amazonaws.com/9395c115a982448b855ea7ad430eb58b.png')
+
     db.session.add(demo)
     db.session.add(marnie)
     db.session.add(bobbie)

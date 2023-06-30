@@ -1,12 +1,11 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { useHistory } from 'react-router-dom';
+import { useDispatch } from "react-redux";
+import { useState } from "react";
 import { useModal } from "../../context/Modal";
-import { login, thunkEditUser } from "../../store/session";
+import { thunkEditUser } from "../../store/session";
 
 const ProfileForm = ({user}) => {
     const dispatch = useDispatch();
-    const history = useHistory()
+	const [username, setUsername] = useState("");
     const [profile_img, setprofile_img] = useState("");
 	const [first_name, setfirst_name] = useState("");
 	const [last_name, setlast_name] = useState("");
@@ -24,13 +23,20 @@ const ProfileForm = ({user}) => {
 		setErrors(err)
         if(Object.keys(err)?.length) return
 
+
         const formData = new FormData()
+		formData.append("username", username)
         formData.append("profile_img", profile_img)
 		formData.append("first_name", first_name)
 		formData.append("last_name", last_name)
 
-        await dispatch(thunkEditUser(formData, user))
+        const data = await dispatch(thunkEditUser(formData, user))
         .then(closeModal)
+		if (data) {
+				setErrors(data);
+			} else {
+				closeModal();
+			}
     }
 
     return (
@@ -39,7 +45,12 @@ const ProfileForm = ({user}) => {
 		encType='multipart/form-data'
         >
             <h1>Edit Profile</h1>
-            <div className='signUp'>
+            <ul>
+					{/* {errors.map((error, idx) => (
+						<li className='errors' key={idx}>{error}</li>
+					))} */}
+				</ul>
+				<div className='signUp'>
 					Profile Picture
 					<input
 					className='signProf'

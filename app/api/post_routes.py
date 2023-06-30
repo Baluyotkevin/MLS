@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from ..forms import PostForm, PostOnPostForm, CommentForm
-from ..models import db, Comment, Post
+from ..models import db, Comment, Post, User, loves
 
 post_routes = Blueprint('posts', __name__, url_prefix='')
 
@@ -29,9 +29,12 @@ def user_all_posts():
 def user_post(id):
     """Gets One post by its id"""
     root = Post.query.get(id)
+    if not root: 
+        return { "message": "post does not exist"}
     childrenObj = Post.query.filter(Post.root_post_id == id).all()
     children = [child.to_dict() for child in childrenObj]
     return { "root": root.to_dict(), "children": children }
+
 
 @post_routes.route('/post', methods=['POST'])
 @login_required
@@ -143,6 +146,38 @@ def edit_post(id):
         db.session.commit()
         return postObj.to_dict()
     return {"message": "You cannot edit this post as it does not belong to you"}
+
+@post_routes.route('/<int:id>/add', methods=['POST'])
+@login_required
+def add_post_loves(id):
+    user = User.query.get(current_user.id)
+    post = Post.query.get(id)
+    childrenObj = Post.query.filter(Post.root_post_id == id).all()
+    children = [child.to_dict() for child in childrenObj]
+    if user not in post.post_loves:
+            user.user_loves.append(post)
+            db.session.add(user)
+            db.session.commit()
+            # return post.to_dict()
+            return { "root": post.to_dict(), "children": children }
+    return {"message": "You already loved this post"}
+
+
+@post_routes.route('/<int:id>/remove', methods=['DELETE'])
+@login_required
+def remove_post_loves(id):
+    user = User.query.get(current_user.id)
+    post = Post.query.get(id)
+    childrenObj = Post.query.filter(Post.root_post_id == id).all()
+    children = [child.to_dict() for child in childrenObj]
+    if user in post.post_loves:
+        post.post_loves.remove(user)
+        print(post.post_loves)
+    # db.session.delete(loves)
+        db.session.commit()
+        return { "root": post.to_dict(), "children": children }
+    return {"message": "You already unloved this post"}
+
 
 @post_routes.route('/<int:id>/delete', methods=['DELETE'])
 @login_required

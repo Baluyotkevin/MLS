@@ -37,7 +37,7 @@ function App() {
           {/* <Route path='/post/:postId/delete' component={DeletePost} /> */}
           <Route path='/profilePage' component= {ProfilePage} />
           <Route path='/postPage/:postId' component={PostPage} />
-          <Route path='/post/:postId/comments' component={PostsCommentsPage} />
+          {/* <Route path='/post/:postId/comments' component={PostsCommentsPage} /> */}
           <Route path='/comments/current' component={GetAllCurrComments} />
           <Route path='/:postId/new' component={CreatePostOnPost} />
           <Route path='/' component={GetAllPosts} />

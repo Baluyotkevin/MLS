@@ -125,3 +125,9 @@ select {
     border-bottom: 3px solid white;
 }
 
+.heart {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
