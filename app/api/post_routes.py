@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from ..forms import PostForm, PostOnPostForm, CommentForm
-from ..models import db, Comment, Post, User, loves
+from ..models import db, Comment, Post, User, love
 
 post_routes = Blueprint('posts', __name__, url_prefix='')
 
@@ -173,7 +173,7 @@ def remove_post_loves(id):
     if user in post.post_loves:
         post.post_loves.remove(user)
         print(post.post_loves)
-    # db.session.delete(loves)
+    # db.session.delete(love)
         db.session.commit()
         return { "root": post.to_dict(), "children": children }
     return {"message": "You already unloved this post"}

@@ -1,6 +1,6 @@
 from .db import db
 
-loves = db.Table(
+love = db.Table(
     'loves',
     db.Model.metadata,
     db.Column("users", db.Integer, db.ForeignKey("users.id"), primary_key=True),
