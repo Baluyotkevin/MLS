@@ -8,4 +8,4 @@ love = db.Table(
     
 )
 if environment == "production":
-        __table_args__ = {'schema': SCHEMA}
+        love.schema = SCHEMA
