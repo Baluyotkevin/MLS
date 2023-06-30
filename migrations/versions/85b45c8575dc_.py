@@ -1,23 +1,21 @@
 """empty message
 
-Revision ID: 7e420c0bc226
+Revision ID: 85b45c8575dc
 Revises: 
-Create Date: 2023-06-29 16:28:43.226262
+Create Date: 2023-06-30 15:40:49.428560
 
 """
 from alembic import op
 import sqlalchemy as sa
-
-
-# revision identifiers, used by Alembic.
-revision = '7e420c0bc226'
-down_revision = None
-branch_labels = None
-depends_on = None
-
 import os
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
+
+# revision identifiers, used by Alembic.
+revision = '85b45c8575dc'
+down_revision = None
+branch_labels = None
+depends_on = None
 
 
 def upgrade():
@@ -72,11 +70,11 @@ def upgrade():
     )
     # ### end Alembic commands ###
     if environment == "production":
-        op.execute(f"ALTER TABLE loves SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE comments SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE posts SET SCHEMA {SCHEMA};")
-        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE categories SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE posts SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE comments SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE loves SET SCHEMA {SCHEMA};")
 
 
 def downgrade():
