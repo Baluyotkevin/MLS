@@ -1,8 +1,11 @@
-from .db import db
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 love = db.Table(
     'loves',
     db.Model.metadata,
-    db.Column("User", db.Integer, db.ForeignKey("users.id"), primary_key=True),
-    db.Column("Post", db.Integer, db.ForeignKey("posts.id"), primary_key=True)
+    db.Column("users", db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), primary_key=True),
+    db.Column("posts", db.Integer, db.ForeignKey(add_prefix_for_prod("posts.id")), primary_key=True)
+    
 )
+if environment == "production":
+        __table_args__ = {'schema': SCHEMA}

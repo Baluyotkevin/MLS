@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: cc6c633fee18
+Revision ID: 071caf269fd2
 Revises: 
-Create Date: 2023-06-30 15:51:28.509742
+Create Date: 2023-06-30 16:07:42.575597
 
 """
 from alembic import op
@@ -11,9 +11,8 @@ import os
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
-
 # revision identifiers, used by Alembic.
-revision = 'cc6c633fee18'
+revision = '071caf269fd2'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -63,15 +62,14 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('loves',
-    sa.Column('User', sa.Integer(), nullable=False),
-    sa.Column('Post', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['Post'], ['posts.id'], ),
-    sa.ForeignKeyConstraint(['User'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('User', 'Post')
+    sa.Column('users', sa.Integer(), nullable=False),
+    sa.Column('posts', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['posts'], ['posts.id'], ),
+    sa.ForeignKeyConstraint(['users'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('users', 'posts')
     )
     # ### end Alembic commands ###
     if environment == "production":
-
         op.execute(f"ALTER TABLE categories SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE posts SET SCHEMA {SCHEMA};")
