@@ -85,7 +85,7 @@ const GetAllPosts = () => {
                 <CarouselImages />
             </div>
             <ul className='postCont'>
-                { allPosts && Object.values(allPosts).map(post => (
+                {Object.values(allPosts)?.map(post => (
                     <Post key={ post.id } postData={post} />
                 ))
                 }
