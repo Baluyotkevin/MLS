@@ -19,12 +19,18 @@ def username_exists(form, field):
     user = User.query.filter(User.username == username).first()
     if user:
         raise ValidationError('Username is already in use.')
+    
+def password_length(form, field):
+    # Checking if password is 8 characters long
+    password = field.data
+    if len(password) < 8:
+        raise ValidationError('Please enter a password 8 characters long')
 
 
 class SignUpForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired(), username_exists])
     email = StringField('Email', validators=[DataRequired(), user_exists, Email()])
-    password = StringField('Password', validators=[DataRequired()])
+    password = StringField('Password', validators=[DataRequired(), password_length])
     profile_img = FileField("Image File", validators=[DataRequired(), FileAllowed(list(ALLOWED_EXTENSIONS))]) 
 # default='https://kevinbawsbucket.s3.us-west-1.amazonaws.com/heart+model.png')
     first_name = StringField('first_name', validators=[DataRequired()])

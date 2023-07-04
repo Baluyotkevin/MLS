@@ -5,6 +5,7 @@ import { thunkCreatePostonPost, thunkEditPost } from "../../store/post";
 import { useParams } from "react-router-dom";
 import { thunkAllCurrComments, thunkCreateComment, thunkEditComment } from "../../store/comment";
 import { useModal } from "../../context/Modal";
+import './Comments.css'
 
 const CommentsForm = ({ postId, formType, comment }) => {
     const dispatch = useDispatch()
@@ -52,6 +53,7 @@ const CommentsForm = ({ postId, formType, comment }) => {
                     <textarea
                     type='text'
                     value={body}
+                    className='commentText'
                     onChange={(e) => setBody(e.target.value)}
                     />
                 </div>

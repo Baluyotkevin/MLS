@@ -44,7 +44,7 @@ function LoginFormModal() {
     dispatch(login(email, password))
     .then(closeModal)
   }
-
+  console.log(errors)
   return (
     <>
       <h1>Log In</h1>

@@ -8,6 +8,8 @@
     text-decoration: none;
 }
 
+
+
 html, body, #root {
     height: 100%;
   }
@@ -48,7 +50,7 @@ form {
     /* color: blue */
 }
 
-textarea {
+#modal-content textarea {
     min-width: 400px;
     min-height: 200px;
     max-width: 400px;
@@ -56,6 +58,7 @@ textarea {
     border-radius: 10px;
     outline: #cd9898;
     color: #cd9898;
+    padding: 2px;
 }
 
 button {
@@ -95,4 +98,10 @@ img {
 
 .body {
     word-break: break-word;
+}
+
+@media screen and (max-width: 900px) and (min-width: 400px) {
+    .singlePostCont {
+        width: 250px;
+    }
 }
