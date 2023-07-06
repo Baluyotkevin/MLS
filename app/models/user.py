@@ -18,8 +18,8 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String(40), nullable=False)
     last_name = db.Column(db.String(40), nullable=False)
     
-    user_posts = db.relationship("Post", back_populates='user')
-    user_comments = db.relationship("Comment", back_populates='user')
+    user_posts = db.relationship("Post", back_populates='user', cascade='all, delete')
+    user_comments = db.relationship("Comment", back_populates='user', cascade='all, delete')
     user_loves = db.relationship("Post", secondary=love, back_populates='post_loves', cascade='all, delete')
 
     @property
