@@ -26,6 +26,7 @@ function SignupFormPage() {
 		if(!last_name.length) err.last = "Please enter a last name"
 		if(!email.length) err.email = "Please enter an email"
 		if(username.length < 5) err.username = "Please enter a 5 character username"
+    if(password.length < 8) err.pass = "Please make password 8 characters long"
 		setErrors(err)
 		if(Object.keys(err.length)) return
 
@@ -100,6 +101,7 @@ function SignupFormPage() {
 					onChange={(e) => setprofile_img(e.target.files[0])}
 					/>
 				</label>
+        {/* {} */}
         <label>
           Password
           <input

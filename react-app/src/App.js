@@ -14,6 +14,7 @@ import GetAllCurrComments from "./components/Comments/AllCurrComments";
 import PostPage from "./components/PostPage/PostPage";
 import PostsCommentsPage from "./components/PostPage/PostsCommentsPage";
 import Footer from "./components/Footer";
+import Forbidden from "./components/Forbidden/Forbidden";
 
 function App() {
   const dispatch = useDispatch();
@@ -28,19 +29,20 @@ function App() {
       <div className='bodyCont'>
       {isLoaded && (
         <Switch>
-          <Route path="/login" >
+          <Route exact path="/login" >
             <LoginFormPage />
           </Route>
-          <Route path="/signup">
+          <Route exact path="/signup">
             <SignupFormPage />
           </Route>
           {/* <Route path='/post/:postId/delete' component={DeletePost} /> */}
-          <Route path='/profilePage' component= {ProfilePage} />
-          <Route path='/postPage/:postId' component={PostPage} />
+          <Route exact path='/profilePage' component= {ProfilePage} />
+          <Route exact path='/postPage/:postId' component={PostPage} />
           {/* <Route path='/post/:postId/comments' component={PostsCommentsPage} /> */}
-          <Route path='/comments/current' component={GetAllCurrComments} />
-          <Route path='/:postId/new' component={CreatePostOnPost} />
-          <Route path='/' component={GetAllPosts} />
+          <Route exact path='/comments/current' component={GetAllCurrComments} />
+          <Route exact path='/:postId/new' component={CreatePostOnPost} />
+          <Route exact path='/' component={GetAllPosts} />
+          <Route path='*' component={Forbidden} />
           {/* <Route path='/post' component={PostForm} /> */}
         </Switch>
       )}

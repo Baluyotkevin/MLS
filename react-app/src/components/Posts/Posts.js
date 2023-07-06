@@ -14,6 +14,7 @@ const Post = ({ postData }) => {
     // console.log("this is my check", check)
     // const [loved, setLoved] = useState(check !== undefined)
     // console.log(loved)
+    // console.log(postData[0])
     const handleLove = async (e) => {
         if (!check) {
           await dispatch(thunkCreateLove(postData));

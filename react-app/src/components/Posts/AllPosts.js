@@ -13,7 +13,7 @@ const GetAllPosts = () => {
     const allPosts = useSelector(state => state.post.allPosts)
     const [isLoading, setIsLoading] = useState(true)
 
-
+    console.log(allPosts)
     useEffect(() => {
         dispatch(thunkAllPosts())
         dispatch(thunkAllUsers())
