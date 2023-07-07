@@ -56,7 +56,7 @@ const Post = ({ postData }) => {
                             <div className='viewCont'>
                                 <div>
 
-                            { currUser ? postData.loves?.includes(currUser?.id) ? 
+                            { currUser ? postData?.loves?.includes(currUser?.id) ? 
                             <div className='heart'>
                             {postData.loves.length}
                             <i class="fa-solid fa-heart" style={{ color: '#ce4257' }} onClick={ handleLove }></i> 
