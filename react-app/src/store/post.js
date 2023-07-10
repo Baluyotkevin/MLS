@@ -1,6 +1,7 @@
 const GET_ONE_POST = "post/loadOnePost"
 const GET_ALL_POSTS = "post/loadAllPosts"
 const GET_ALL_CURR_POSTS = "post/loadAllCurrPosts"
+const GET_ALL_FAV_POSTS = "post/loadAllFavPosts"
 const CREATE_POST_POST = "post/createPostOnPost"
 const CREATE_POST = "post/createPost"
 const EDIT_POST = "post/editPost"
@@ -8,6 +9,8 @@ const EDIT_POST_POST = 'post/editPostOnPost'
 const DELETE_POST = "delete/deletePost"
 const CREATE_LOVE = 'love/createLove'
 const DELETE_LOVE = 'love/deleteLove'
+const CREATE_FAV = 'favorite/createFav'
+const DELETE_FAV = 'favorite/deleteFav'
 
 const loadOnePost = post => ({
     type: GET_ONE_POST,
@@ -21,6 +24,11 @@ const loadAllPosts = posts => ({
 
 const loadAllCurrPosts = posts => ({
     type: GET_ALL_CURR_POSTS,
+    posts
+})
+
+const loadAllFavPosts = posts => ({
+    type: GET_ALL_FAV_POSTS,
     posts
 })
 
@@ -59,6 +67,16 @@ const deleteLove = post => ({
     post
 })
 
+const createFav = post => ({
+    type: CREATE_FAV,
+    post
+})
+
+const deleteFav = post => ({
+    type: DELETE_FAV,
+    post
+})
+
 
 export const thunkOnePost = (postId) => async (dispatch) => {
     const res = await fetch(`/api/posts/${postId}`)
@@ -83,6 +101,14 @@ export const thunkAllCurrPosts = () => async (dispatch) => {
     if (res.ok) {
         const data = await res.json()
         dispatch(loadAllCurrPosts(data))
+    }
+}
+
+export const thunkAllFavPosts = () => async (dispatch) => {
+    const res = await fetch(`/api/posts/current/favorites`)
+    if (res.ok) {
+        const data = await res.json()
+        dispatch(loadAllFavPosts(data))
     }
 }
 
@@ -113,7 +139,6 @@ export const thunkCreatePostonPost = (post, postId) => async (dispatch) => {
 }
 
 export const thunkEditPost = (post) => async (dispatch) => {
-    console.log(post)
     const res = await fetch(`/api/posts/${post.id}/edit`, {
         method: "PUT",
         headers: { 'Content-Type': 'application/json' },
@@ -127,7 +152,6 @@ export const thunkEditPost = (post) => async (dispatch) => {
 }
 
 export const thunkEditPostOnPost = (post) => async (dispatch) => {
-    console.log(post)
     const res = await fetch(`/api/posts/${post.id}/edit`, {
         method: "PUT",
         headers: { 'Content-Type': 'application/json' },
@@ -141,7 +165,6 @@ export const thunkEditPostOnPost = (post) => async (dispatch) => {
 }
 
 export const thunkDeletePost = (postId) => async (dispatch) => {
-    // console.log("THIS IS MY POSTID YOOOOO", postId)
     const res = await fetch(`/api/posts/${postId}/delete`, {
         method: "DELETE"
     })
@@ -172,7 +195,29 @@ export const thunkDeleteLove = (post) => async (dispatch) => {
     }
 }
 
-const initialState = { currentUserPosts: {}, singlePost: {}, allPosts: {} }
+export const thunkCreateFav = (post) => async (dispatch) => {
+    const res = await fetch(`/api/posts/${post.id}/favorite/add`, {
+        method: "POST"
+    })
+    if (res.ok) {
+        const data = await res.json()
+        console.log(data)
+        await dispatch(createFav(data))
+} 
+}
+
+export const thunkDeleteFav = (post) => async (dispatch) => {
+const res = await fetch(`/api/posts/${post.id}/favorite/remove`, {
+    method: "DELETE"
+})
+
+if (res.ok) {
+    const data = await res.json()
+    await dispatch(deleteFav(data))
+}
+}
+
+const initialState = { currentUserPosts: {}, singlePost: {}, allPosts: {}, currentUserFav: {} }
 
 const postReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -196,6 +241,17 @@ const postReducer = (state = initialState, action) => {
             return {
                 ...state,
                 currentUserPosts: newState
+            }
+        }
+        case GET_ALL_FAV_POSTS: {
+            const newState = {}
+            const allCurrFav = action.posts
+            allCurrFav.forEach(post => {
+                newState[post.id] = post
+            })
+            return {
+                ...state,
+                currentUserFav: newState
             }
         }
         case GET_ONE_POST: {
@@ -245,6 +301,25 @@ const postReducer = (state = initialState, action) => {
             newState.allPosts[onePost.id] = onePost
             return newState
         }
+        case CREATE_FAV: {
+            const newState = { ...state }
+            const onePost = action.post
+            newState.singlePost = onePost
+            return newState
+        }
+        // case CREATE_FAV: {
+        //     const newState = { ...state }
+        //     newState.singlePost = action.post
+        //     console.log(newState)
+        //     return newState
+        // }
+        case DELETE_FAV: {
+            const newState = { ...state }
+            const onePost = action.post.root
+            delete newState.allPosts[onePost.id]
+            return newState
+        }
+
         case DELETE_LOVE: {
             const newState = { ...state }
             const onePost = action.post.root

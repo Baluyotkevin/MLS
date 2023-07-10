@@ -20,7 +20,7 @@ function LoginFormPage() {
       setErrors(data);
     }
   };
-                console.log(errors)
+                
   return (
     <>
       <h1>Log In</h1>

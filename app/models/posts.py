@@ -2,6 +2,7 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
 from .loves import love
 from .comments import Comment
+from .favorites import favorite
 
 class Post(db.Model):
     __tablename__ = 'posts'
@@ -22,6 +23,7 @@ class Post(db.Model):
     user = db.relationship('User', back_populates='user_posts')
     post_comments = db.relationship('Comment', back_populates='post', cascade="all, delete")
     post_loves = db.relationship("User", secondary=love, back_populates='user_loves', cascade="all, delete" )
+    post_favorites = db.relationship("User", secondary=favorite, back_populates='user_favorites', cascade='all, delete')
 
     def to_dict(self):
         return {
@@ -36,6 +38,7 @@ class Post(db.Model):
             "created_at": self.created_at,
             "user": self.user.to_dict(),
             # "comments": [post_comments],
-            "loves": [user.id for user in self.post_loves]
+            "loves": [user.id for user in self.post_loves],
+            "favorites": [user.id for user in self.post_favorites]
             # "loves": []
         }

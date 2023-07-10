@@ -5,3 +5,4 @@ from .posts import Post
 from .category import Category
 from .comments import Comment
 from .loves import love
+from .favorites import favorite

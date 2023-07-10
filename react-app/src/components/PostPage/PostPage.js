@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { thunkAllPosts, thunkOnePost, thunkDeleteLove, thunkCreateLove } from "../../store/post";
+import { thunkAllPosts, thunkOnePost, thunkDeleteLove, thunkCreateLove, thunkCreateFav, thunkDeleteFav } from "../../store/post";
 import { thunkAllComments } from "../../store/comment";
+import { useHistory } from 'react-router-dom'
 import { useParams } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton";
 import CreatePostOnPost from "../Posts/CreatePostOnPost";
@@ -13,6 +14,7 @@ import './PostPage.css'
 
 const PostPage = () => {
     const dispatch = useDispatch()
+    const history = useHistory()
     const allComments = useSelector(state => state.comment.allComments)
     const onePost = useSelector(state => state.post.singlePost)
     const currUser = useSelector(state => state.session.user)
@@ -21,14 +23,14 @@ const PostPage = () => {
     const children = onePost.children
     const { postId } = useParams()
     const [isLoading, setIsLoading] = useState(true)
-    const checkLove = root?.loves.includes(currUser?.id)
+    const checkLove = root?.loves?.includes(currUser?.id)
+    const checkFavorite = root?.favorites.includes(currUser?.id)
     const check = [];
     Object.values(postComments).forEach(comment => check.push(comment.user_id))
 
     useEffect(() => {
         dispatch(thunkOnePost(postId))
         dispatch(thunkAllComments())
-        // dispatch(thunkAllPosts())
         setTimeout(() => {
             setIsLoading(false)
         }, 500);
@@ -43,13 +45,22 @@ const PostPage = () => {
         if (!checkLove) {
           await dispatch(thunkCreateLove(root));
           dispatch(thunkOnePost(postId))
-        //   setLoved(true);
         } else {
           await dispatch(thunkDeleteLove(root));
           dispatch(thunkOnePost(postId))
-        //   setLoved(false);
         }
       };
+
+      const handleFavorite = async (e) => {
+          e.preventDefault()
+        if (!checkFavorite) {
+            await dispatch(thunkCreateFav(root))
+            dispatch(thunkOnePost(postId))
+        } else {
+            await dispatch(thunkDeleteFav(root))
+            // dispatch(thunkOnePost(postId))
+        }
+    }
 
     if (isLoading === true) return <Loading />
 
@@ -64,6 +75,17 @@ const PostPage = () => {
                     <div>
                         {root?.title}
                     </div>
+                    { currUser.favorites?.includes(root.id) ? 
+                    
+                    <div className='heart'>
+                        <i class="fa-regular fa-bookmark" style={{ color: '#ce4257'}} onClick={ handleFavorite }></i>
+                    </div>
+                        :
+                        <div className='heart'>
+                            <i class="fa-regular fa-bookmark" onClick={ handleFavorite }></i>
+                        </div>
+                    }
+
                     <div>
                         {root?.category}
                     </div>

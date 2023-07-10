@@ -15,6 +15,7 @@ import PostPage from "./components/PostPage/PostPage";
 import PostsCommentsPage from "./components/PostPage/PostsCommentsPage";
 import Footer from "./components/Footer";
 import Forbidden from "./components/Forbidden/Forbidden";
+import FavoritesPage from "./components/ProfilePage/FavoritesPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ function App() {
           </Route>
           {/* <Route path='/post/:postId/delete' component={DeletePost} /> */}
           <Route exact path='/profilePage' component= {ProfilePage} />
+          <Route exact path='/favorites' component={FavoritesPage} />
           <Route exact path='/postPage/:postId' component={PostPage} />
           {/* <Route path='/post/:postId/comments' component={PostsCommentsPage} /> */}
           <Route exact path='/comments/current' component={GetAllCurrComments} />

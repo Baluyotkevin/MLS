@@ -24,6 +24,19 @@ def user_all_posts():
     new_all_posts = [post.to_dict() for post in all_posts]
     return new_all_posts
 
+
+@post_routes.route('/current/favorites')
+@login_required
+def get_favorites():
+    """Query for all current users favorites posts"""
+    all_posts = Post.query.all()
+    current_favorites = []
+    for post in all_posts:
+        if post in current_user.user_favorites:
+                current_favorites.append(post)
+    print('==========',current_favorites)
+    return [post.to_dict() for post in current_favorites]
+
 @post_routes.route('/<int:id>')
 # @login_required
 def user_post(id):
@@ -150,6 +163,7 @@ def edit_post(id):
 @post_routes.route('/<int:id>/add', methods=['POST'])
 @login_required
 def add_post_loves(id):
+    """Adds current users love to a post"""
     user = User.query.get(current_user.id)
     post = Post.query.get(id)
     childrenObj = Post.query.filter(Post.root_post_id == id).all()
@@ -166,18 +180,44 @@ def add_post_loves(id):
 @post_routes.route('/<int:id>/remove', methods=['DELETE'])
 @login_required
 def remove_post_loves(id):
+    """Removes current users love from post"""
     user = User.query.get(current_user.id)
     post = Post.query.get(id)
     childrenObj = Post.query.filter(Post.root_post_id == id).all()
     children = [child.to_dict() for child in childrenObj]
     if user in post.post_loves:
         post.post_loves.remove(user)
-        print(post.post_loves)
-    # db.session.delete(love)
         db.session.commit()
         return { "root": post.to_dict(), "children": children }
-    return {"message": "You already unloved this post"}
+    return {"message": "You already unloved this post or you have not loved this post"}
 
+@post_routes.route('/<int:id>/favorite/add', methods=['POST'])
+@login_required
+def add_post_favorites(id):
+    """Add post to current users favorites"""
+    user = User.query.get(current_user.id)
+    post = Post.query.get(id)
+    childrenObj = Post.query.filter(Post.root_post_id == id).all()
+    children = [child.to_dict() for child in childrenObj]
+    if user not in post.post_favorites:
+        post.post_favorites.append(user)
+        db.session.commit()
+        return { "root": post.to_dict(), "children": children }
+    return {"message": "You already favorited this post"}
+
+@post_routes.route('/<int:id>/favorite/remove', methods=['DELETE'])
+@login_required
+def remove_post_favorites(id):
+    """Removes post from current users favorites"""
+    user = User.query.get(current_user.id)
+    post = Post.query.get(id)
+    childrenObj = Post.query.filter(Post.root_post_id == id).all()
+    children = [child.to_dict() for child in childrenObj]
+    if user in post.post_favorites:
+        post.post_favorites.remove(user)
+        db.session.commit()
+        return { "root": post.to_dict(), "children": children }
+    return {"message": "You already unfavorited this post or you have not favorited"}
 
 @post_routes.route('/<int:id>/delete', methods=['DELETE'])
 @login_required
@@ -191,7 +231,6 @@ def delete_post(id):
     if postObj.user_id == current_user.id:
         if postObj.root_post_id is None:
             allPost = Post.query.filter(Post.root_post_id == postObj.id).all()
-            print('this is all of my post post', allPost)
             for post in allPost:
                 db.session.delete(post)
             db.session.delete(postObj)

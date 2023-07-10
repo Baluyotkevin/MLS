@@ -2,10 +2,6 @@
     padding: 30px 60px;
     margin-top: 20px;
     margin-left: 20px;
-    /* margin-bottom: 20px; */
-    /* display: flex; */
-    /* flex-direction: column; */
-    /* align-content: center; */
 }
 
 
@@ -14,16 +10,12 @@
     grid-template-columns: 1fr 1fr;
     grid-template-areas: "a b";
     justify-items: center;
-    /* gap: 20px; */
 }
 
 .carousel {
     width: 500px;
     height: 500px;
-    /* grid-area: b; */
     border-radius: 30px;
-    /* margin-top: 50px; */
-    /* z-index: -1; */
 }
 
 .react-multi-carousel-track {
@@ -33,11 +25,7 @@
 .carouselImgCont {
     margin-top: 100px;
     grid-area: b;
-    /* margin-left: 200px; */
     border-radius: 30px;
-    /* margin-left: 50px; */
-    /* z-index: -1; */
-
 }
 
 
@@ -71,7 +59,7 @@
 }
 
 .singlePostCont {
-    width: 500px;
+    max-width: 500px;
     padding: 10px;
     height: auto;
     background-color: #cd9898;
@@ -89,7 +77,6 @@
 
 .viewComm {
     display: flex;
-    /* gap: 5px; */
 }
 
 .viewComm > a:hover {
@@ -118,7 +105,6 @@
 
 select {
     color: #cd9898;
-    /* background-color: white; */
 }
 
 .homePostTitle {
