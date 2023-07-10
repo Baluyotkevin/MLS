@@ -2,7 +2,6 @@ import CommentsForm from "./CommentsForm";
 import './Comments.css'
 
 const CreateComment = ({post}) => {
-    // console.log(post)
     const comment = {
         body: ""
     }

@@ -1,7 +1,6 @@
 from app.models import db, Post, environment, SCHEMA
 from sqlalchemy.sql import text
 from .users import User
-# from random import randint
 
 def seed_posts():
     users = User.query.all()
@@ -35,7 +34,7 @@ def seed_posts():
         title="Close To Heaven", body="You know your the only one for me, The thought of you, picks me up when I am lonely. I get all crazy when you call out my name, I'm close to heaven when your touching me. You say that you love me, Girl, I know it, I feel the same but still so afraid to show it, I get all crazy when you call out my name I'm close to heaven when your touching me It's gotta be love, sweet love (love sweet love) Whenever your near me Ooh you make me happy, baby Love, sweet love (love... sweet love) Whenever your near me Ooh you make me happy, baby, Me vuelvo loco pensando en Tu amor Cuandote veo, temblo por Tu calor Cerca del cielco, alma de Mi corazon, mis ladios Brillan llenos de emocion", user_id = 4, category='Beautiful'
     )
     post11 = Post(
-        title='It hurts', body="It hurts not being able to see you anymore. It hurts not being able to feel your warmth. I never considered my love to be a chore. I looked at you and if anything you made me want to love you even more. It hurts not being able to touch you anymore. It hurts not being able to look into your beautiful eyes. So that I can tell you how beautiful as a person you are. But now all I can do now is appreciate and look at you from afar. It hurts because I loved seeing you look into my eyes and smile. It hurts because you were the light to my world. I would have done anything to keep you by my side. But I know people change and not everyone can stay in the tide. It hurts because I still smell your scent. It hurts because I loved you so much. I guess this is part of the healing process. To feel everything and moving forward while being in a mess.", user_id = 4, category='Horrible'
+        title='It hurts', body="It hurts not being able to see you anymore. It hurts not being able to feel your warmth. I never considered my love to be a chore.  I appreciated, enjoyed your whole being Just looking at you, I mean, it felt freeing It hurts not being able to get lost into those mesmerizing eyes. Like you with me? It came to me as a surprise. It hurts because I can't remind you how beautiful of a soul you are. But now all I can do now is appreciate and look at you from afar. It hurts because I loved seeing you look into my eyes and smile. It hurts because I still believe you're worth fighting for and all the while. I would have done anything to have kept you by my side. But I know people change and not everyone can stay in the tide.  It hurts because I still smell your scent. It hurts because I think of all the times we've spent. It hurts because I loved you so much. I guess this is part of the healing process. To feel everything and moving forward while being in a mess.", user_id = 4, category='Horrible'
     )
     post12 = Post(
         title='A Dance Of Souls', body="Two souls entwined in a dance so sweet, Moving in rhythm, their hearts complete. With every step, love's melody plays, Guiding their dance through life's myriad ways. Hand in hand, they twirl through life's maze, Love's choreography, a divine ballet. In this dance, their spirits intertwine, Forever partners, their love's design.", user_id = 3, category = 'Beautiful'
@@ -72,7 +71,6 @@ def seed_posts():
     db.session.add(post5)
     db.session.add(post6)
     db.session.add(post7)
-    # db.session.add(post8)
     db.session.add(post9)
     db.session.add(post10)
     db.session.add(post11)

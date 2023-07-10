@@ -5,8 +5,6 @@ import { useEffect, Fragment } from "react";
 import { useHistory } from "react-router-dom";
 
 const CreatePost = () => {
-    // const { postId } = useParams()
-    // console.log("do i get in here")
     const post = {
         title: "",
         body: "",

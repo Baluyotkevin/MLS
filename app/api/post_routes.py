@@ -52,6 +52,7 @@ def user_post(id):
 @post_routes.route('/post', methods=['POST'])
 @login_required
 def create_post():
+    """Creates a post"""
     form = PostForm()
     form["csrf_token"].data=request.cookies["csrf_token"]
 

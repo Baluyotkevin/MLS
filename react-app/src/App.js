@@ -36,16 +36,13 @@ function App() {
           <Route exact path="/signup">
             <SignupFormPage />
           </Route>
-          {/* <Route path='/post/:postId/delete' component={DeletePost} /> */}
           <Route exact path='/profilePage' component= {ProfilePage} />
           <Route exact path='/favorites' component={FavoritesPage} />
           <Route exact path='/postPage/:postId' component={PostPage} />
-          {/* <Route path='/post/:postId/comments' component={PostsCommentsPage} /> */}
           <Route exact path='/comments/current' component={GetAllCurrComments} />
           <Route exact path='/:postId/new' component={CreatePostOnPost} />
           <Route exact path='/' component={GetAllPosts} />
           <Route path='*' component={Forbidden} />
-          {/* <Route path='/post' component={PostForm} /> */}
         </Switch>
       )}
       </div>

@@ -22,8 +22,6 @@ const PostOnPostForm = ({ postId, post, formType }) => {
         if(title.length > 30) errors.title = "You cannot exceed 30 characters"
         if(body.length < 10) errors.body = "Please enter 10 characters or more"
         if(body.length > 1300) errors.body = "You cannot exceed 1300 characters"
-        // const check = dispatch(thunkOnePost(postId + 1))
-        // if(check.children) errors.check = "You've already created a post"
         setValidationErrors(errors)
         if(Object.keys(errors).length) return
 
@@ -37,7 +35,6 @@ const PostOnPostForm = ({ postId, post, formType }) => {
         if (formType === 'Create Post') {
             await dispatch(thunkCreatePostonPost(post, postId))
             .then(closeModal)
-            // history.push(`/postPage/${postId}`)
             dispatch(thunkOnePost(postId))
         }
 

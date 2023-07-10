@@ -37,30 +37,29 @@ const PostPage = () => {
     }, [dispatch])
 
     const handleAlert = async (e) => {
-        alert("Need to be logged in to love")
+        alert("Must be logged in to love")
       }
 
+    const handleFavAlert = async (e) => {
+        alert("Must be logged in to favorite!")
+      }
 
     const handleLove = async (e) => {
         if (!checkLove) {
           await dispatch(thunkCreateLove(root));
-          dispatch(thunkOnePost(postId))
         } else {
           await dispatch(thunkDeleteLove(root));
-          dispatch(thunkOnePost(postId))
         }
       };
 
       const handleFavorite = async (e) => {
-          e.preventDefault()
         if (!checkFavorite) {
             await dispatch(thunkCreateFav(root))
-            dispatch(thunkOnePost(postId))
         } else {
             await dispatch(thunkDeleteFav(root))
-            // dispatch(thunkOnePost(postId))
         }
     }
+
 
     if (isLoading === true) return <Loading />
 
@@ -72,19 +71,26 @@ const PostPage = () => {
             /> : null}
             <ul class='postCont'>
                 <li className='singlePostCont'> 
+                <div className='titleFav'>
                     <div>
                         {root?.title}
                     </div>
-                    { currUser.favorites?.includes(root.id) ? 
+                    { currUser ? root.favorites.includes(currUser?.id) ? 
                     
-                    <div className='heart'>
-                        <i class="fa-regular fa-bookmark" style={{ color: '#ce4257'}} onClick={ handleFavorite }></i>
+                    <div className='heart fav'>
+                        <i class="fa-solid fa-bookmark" style={{ color: '#ce4257'}} onClick={ handleFavorite }></i>
                     </div>
                         :
-                        <div className='heart'>
-                            <i class="fa-regular fa-bookmark" onClick={ handleFavorite }></i>
-                        </div>
+                        <div className='heart fav'>
+                            <i class="fa-solid fa-bookmark" onClick={ handleFavorite }></i>
+                        </div> 
+                        :
+                        <div className='heart fav'>
+                            <i class="fa-solid fa-bookmark" onClick={ handleFavAlert }></i>
+                        </div> 
                     }
+
+                </div>
 
                     <div>
                         {root?.category}
@@ -106,7 +112,7 @@ const PostPage = () => {
                             </div>
                             :
                             <div>
-                            {root.loves.length} <i class="fa-solid fa-heart" style={{ color: '#ce4257' }} onClick={ handleAlert }></i> 
+                            {root.loves.length} <i class="fa-solid fa-heart" onClick={ handleAlert }></i> 
                             </div>
                             }
                     <div>

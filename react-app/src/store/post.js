@@ -201,7 +201,6 @@ export const thunkCreateFav = (post) => async (dispatch) => {
     })
     if (res.ok) {
         const data = await res.json()
-        console.log(data)
         await dispatch(createFav(data))
 } 
 }
@@ -255,11 +254,9 @@ const postReducer = (state = initialState, action) => {
             }
         }
         case GET_ONE_POST: {
-            const newState = { ...action.post }
-            return {
-                ...state,
-                singlePost: newState
-            }
+            const newState = { ...state }
+            newState.singlePost = action.post
+            return newState
         }
         case EDIT_POST: {
             const newState = {}
@@ -297,8 +294,8 @@ const postReducer = (state = initialState, action) => {
         }
         case CREATE_LOVE: {
             const newState = { ...state }
-            const onePost = action.post.root
-            newState.allPosts[onePost.id] = onePost
+            const onePost = action.post
+            newState.singlePost = onePost
             return newState
         }
         case CREATE_FAV: {
@@ -307,23 +304,16 @@ const postReducer = (state = initialState, action) => {
             newState.singlePost = onePost
             return newState
         }
-        // case CREATE_FAV: {
-        //     const newState = { ...state }
-        //     newState.singlePost = action.post
-        //     console.log(newState)
-        //     return newState
-        // }
         case DELETE_FAV: {
             const newState = { ...state }
-            const onePost = action.post.root
-            delete newState.allPosts[onePost.id]
+            const onePost = action.post
+            newState.singlePost = onePost
             return newState
         }
-
         case DELETE_LOVE: {
             const newState = { ...state }
-            const onePost = action.post.root
-            delete newState.allPosts[onePost.id]
+            const onePost = action.post
+            newState.singlePost = onePost
             return newState
         }
         case DELETE_POST: {

@@ -62,14 +62,10 @@ const Post = ({ postData }) => {
                             </div>
                             : 
                             <>
-                            {postData.loves.length} <i class="fa-solid fa-heart" style={{ color: '#ce4257' }} onClick={ handleAlert }></i> 
+                            {postData.loves.length} <i class="fa-solid fa-heart" onClick={ handleAlert }></i> 
                             </>
                             }
                                 </div>
-                        {/* <div className='viewComm'>
-                        
-                            <NavLink to={`/post/${postData.id}/comments`}><i class="fa-regular fa-comment"></i> View Comments</NavLink>
-                        </div> */}
                         
                         <div className='viewPost'>
                             <NavLink to={`/postPage/${postData.id}`}>View more Posts</NavLink>

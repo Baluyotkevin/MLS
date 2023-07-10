@@ -7,20 +7,13 @@ import { thunkAllCurrPosts, thunkAllPosts, thunkOnePost } from "../../store/post
 const EditPostOnPost = ({ post }) => {
     
     const dispatch = useDispatch()
-    // const { postId } = useParams()
-    // const post = useSelector(state => state.post.singlePost[postEdit.id])
-    // console.log(post)
-    // useEffect(() => {
-    //     dispatch(thunkOnePost(post))
-    //     dispatch(thunkAllCurrPosts())
-    // }, [dispatch])
+
 
     return (
         <>
 
         <PostOnPostForm
         post = {post}
-        // postId = {postEdit}
         formType = 'Edit Post'
         />
         </>

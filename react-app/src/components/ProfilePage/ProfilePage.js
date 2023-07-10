@@ -36,8 +36,8 @@ const ProfilePage = () => {
                 buttonText='Edit Profile'
                 modalComponent={<ProfileForm user={currUser} />}
                 />
-                <div>5 Followers</div>
-                <div>5 Favorites</div>
+                {/* <div>5 Followers</div> */}
+                {/* <div>You have favorited {currUser.favorites.length} posts</div> */}
             </div>
             </div>
             <ul class='postCont'>

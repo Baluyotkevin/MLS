@@ -11,8 +11,6 @@ const ProfileForm = ({user}) => {
 	const [last_name, setlast_name] = useState("");
 	const [errors, setErrors] = useState("")
     const { closeModal } = useModal()
-	// const [errors, setErrors] = ({})
-    console.log("this is my user", user)
     const handleSubmit = async (e) => {
         e.preventDefault()
 		const err = {}
@@ -46,9 +44,6 @@ const ProfileForm = ({user}) => {
         >
             <h1>Edit Profile</h1>
             <ul>
-					{/* {errors.map((error, idx) => (
-						<li className='errors' key={idx}>{error}</li>
-					))} */}
 				</ul>
 				<div className='signUp'>
 					Profile Picture

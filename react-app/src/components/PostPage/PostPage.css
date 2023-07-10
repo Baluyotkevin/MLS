@@ -23,3 +23,12 @@
     flex-direction: column;
     gap: 10px;
 }
+
+.titleFav {
+    display: flex;
+    justify-content: space-between;
+}
+
+.fav {
+    font-size: 20px;
+}
