@@ -6,13 +6,10 @@ import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import GetAllPosts from "./components/Posts/AllPosts";
-import PostForm from "./components/Posts/PostOneForm"
 import CreatePostOnPost from "./components/Posts/CreatePostOnPost";
-import DeletePost from "./components/Posts/DeletePost";
 import ProfilePage from "./components/ProfilePage/ProfilePage";
 import GetAllCurrComments from "./components/Comments/AllCurrComments";
 import PostPage from "./components/PostPage/PostPage";
-import PostsCommentsPage from "./components/PostPage/PostsCommentsPage";
 import Footer from "./components/Footer";
 import Forbidden from "./components/Forbidden/Forbidden";
 import FavoritesPage from "./components/ProfilePage/FavoritesPage";

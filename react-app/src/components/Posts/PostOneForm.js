@@ -1,13 +1,10 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { useHistory } from 'react-router-dom';
+import { useDispatch } from "react-redux";
+import { useState } from "react";
 import { thunkCreatePost, thunkAllCurrPosts, thunkEditPost } from "../../store/post";
-import OpenModalButton from "../OpenModalButton";
 import { useModal } from "../../context/Modal";
 
 const PostForm = ({post, formType}) => {
     const dispatch = useDispatch()
-    const history = useHistory()
     const [body, setBody] = useState(post?.body)
     const [title, setTitle] = useState(post?.title)
     const [category, setCategory] = useState(post?.category)
@@ -28,8 +25,6 @@ const PostForm = ({post, formType}) => {
         if(!anonymous.length) errors.anonymous = "Please select yes or no."
         setValidationErrors(errors)
         if(Object.keys(errors).length) return
-
-        console.log(post)
         
         post = {
             ...post,
@@ -42,7 +37,6 @@ const PostForm = ({post, formType}) => {
         if (formType === 'Create Post') {
             await dispatch(thunkCreatePost(post))
             .then(closeModal)
-            // history.push('/')
             dispatch(thunkAllCurrPosts())
         }
 
@@ -50,7 +44,6 @@ const PostForm = ({post, formType}) => {
             await dispatch(thunkEditPost(post))
             .then(closeModal)
             dispatch(thunkAllCurrPosts())
-            // history.push('/')
         }
     }
 
@@ -85,7 +78,6 @@ const PostForm = ({post, formType}) => {
             {formType === 'Edit Post' ? null : 
             <>
             <div className='errors' >
-        {/* hello */}
             {validationErrors.category}
             </div>
             <select onChange={(e) => setCategory(e.target.value)}>

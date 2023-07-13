@@ -30,7 +30,6 @@ const PostOnPostForm = ({ postId, post, formType }) => {
             title,
             body
         }
-        console.log(post)
 
         if (formType === 'Create Post') {
             await dispatch(thunkCreatePostonPost(post, postId))
@@ -41,8 +40,6 @@ const PostOnPostForm = ({ postId, post, formType }) => {
         if (formType === 'Edit Post') {
             await dispatch(thunkEditPostOnPost(post))
             .then(closeModal)
-            // dispatch(thunkOnePost(postId))
-            // dispatch(thunkAllPosts())
         }
     }
 

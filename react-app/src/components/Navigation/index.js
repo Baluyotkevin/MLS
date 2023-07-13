@@ -10,7 +10,6 @@ import OpenModalButton from '../OpenModalButton';
 function Navigation({ isLoaded }){
 	const sessionUser = useSelector(state => state.session.user);
 	const [isBlur, setIsBlur] = useState(false)
-	console.log(isBlur)
 	return (
 		<ul class='navContainer'>
 			<li>

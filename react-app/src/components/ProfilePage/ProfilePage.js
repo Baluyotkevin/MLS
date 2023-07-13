@@ -15,6 +15,7 @@ const ProfilePage = () => {
     const dispatch = useDispatch()
     const allCurrPosts = useSelector(state => state.post.currentUserPosts)
     const currUser = useSelector(state => state.session.user)
+    const check = Object.values(allCurrPosts)
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
@@ -23,7 +24,6 @@ const ProfilePage = () => {
             setIsLoading(false)
         }, 500);
     }, [dispatch])
-
     if (isLoading === true) return <Loading />
 
     return (
@@ -36,21 +36,16 @@ const ProfilePage = () => {
                 buttonText='Edit Profile'
                 modalComponent={<ProfileForm user={currUser} />}
                 />
-                {/* <div>5 Followers</div> */}
-                {/* <div>You have favorited {currUser.favorites.length} posts</div> */}
             </div>
             </div>
             <ul class='postCont'>
                 <h3 className='profileHeader'>
                     {currUser.first_name} - Posts
                 </h3>
-                {!allCurrPosts.length ? Object.values(allCurrPosts).map(post => {
-                    // console.log(post.root_user_id)
-                    // console.log(post.parent_id)
+                {check.length ? Object.values(allCurrPosts).map(post => {
                     if (post.root_post_id === null) {
                         return (
                             <li className='singlePostCont'>
-                                {/* hello */}
                                 <>
                                 <div className='modalCont'>
                                 <OpenModalButton
@@ -90,7 +85,7 @@ const ProfilePage = () => {
                     } else {
                         return null
                     }
-                }) : <div className='none'>You Haven't Posted Your Love Story Yet!</div> } 
+                }) : <div className='none' >You Haven't Posted Your Love Story Yet!</div> } 
             </ul>
         </div>
     )

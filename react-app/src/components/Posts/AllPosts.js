@@ -1,8 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
 import { thunkAllPosts } from "../../store/post";
-import { thunkAllUsers } from "../../store/user";
 import Post from "./Posts"
 import Loading from "../Loading/loading";
 import './Post.css'
@@ -12,19 +10,41 @@ const GetAllPosts = () => {
     const dispatch = useDispatch()
     const allPosts = useSelector(state => state.post.allPosts)
     const [isLoading, setIsLoading] = useState(true)
-    const allPostsArr = Object.values(allPosts)
+    const [sortType, setSortType] = useState('')
+    const [posts, setPosts] = useState([])
+
+    let allPostsArr
+    if (allPosts) allPostsArr = Object.values(allPosts)
+
+    useEffect(() => {
+        if (allPostsArr) {
+            const sortedPosts = type => {
+                let sorted;
+                    if (type === 'created_at') {
+                        sorted = allPostsArr.sort((a, b) => new Date(b.created_at) - new Date(a.created_at)
+                    )}
+                    else if (type === 'Horrible') {
+                        sorted = allPostsArr.filter(post => post.category === 'Horrible')
+                    }
+                    else if (type === 'Beautiful' ) {
+                        sorted = allPostsArr.filter(post => post.category === 'Beautiful')
+                    }
+                    else {
+                        sorted = allPostsArr
+                    }
+                setPosts(sorted)
+            }
+            sortedPosts(sortType)
+        }
+    }, [sortType, allPostsArr.length])
 
     useEffect(() => {
         dispatch(thunkAllPosts())
-        dispatch(thunkAllUsers())
         setTimeout(() => {
             setIsLoading(false)
         }, 500);
     }, [dispatch])
 
-    // const handleSort = async (e) => {
-    //     allPostsArr.sort((a,b) => new Date(b.created_at) - new Date(a.created_at))
-    // }
 
     if (isLoading === true) return <Loading />
 
@@ -32,15 +52,26 @@ const GetAllPosts = () => {
         <>
         <div className='storyHead'>
             <h1>All Love Stories</h1>
-            <h1>Let These Stories Inspire Your Love Story!</h1>
+            <h1>Share Your Own Love Story!</h1>
         </div>
-            {/* <button onClick={handleSort}>Newest</button> */}
         <div className='postBody'>
             <div className='carouselImgCont'>
                 <CarouselImages />
             </div>
             <ul className='postCont'>
-                {allPostsArr && allPostsArr?.map(post => (
+            <div className='sorting'>
+                <button onClick={(e) => {
+                    setSortType('created_at')
+                } }>Newest</button>
+                <button onClick={(e) => {
+                    setSortType('Beautiful')
+                } }>Beautiful</button>
+                <button onClick={(e) => {
+                    setSortType('Horrible')
+                } }>Horrible</button>
+
+            </div>
+                {posts && posts.map(post => (
                     <Post key={ post.id } postData={post} />
                 ))
                 }

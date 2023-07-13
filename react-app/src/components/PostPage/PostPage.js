@@ -154,7 +154,7 @@ const PostPage = () => {
 
             {postComments.length ? Object.values(postComments).map(comment => {
                     return (
-                        <div class='commentCont'>
+                        <div key={comment.id} class='commentCont'>
                             <div className='singleCommCont'>
                             <div>
                                 {comment.user.first_name}

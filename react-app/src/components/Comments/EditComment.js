@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import CommentsForm from "./CommentsForm";
 
 const EditComment = ({ comment }) => {
-    console.log(comment)
     return (
         <>
         <h1>Edit Comment</h1>

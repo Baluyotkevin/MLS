@@ -46,7 +46,6 @@ function ProfileButton({ user }) {
   return (
     <>
       <button onClick={openMenu}>
-        {/* <i className="fas fa-user-circle" /> */}
         {currUser ? <>
         <i className="fas fa-user-circle" /> Welcome, {currUser?.first_name}!
          </>

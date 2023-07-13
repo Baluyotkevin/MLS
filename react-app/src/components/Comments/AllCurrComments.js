@@ -45,7 +45,7 @@ const GetAllCurrComments = () => {
                 <br />
                 {check.length ? Object.values(allComments).map(comment => {
                     return (
-                        <li className='singlePostCont'>
+                        <li className='singlePostCont' key={comment.id}>
                         <div className='modalCont'>
                         <OpenModalButton
                         buttonText='Edit'

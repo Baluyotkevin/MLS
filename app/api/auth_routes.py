@@ -76,11 +76,9 @@ def sign_up():
 
         if "url" not in upload:
             return upload['errors']
-            # return 'hello'
         # if the dictionary doesn't have a url key
         # it means that there was an error when we tried to upload
         # so we send back that error message
-            # return 'hello'
         user = User(
             username=form.data['username'],
             email=form.data['email'],
@@ -89,7 +87,6 @@ def sign_up():
             first_name=form.data['first_name'],
             last_name=form.data['last_name']
         )
-        print('Do i get created ?? ========>', user)
         db.session.add(user)
         db.session.commit()
         login_user(user)

@@ -95,7 +95,6 @@
 }
 
 .createPostTitle {
-    /* color: red; */
     color: #cd9898;
 }
 
@@ -117,3 +116,8 @@ select {
     gap: 5px;
 }
 
+.sorting {
+    display: flex;
+    margin-left: 20px;
+    gap: 10px;
+}

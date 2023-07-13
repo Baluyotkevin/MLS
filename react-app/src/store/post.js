@@ -175,7 +175,7 @@ export const thunkDeletePost = (postId) => async (dispatch) => {
 }
 
 export const thunkCreateLove = (post) => async (dispatch) => {
-        const res = await fetch(`/api/posts/${post.id}/add`, {
+    const res = await fetch(`/api/posts/${post.id}/add`, {
             method: "POST"
         })
         if (res.ok) {

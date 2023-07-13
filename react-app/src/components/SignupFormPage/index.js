@@ -11,7 +11,6 @@ function SignupFormPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [profile_img, setprofile_img] = useState("");
-	// const [imageLoading, setImageLoading] = useState(false);
 	const [first_name, setfirst_name] = useState("");
 	const [last_name, setlast_name] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -31,7 +30,6 @@ function SignupFormPage() {
 		if(Object.keys(err.length)) return
 
     const formData = new FormData()
-			console.log(username)
 			formData.append("username", username)
 			formData.append("email", email)
 			formData.append("password", password)

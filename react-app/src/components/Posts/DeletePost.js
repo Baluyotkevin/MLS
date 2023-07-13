@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useModal } from "../../context/Modal";
-import { thunkAllCurrPosts, thunkDeletePost, thunkOnePost } from '../../store/post';
+import { thunkDeletePost, thunkOnePost } from '../../store/post';
 
 
 const DeletePost = ({post, root}) => {

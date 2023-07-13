@@ -3,12 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { thunkAllFavPosts } from "../../store/post";
 import { NavLink } from "react-router-dom";
 import Loading from "../Loading/loading";
+import OpenModalButton from "../OpenModalButton";
+import ProfileForm from "./EditProfilePage";
 
 const FavoritesPage = () => {
     const dispatch = useDispatch()
     const [isLoading, setIsLoading] = useState(true)
     const allFavPosts = useSelector(state => state.post.currentUserFav)
     const currUser = useSelector(state => state.session.user)
+    const check = Object.values(allFavPosts)
      useEffect(() => {
         dispatch(thunkAllFavPosts())
         setTimeout(() => {
@@ -19,8 +22,22 @@ const FavoritesPage = () => {
     if (isLoading === true) return <Loading />
 
     return (
-        <div className='postCont'>
-            {allFavPosts && Object.values(allFavPosts).map(post => {
+        <div className='profileCont'>
+             <div>
+                
+                <img className='profileImg' src={currUser.profile_img} />
+            <div className='editCont'>
+                <OpenModalButton
+                buttonText='Edit Profile'
+                modalComponent={<ProfileForm user={currUser} />}
+                />
+            </div>
+            </div>
+            <ul class='postCont'>
+                <h3 className='profileHeader'>
+                    {currUser.first_name} - Favorites
+                </h3>
+            {check.length ? Object.values(allFavPosts).map(post => {
                 return (
                     <li className='singlePostCont' key={post.id}>
                         <div className='homePostTitle'>
@@ -47,7 +64,8 @@ const FavoritesPage = () => {
                         <br />
                     </li>
                 )
-            })}
+            }) : <div className='none'>You Have No Favorites Yet!</div> }
+            </ul>
         </div>
     )
 }

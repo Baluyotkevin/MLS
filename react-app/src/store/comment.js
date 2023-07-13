@@ -63,7 +63,6 @@ export const thunkAllCurrComments = () => async (dispatch) => {
 }
 
 export const thunkCreateComment = (comment, postId) => async (dispatch) => {
-    console.log("do i get in here")
     const res = await fetch(`/api/posts/${postId}/comment`,{
         method: "POST",
         headers: { 'Content-Type': 'application/json' },

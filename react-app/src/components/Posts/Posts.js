@@ -1,31 +1,11 @@
-import { useState } from 'react';
 import { useSelector } from 'react-redux'
 import { NavLink } from "react-router-dom";
-import { thunkAllPosts, thunkCreateLove, thunkDeleteLove } from '../../store/post';
 import { useDispatch } from 'react-redux';
 import './Post.css'
 
 const Post = ({ postData }) => {
     const dispatch = useDispatch()
-    const [numLoves, setNumLoves] = useState(postData?.loves.length)
     const currUser = useSelector(state => state.session.user)
-    const check = postData.loves.includes(currUser?.id)
-
-    const handleLove = async (e) => {
-        if (!check) {
-          await dispatch(thunkCreateLove(postData));
-          dispatch(thunkAllPosts())
-        } else {
-          await dispatch(thunkDeleteLove(postData));
-          dispatch(thunkAllPosts())
-        }
-      };
-
-      const handleAlert = async (e) => {
-        alert("Need to be logged in to love")
-      }
-
-
 
     return (
         <>
@@ -49,23 +29,6 @@ const Post = ({ postData }) => {
                             </div>
                             
                             <div className='viewCont'>
-                                <div>
-
-                            { currUser ? postData?.loves?.includes(currUser?.id) ? 
-                            <div className='heart'>
-                            {postData.loves.length}
-                            <i class="fa-solid fa-heart" style={{ color: '#ce4257' }} onClick={ handleLove }></i> 
-                            </div>
-                            :
-                            <div className='heart'>
-                            {postData.loves.length} <i class="fa-solid fa-heart"  onClick={ handleLove }></i> 
-                            </div>
-                            : 
-                            <>
-                            {postData.loves.length} <i class="fa-solid fa-heart" onClick={ handleAlert }></i> 
-                            </>
-                            }
-                                </div>
                         
                         <div className='viewPost'>
                             <NavLink to={`/postPage/${postData.id}`}>View more Posts</NavLink>

@@ -34,7 +34,6 @@ def get_favorites():
     for post in all_posts:
         if post in current_user.user_favorites:
                 current_favorites.append(post)
-    print('==========',current_favorites)
     return [post.to_dict() for post in current_favorites]
 
 @post_routes.route('/<int:id>')
@@ -120,7 +119,6 @@ def create_post_on_post(id):
 @login_required
 def create_comment(id):
     """Creates a comment on a post"""
-    print("am i getting in here ========")
     form = CommentForm()
     form["csrf_token"].data=request.cookies["csrf_token"]
 
@@ -140,19 +138,9 @@ def create_comment(id):
 def edit_post(id):
     """Edits a current users post"""
     postObj = Post.query.get(id)
-    # post = postObj.to_dict()
     form = PostForm()
     form["csrf_token"].data=request.cookies["csrf_token"]
     if postObj.user_id == current_user.id:
-        # if postObj.root_post_id is None:
-        #     postObj.title = form.data['title']
-        #     postObj.body = form.data['body']
-        #     postObj.anonymous = form.data['anonymous']
-        #     postObj.category = postObj.category
-
-        #     db.session.commit()
-        #     return postObj.to_dict()
-
         postObj.title = form.data['title']
         postObj.body = form.data['body']
         postObj.anonymous = form.data['anonymous']
@@ -173,7 +161,6 @@ def add_post_loves(id):
             user.user_loves.append(post)
             db.session.add(user)
             db.session.commit()
-            # return post.to_dict()
             return { "root": post.to_dict(), "children": children }
     return {"message": "You already loved this post"}
 

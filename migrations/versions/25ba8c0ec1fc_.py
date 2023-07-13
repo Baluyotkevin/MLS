@@ -1,20 +1,19 @@
 """empty message
 
-Revision ID: ad4d0ddd9676
+Revision ID: 25ba8c0ec1fc
 Revises: 
-Create Date: 2023-07-10 13:44:32.476897
+Create Date: 2023-07-13 09:39:30.521878
 
 """
 from alembic import op
 import sqlalchemy as sa
-
 import os
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
-revision = 'ad4d0ddd9676'
+revision = '25ba8c0ec1fc'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -85,6 +84,7 @@ def upgrade():
         op.execute(f"ALTER TABLE comments SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE loves SET SCHEMA {SCHEMA};")
         op.execute(f"ALTER TABLE favorites SET SCHEMA {SCHEMA};")
+
 
 
 def downgrade():
