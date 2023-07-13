@@ -65,7 +65,7 @@ const PostPage = () => {
 
     return (
         <div className='postPageBody'>
-            {currUser?.id === root?.user_id && !children.length ? <OpenModalButton
+            {currUser?.id === root?.user_id && !children?.length ? <OpenModalButton
             buttonText='Continue your love story!'
             modalComponent={<CreatePostOnPost postId={postId}/>}
             /> : null}
@@ -75,7 +75,7 @@ const PostPage = () => {
                     <div>
                         {root?.title}
                     </div>
-                    { currUser ? root.favorites.includes(currUser?.id) ? 
+                    { currUser && root ? root.favorites.includes(currUser?.id) ? 
                     
                     <div className='heart fav'>
                         <i class="fa-solid fa-bookmark" style={{ color: '#ce4257'}} onClick={ handleFavorite }></i>
@@ -103,16 +103,16 @@ const PostPage = () => {
                     </div>
                         {currUser ? root.loves?.includes(currUser?.id) ? 
                             <div className='heart'>
-                            {root.loves.length}
+                            {root?.loves.length}
                             <i class="fa-solid fa-heart" style={{ color: '#ce4257' }} onClick={ handleLove }></i> 
                             </div>
                             :
                             <div className='heart'>
-                            {root.loves.length} <i class="fa-solid fa-heart"  onClick={ handleLove }></i> 
+                            {root?.loves.length} <i class="fa-solid fa-heart"  onClick={ handleLove }></i> 
                             </div>
                             :
                             <div>
-                            {root.loves.length} <i class="fa-solid fa-heart" onClick={ handleAlert }></i> 
+                            {root?.loves.length} <i class="fa-solid fa-heart" onClick={ handleAlert }></i> 
                             </div>
                             }
                     <div>
