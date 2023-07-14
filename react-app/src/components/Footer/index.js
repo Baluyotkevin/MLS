@@ -10,10 +10,10 @@ function Footer({ isLoaded }){
 		<ul class='footerContainer'>
 			{isLoaded && (
 				<div className='footBody'>
-                	<a className='footItems' href='https://www.linkedin.com/in/kevin-baluyot-2102b5bb/'>
+                	<a className='footItems' target='_blank' href='https://www.linkedin.com/in/kevin-baluyot-2102b5bb/'>
                     	LinkedIn
                 	</a>
-					<a className='footItems' href='https://github.com/Baluyotkevin'>GitHub</a>
+					<a className='footItems' target='_blank' href='https://github.com/Baluyotkevin'>GitHub</a>
 					<p className='author'>Developed By: Kevin Baluyot</p>
 				</div>
 			)}

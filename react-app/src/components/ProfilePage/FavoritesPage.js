@@ -38,9 +38,9 @@ const FavoritesPage = () => {
                 <h3 className='profileHeader'>
                     {currUser.first_name} - Favorites
                 </h3>
-            {Object.values(allFavPosts).map(post => (
+            {check.length ? Object.values(allFavPosts).map(post => (
                 <FavoritesPost key={post.id} post={post} />
-            ))}
+            )) : <div>You Haven't Bookmarked Anything Yet!</div>}
             </ul>
         </div>
     )
