@@ -41,7 +41,7 @@ const PostPage = () => {
       }
 
     const handleFavAlert = async (e) => {
-        alert("Must be logged in to favorite!")
+        alert("Must be logged in to bookmark!")
       }
 
     const handleLove = async (e) => {
