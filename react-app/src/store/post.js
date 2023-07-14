@@ -307,8 +307,12 @@ const postReducer = (state = initialState, action) => {
         case DELETE_FAV: {
             const newState = { ...state }
             const onePost = action.post
+            delete newState.currentUserFav[onePost.root.id]
             newState.singlePost = onePost
-            return newState
+            return {
+                ...newState,
+                currentUserFav: { ...newState.currentUserFav }
+            }
         }
         case DELETE_LOVE: {
             const newState = { ...state }

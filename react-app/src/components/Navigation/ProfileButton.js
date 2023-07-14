@@ -61,7 +61,7 @@ function ProfileButton({ user }) {
             <li className='profileDrop'>My Comments</li>
           </NavLink>
           <NavLink to='/favorites'>
-          <li className='profileDrop'>My Favorites</li>
+          <li className='profileDrop'>My Bookmarks</li>
           </NavLink>
               <button className='logOut profileDrop' onClick={handleLogout}>Log Out</button>
           </>

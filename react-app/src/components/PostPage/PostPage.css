@@ -27,6 +27,8 @@
 .titleFav {
     display: flex;
     justify-content: space-between;
+    border-bottom: 3px solid white;
+    padding-bottom: 5px;
 }
 
 .fav {

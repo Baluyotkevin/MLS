@@ -31,7 +31,7 @@ const Post = ({ postData }) => {
                             <div className='viewCont'>
                         
                         <div className='viewPost'>
-                            <NavLink to={`/postPage/${postData.id}`}>View more Posts</NavLink>
+                            <NavLink to={`/postPage/${postData.id}`}>View more...</NavLink>
                         </div>
                             </div>
                         <br />
