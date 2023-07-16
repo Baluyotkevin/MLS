@@ -1,5 +1,6 @@
 const GET_ONE_COMMENT = 'comment/loadOneComment'
 const GET_ALL_COMMENTS = 'comment/loadAllComments'
+const GET_ALL_POST_COMMENTS = 'comment/loadAllPostComments'
 const GET_ALL_CURR_COMMENTS = 'comment/loadAllCurrComments'
 const CREATE_COMMENT = 'comment/createComment'
 const EDIT_COMMENT = 'comment/editComment'
@@ -8,6 +9,11 @@ const DELETE_COMMENT = 'comment/deleteComment'
 const loadOneComment = comment => ({
     type: GET_ONE_COMMENT,
     comment
+})
+
+const loadPostComments = comments => ({
+    type: GET_ALL_POST_COMMENTS,
+    comments
 })
 
 const loadAllComments = comments => ({
@@ -50,6 +56,15 @@ export const thunkAllComments = () => async (dispatch) => {
     if (res.ok) {
         const data = await res.json()
         dispatch(loadAllComments(data))
+    }
+}
+
+export const thunkAllPostComments = (postId) => async (dispatch) => {
+    const res = await fetch(`/api/posts/${postId}/all_comments`)
+
+    if (res.ok) {
+        const data = await res.json()
+        dispatch(loadPostComments(data))
     }
 }
 
@@ -99,7 +114,7 @@ export const thunkDeleteComment = (commentId) => async (dispatch) => {
     }
 }
 
-const initialState = { currentComments: {}, singleComment: {}, allComments: {} }
+const initialState = { currentComments: {}, singleComment: {}, allComments: {}, postComments: {} }
 
 const commentReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -112,6 +127,17 @@ const commentReducer = (state = initialState, action) => {
             return {
                 ...state,
                 allComments: newState
+            }
+        }
+        case GET_ALL_POST_COMMENTS: {
+            const newState = {}
+            const allPostComms = action.comments
+            allPostComms.forEach(comment => {
+                newState[comment.id] = comment
+            })
+            return {
+                ...state,
+                postComments: newState
             }
         }
         case GET_ALL_CURR_COMMENTS: {
@@ -131,7 +157,7 @@ const commentReducer = (state = initialState, action) => {
             newState[oneComment] = oneComment
             return {
                 ...state,
-                allComments: {...state.allComments, ...newState}
+                postComments: {...state.postComments, ...newState}
             }
         }
         case EDIT_COMMENT: {

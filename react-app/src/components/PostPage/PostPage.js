@@ -1,8 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { thunkAllPosts, thunkOnePost, thunkDeleteLove, thunkCreateLove, thunkCreateFav, thunkDeleteFav } from "../../store/post";
-import { thunkAllComments } from "../../store/comment";
-import { useHistory } from 'react-router-dom'
+import { thunkOnePost, thunkDeleteLove, thunkCreateLove, thunkCreateFav, thunkDeleteFav } from "../../store/post";
+import { thunkAllPostComments } from "../../store/comment";
 import { useParams } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton";
 import CreatePostOnPost from "../Posts/CreatePostOnPost";
@@ -14,11 +13,9 @@ import './PostPage.css'
 
 const PostPage = () => {
     const dispatch = useDispatch()
-    const history = useHistory()
-    const allComments = useSelector(state => state.comment.allComments)
+    const allComments = useSelector(state => state.comment.postComments)
     const onePost = useSelector(state => state.post.singlePost)
     const currUser = useSelector(state => state.session.user)
-    const postComments = Object.values(allComments).filter(comment =>  comment.post_id === onePost.root?.id)
     const root = onePost.root
     const children = onePost.children
     const { postId } = useParams()
@@ -26,11 +23,11 @@ const PostPage = () => {
     const checkLove = root?.loves?.includes(currUser?.id)
     const checkFavorite = root?.favorites.includes(currUser?.id)
     const check = [];
-    Object.values(postComments).forEach(comment => check.push(comment.user_id))
+    Object.values(allComments).forEach(comment => check.push(comment.user_id))
 
     useEffect(() => {
         dispatch(thunkOnePost(postId))
-        dispatch(thunkAllComments())
+        dispatch(thunkAllPostComments(postId))
         setTimeout(() => {
             setIsLoading(false)
         }, 500);
@@ -152,7 +149,7 @@ const PostPage = () => {
                     )
                 }) : null}
 
-            {postComments.length ? Object.values(postComments).map(comment => {
+            {Object.values(allComments).length ? Object.values(allComments).map(comment => {
                     return (
                         <div key={comment.id} class='commentCont'>
                             <div className='singleCommCont'>

@@ -15,7 +15,7 @@ const GetAllCurrComments = () => {
     const currUser = useSelector(state => state.session.user)
     const check = Object.values(allComments)
     const [isLoading, setIsLoading] = useState(true)
-
+    
     useEffect(() => {
         dispatch(thunkAllCurrComments())
         dispatch(thunkAllPosts())
@@ -59,7 +59,7 @@ const GetAllCurrComments = () => {
                         </div>
 
                             <div>
-                                {comment.post.title} - {comment.post.user.first_name}
+                                {comment?.post?.title} - {comment.post?.user?.first_name}
                             </div>
 
                             <div>

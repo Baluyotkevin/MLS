@@ -256,7 +256,10 @@ const postReducer = (state = initialState, action) => {
         case GET_ONE_POST: {
             const newState = { ...state }
             newState.singlePost = action.post
-            return newState
+            return {
+                ...newState,
+                singlePost: { ...newState.singlePost }
+            }
         }
         case EDIT_POST: {
             const newState = {}

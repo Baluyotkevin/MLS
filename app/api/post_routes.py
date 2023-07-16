@@ -36,6 +36,12 @@ def get_favorites():
                 current_favorites.append(post)
     return [post.to_dict() for post in current_favorites]
 
+@post_routes.route('/<int:id>/all_comments')
+def get_post_comments(id):
+    """Query for all posts comments"""
+    all_comments = Comment.query.filter(Comment.post_id == id).all()
+    return [comments.to_dict() for comments in all_comments]
+
 @post_routes.route('/<int:id>')
 # @login_required
 def user_post(id):
@@ -132,6 +138,8 @@ def create_comment(id):
         db.session.commit()
         return new_comment.to_dict()
     
+
+
 
 @post_routes.route('/<int:id>/edit', methods=['PUT'])
 @login_required
