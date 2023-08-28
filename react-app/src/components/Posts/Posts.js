@@ -7,6 +7,14 @@ const Post = ({ postData }) => {
     const dispatch = useDispatch()
     const currUser = useSelector(state => state.session.user)
 
+    const handleLove = async (e) => {
+        if (!checkLove) {
+          await dispatch(thunkCreateLove(postData));
+        } else {
+          await dispatch(thunkDeleteLove(postData));
+        }
+      };
+
     return (
         <>
         
