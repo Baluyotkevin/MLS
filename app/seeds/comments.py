@@ -80,6 +80,9 @@ def seed_comments():
     comment26 = Comment(
         body="Lost love, shattered hopes remain.", user_id = 1, post_id = 6
     )
+    comment27 = Comment(
+        body="Wow, I cannot even fathom", user_id = 2, post_id = 16
+    )
 
 
     db.session.add(comment1)
@@ -108,6 +111,7 @@ def seed_comments():
     db.session.add(comment24)
     db.session.add(comment25)
     db.session.add(comment26)
+    db.session.add(comment27)
     db.session.commit()
 
 def undo_comments():
