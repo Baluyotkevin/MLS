@@ -17,6 +17,13 @@ const GetAllPosts = () => {
     if (allPosts) allPostsArr = Object.values(allPosts)
 
     useEffect(() => {
+        dispatch(thunkAllPosts())
+        setTimeout(() => {
+            setIsLoading(false)
+        }, 500);
+    }, [dispatch])
+
+    useEffect(() => {
         if (allPostsArr) {
             const sortedPosts = type => {
                 let sorted;
@@ -38,47 +45,45 @@ const GetAllPosts = () => {
         }
     }, [sortType, allPostsArr.length])
 
-    useEffect(() => {
-        dispatch(thunkAllPosts())
-        setTimeout(() => {
-            setIsLoading(false)
-        }, 500);
-    }, [dispatch])
+ 
 
 
     if (isLoading === true) return <Loading />
 
     return (
         <>
-        <div className='storyHead'>
-            <h1>All Love Stories</h1>
-            <h1>Share Your Own Love Story!</h1>
-        </div>
-        <div className='postBody'>
-            <div className='carouselImgCont'>
-                <CarouselImages />
-            </div>
-            <ul className='postCont'>
-            <div className='sorting'>
-                <button onClick={(e) => {
-                    setSortType('created_at')
-                } }>Newest</button>
-                <button onClick={(e) => {
-                    setSortType('Beautiful')
-                } }>Beautiful</button>
-                <button onClick={(e) => {
-                    setSortType('Horrible')
-                } }>Horrible</button>
+        {allPosts && (
+            <>
+                <div className='storyHead'>
+                        <h1>All Love Stories</h1>
+                        <h1>Share Your Own Love Story!</h1>
+                    </div>
+                    <div className='postBody'>
+                        <div className='carouselImgCont'>
+                            <CarouselImages />
+                        </div>
+                        <ul className='postCont'>
+                        <div className='sorting'>
+                            <button onClick={(e) => {
+                                setSortType('created_at')
+                            } }>Newest</button>
+                            <button onClick={(e) => {
+                                setSortType('Beautiful')
+                            } }>Beautiful</button>
+                            <button onClick={(e) => {
+                                setSortType('Horrible')
+                            } }>Horrible</button>
 
-            </div>
-                {posts && posts.map(post => (
-                    <Post key={ post.id } postData={post} />
-                ))
-                }
-            </ul>
-        </div>
-    </>
-    )
-}
-
+                        </div>
+                            {posts && posts.map(post => (
+                                <Post key={ post.id } postData={post} />
+                            ))
+                            }
+                        </ul>
+                    </div>
+                </>
+            )}
+        </>
+    );
+};
 export default GetAllPosts
