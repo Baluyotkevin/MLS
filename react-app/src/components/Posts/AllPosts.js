@@ -17,13 +17,13 @@ const GetAllPosts = () => {
     if (allPosts) allPostsArr = Object.values(allPosts)
 
     useEffect(() => {
-        dispatch(thunkAllPosts())
         setTimeout(() => {
             setIsLoading(false)
         }, 500);
     }, [dispatch])
 
     useEffect(() => {
+        dispatch(thunkAllPosts())
         if (allPostsArr) {
             const sortedPosts = type => {
                 let sorted;
