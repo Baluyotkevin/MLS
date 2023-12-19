@@ -52,7 +52,7 @@ const GetAllPosts = () => {
 
     return (
         <>
-        {allPosts && (
+        {posts && (
             <>
                 <div className='storyHead'>
                         <h1>All Love Stories</h1>
